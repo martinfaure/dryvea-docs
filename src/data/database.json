@@ -1,0 +1,271 @@
+{
+  "entities": [
+    {
+      "name": "User",
+      "description": "Utilisateur de la plateforme (propriétaire ou locataire)",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "email", "type": "VARCHAR(255)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "password_hash", "type": "VARCHAR(255)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "first_name", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "last_name", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "birth_date", "type": "DATE", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "phone", "type": "VARCHAR(20)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "avatar_url", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "is_verified", "type": "BOOLEAN", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "kyc_status", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "updated_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    },
+    {
+      "name": "Vehicle",
+      "description": "Véhicule sans permis (VSP) électrique enregistré sur la plateforme",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "owner_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "User" },
+        { "name": "brand", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "model", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "year", "type": "INTEGER", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "vin", "type": "VARCHAR(17)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "license_plate", "type": "VARCHAR(20)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "category", "type": "VARCHAR(10)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "max_speed", "type": "INTEGER", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "battery_capacity", "type": "DECIMAL(5,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "autonomy_km", "type": "INTEGER", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "photos_urls", "type": "JSONB", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "status", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    },
+    {
+      "name": "Listing",
+      "description": "Annonce de location associée à un véhicule",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "vehicle_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "Vehicle" },
+        { "name": "title", "type": "VARCHAR(200)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "description", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "price_per_hour", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "price_per_day", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "deposit_amount", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "location_lat", "type": "DECIMAL(10,7)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "location_lng", "type": "DECIMAL(10,7)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "location_address", "type": "VARCHAR(500)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "availability_start", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "availability_end", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "is_active", "type": "BOOLEAN", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    },
+    {
+      "name": "Booking",
+      "description": "Réservation de location entre locataire et annonce",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "listing_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "Listing" },
+        { "name": "renter_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "User" },
+        { "name": "start_datetime", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "end_datetime", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "total_price", "type": "DECIMAL(10,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "service_fee", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "deposit_held", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "status", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    },
+    {
+      "name": "Payment",
+      "description": "Transaction financière liée à une réservation",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "booking_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "Booking" },
+        { "name": "amount", "type": "DECIMAL(10,2)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "currency", "type": "VARCHAR(3)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "payment_method", "type": "VARCHAR(50)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "payment_provider", "type": "VARCHAR(50)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "provider_ref", "type": "VARCHAR(255)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "status", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    },
+    {
+      "name": "Review",
+      "description": "Avis laissé après une location terminée",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "booking_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "Booking" },
+        { "name": "reviewer_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "User" },
+        { "name": "reviewed_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "User" },
+        { "name": "rating", "type": "INTEGER", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "comment", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    },
+    {
+      "name": "Insurance",
+      "description": "Contrat d'assurance associé à un véhicule",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "vehicle_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "Vehicle" },
+        { "name": "company_name", "type": "VARCHAR(200)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "contract_number", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "coverage_type", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "covers_rental", "type": "BOOLEAN", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "expiry_date", "type": "DATE", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    },
+    {
+      "name": "Incident",
+      "description": "Signalement d'incident durant ou après une location",
+      "attributes": [
+        { "name": "id", "type": "UUID", "isPrimaryKey": true, "isForeignKey": false },
+        { "name": "booking_id", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "Booking" },
+        { "name": "reported_by", "type": "UUID", "isPrimaryKey": false, "isForeignKey": true, "references": "User" },
+        { "name": "type", "type": "VARCHAR(50)", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "description", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "photos_urls", "type": "JSONB", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "reported_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false },
+        { "name": "status", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false }
+      ]
+    }
+  ],
+  "relations": [
+    { "from": "Vehicle", "to": "User", "cardinality": "N:1", "label": "owner_id" },
+    { "from": "Listing", "to": "Vehicle", "cardinality": "N:1", "label": "vehicle_id" },
+    { "from": "Booking", "to": "Listing", "cardinality": "N:1", "label": "listing_id" },
+    { "from": "Booking", "to": "User", "cardinality": "N:1", "label": "renter_id" },
+    { "from": "Payment", "to": "Booking", "cardinality": "N:1", "label": "booking_id" },
+    { "from": "Review", "to": "Booking", "cardinality": "N:1", "label": "booking_id" },
+    { "from": "Review", "to": "User", "cardinality": "N:1", "label": "reviewer_id / reviewed_id" },
+    { "from": "Insurance", "to": "Vehicle", "cardinality": "N:1", "label": "vehicle_id" },
+    { "from": "Incident", "to": "Booking", "cardinality": "N:1", "label": "booking_id" },
+    { "from": "Incident", "to": "User", "cardinality": "N:1", "label": "reported_by" }
+  ],
+  "mldTables": [
+    {
+      "name": "users",
+      "primaryKey": "id",
+      "foreignKeys": [],
+      "columns": ["id PK", "email UK", "password_hash", "first_name", "last_name", "birth_date", "phone", "avatar_url", "is_verified", "kyc_status", "created_at", "updated_at"]
+    },
+    {
+      "name": "vehicles",
+      "primaryKey": "id",
+      "foreignKeys": ["owner_id → users(id)"],
+      "columns": ["id PK", "owner_id FK", "brand", "model", "year", "vin UK", "license_plate UK", "category", "max_speed", "battery_capacity", "autonomy_km", "photos_urls", "status", "created_at"]
+    },
+    {
+      "name": "listings",
+      "primaryKey": "id",
+      "foreignKeys": ["vehicle_id → vehicles(id)"],
+      "columns": ["id PK", "vehicle_id FK", "title", "description", "price_per_hour", "price_per_day", "deposit_amount", "location_lat", "location_lng", "location_address", "availability_start", "availability_end", "is_active", "created_at"]
+    },
+    {
+      "name": "bookings",
+      "primaryKey": "id",
+      "foreignKeys": ["listing_id → listings(id)", "renter_id → users(id)"],
+      "columns": ["id PK", "listing_id FK", "renter_id FK", "start_datetime", "end_datetime", "total_price", "service_fee", "deposit_held", "status", "created_at"]
+    },
+    {
+      "name": "payments",
+      "primaryKey": "id",
+      "foreignKeys": ["booking_id → bookings(id)"],
+      "columns": ["id PK", "booking_id FK", "amount", "currency", "payment_method", "payment_provider", "provider_ref UK", "status", "created_at"]
+    },
+    {
+      "name": "reviews",
+      "primaryKey": "id",
+      "foreignKeys": ["booking_id → bookings(id)", "reviewer_id → users(id)", "reviewed_id → users(id)"],
+      "columns": ["id PK", "booking_id FK", "reviewer_id FK", "reviewed_id FK", "rating", "comment", "created_at"]
+    },
+    {
+      "name": "insurance",
+      "primaryKey": "id",
+      "foreignKeys": ["vehicle_id → vehicles(id)"],
+      "columns": ["id PK", "vehicle_id FK", "company_name", "contract_number UK", "coverage_type", "covers_rental", "expiry_date"]
+    },
+    {
+      "name": "incidents",
+      "primaryKey": "id",
+      "foreignKeys": ["booking_id → bookings(id)", "reported_by → users(id)"],
+      "columns": ["id PK", "booking_id FK", "reported_by FK", "type", "description", "photos_urls", "reported_at", "status"]
+    }
+  ],
+  "dictionary": [
+    { "table": "users", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique de l'utilisateur", "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" },
+    { "table": "users", "field": "email", "type": "VARCHAR(255)", "nullable": false, "description": "Adresse email de connexion", "example": "marie.dupont@email.fr" },
+    { "table": "users", "field": "password_hash", "type": "VARCHAR(255)", "nullable": false, "description": "Hash bcrypt du mot de passe", "example": "$2b$12$..." },
+    { "table": "users", "field": "first_name", "type": "VARCHAR(100)", "nullable": false, "description": "Prénom de l'utilisateur", "example": "Marie" },
+    { "table": "users", "field": "last_name", "type": "VARCHAR(100)", "nullable": false, "description": "Nom de famille", "example": "Dupont" },
+    { "table": "users", "field": "birth_date", "type": "DATE", "nullable": false, "description": "Date de naissance (vérification âge minimum 18 ans)", "example": "1995-03-15" },
+    { "table": "users", "field": "phone", "type": "VARCHAR(20)", "nullable": true, "description": "Numéro de téléphone mobile", "example": "+33612345678" },
+    { "table": "users", "field": "avatar_url", "type": "TEXT", "nullable": true, "description": "URL de la photo de profil", "example": "https://cdn.dryvea.fr/avatars/user123.jpg" },
+    { "table": "users", "field": "is_verified", "type": "BOOLEAN", "nullable": false, "description": "Email vérifié", "example": "true" },
+    { "table": "users", "field": "kyc_status", "type": "ENUM", "nullable": false, "description": "Statut KYC : pending, approved, rejected", "example": "approved" },
+    { "table": "users", "field": "created_at", "type": "TIMESTAMP", "nullable": false, "description": "Date de création du compte", "example": "2026-01-15T10:30:00Z" },
+    { "table": "users", "field": "updated_at", "type": "TIMESTAMP", "nullable": false, "description": "Dernière mise à jour du profil", "example": "2026-05-20T14:00:00Z" },
+    { "table": "vehicles", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique du véhicule", "example": "b2c3d4e5-f6a7-8901-bcde-f12345678901" },
+    { "table": "vehicles", "field": "owner_id", "type": "UUID", "nullable": false, "description": "Référence vers le propriétaire (users.id)", "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" },
+    { "table": "vehicles", "field": "brand", "type": "VARCHAR(100)", "nullable": false, "description": "Marque du VSP", "example": "Aixam" },
+    { "table": "vehicles", "field": "model", "type": "VARCHAR(100)", "nullable": false, "description": "Modèle du VSP", "example": "City Pack" },
+    { "table": "vehicles", "field": "year", "type": "INTEGER", "nullable": false, "description": "Année de mise en circulation", "example": "2024" },
+    { "table": "vehicles", "field": "vin", "type": "VARCHAR(17)", "nullable": false, "description": "Numéro d'identification véhicule", "example": "VF1XXXXXXXXXXXXXX" },
+    { "table": "vehicles", "field": "license_plate", "type": "VARCHAR(20)", "nullable": false, "description": "Immatriculation", "example": "AB-123-CD" },
+    { "table": "vehicles", "field": "category", "type": "VARCHAR(10)", "nullable": false, "description": "Catégorie réglementaire VSP", "example": "L6e" },
+    { "table": "vehicles", "field": "max_speed", "type": "INTEGER", "nullable": false, "description": "Vitesse maximale en km/h", "example": "45" },
+    { "table": "vehicles", "field": "battery_capacity", "type": "DECIMAL(5,2)", "nullable": false, "description": "Capacité batterie en kWh", "example": "5.40" },
+    { "table": "vehicles", "field": "autonomy_km", "type": "INTEGER", "nullable": false, "description": "Autonomie estimée en km", "example": "75" },
+    { "table": "vehicles", "field": "photos_urls", "type": "JSONB", "nullable": true, "description": "Tableau JSON des URLs photos", "example": "[\"https://cdn.dryvea.fr/v/1.jpg\"]" },
+    { "table": "vehicles", "field": "status", "type": "ENUM", "nullable": false, "description": "Statut : available, rented, maintenance, inactive", "example": "available" },
+    { "table": "listings", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique de l'annonce", "example": "c3d4e5f6-a7b8-9012-cdef-123456789012" },
+    { "table": "listings", "field": "vehicle_id", "type": "UUID", "nullable": false, "description": "Référence vers le véhicule", "example": "b2c3d4e5-f6a7-8901-bcde-f12345678901" },
+    { "table": "listings", "field": "title", "type": "VARCHAR(200)", "nullable": false, "description": "Titre de l'annonce", "example": "Aixam City Pack — Centre-ville Lyon" },
+    { "table": "listings", "field": "description", "type": "TEXT", "nullable": true, "description": "Description détaillée de l'offre", "example": "VSP électrique idéal pour la ville..." },
+    { "table": "listings", "field": "price_per_hour", "type": "DECIMAL(8,2)", "nullable": false, "description": "Tarif horaire en EUR", "example": "8.50" },
+    { "table": "listings", "field": "price_per_day", "type": "DECIMAL(8,2)", "nullable": false, "description": "Tarif journalier en EUR", "example": "45.00" },
+    { "table": "listings", "field": "deposit_amount", "type": "DECIMAL(8,2)", "nullable": false, "description": "Montant du dépôt de garantie", "example": "300.00" },
+    { "table": "listings", "field": "location_lat", "type": "DECIMAL(10,7)", "nullable": false, "description": "Latitude du point de retrait", "example": "45.7640430" },
+    { "table": "listings", "field": "location_lng", "type": "DECIMAL(10,7)", "nullable": false, "description": "Longitude du point de retrait", "example": "4.8356590" },
+    { "table": "listings", "field": "location_address", "type": "VARCHAR(500)", "nullable": false, "description": "Adresse textuelle", "example": "12 Rue de la République, 69002 Lyon" },
+    { "table": "bookings", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique de la réservation", "example": "d4e5f6a7-b8c9-0123-def0-234567890123" },
+    { "table": "bookings", "field": "listing_id", "type": "UUID", "nullable": false, "description": "Référence vers l'annonce", "example": "c3d4e5f6-a7b8-9012-cdef-123456789012" },
+    { "table": "bookings", "field": "renter_id", "type": "UUID", "nullable": false, "description": "Référence vers le locataire", "example": "e5f6a7b8-c9d0-1234-ef01-345678901234" },
+    { "table": "bookings", "field": "start_datetime", "type": "TIMESTAMP", "nullable": false, "description": "Début de la location", "example": "2026-06-01T09:00:00Z" },
+    { "table": "bookings", "field": "end_datetime", "type": "TIMESTAMP", "nullable": false, "description": "Fin de la location", "example": "2026-06-01T18:00:00Z" },
+    { "table": "bookings", "field": "total_price", "type": "DECIMAL(10,2)", "nullable": false, "description": "Prix total TTC", "example": "76.50" },
+    { "table": "bookings", "field": "service_fee", "type": "DECIMAL(8,2)", "nullable": false, "description": "Commission Dryvea (15%)", "example": "11.48" },
+    { "table": "bookings", "field": "deposit_held", "type": "DECIMAL(8,2)", "nullable": false, "description": "Dépôt retenu via Stripe", "example": "300.00" },
+    { "table": "bookings", "field": "status", "type": "ENUM", "nullable": false, "description": "pending, confirmed, active, completed, cancelled", "example": "confirmed" },
+    { "table": "payments", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique du paiement", "example": "f6a7b8c9-d0e1-2345-f012-456789012345" },
+    { "table": "payments", "field": "booking_id", "type": "UUID", "nullable": false, "description": "Référence vers la réservation", "example": "d4e5f6a7-b8c9-0123-def0-234567890123" },
+    { "table": "payments", "field": "amount", "type": "DECIMAL(10,2)", "nullable": false, "description": "Montant du paiement", "example": "76.50" },
+    { "table": "payments", "field": "currency", "type": "VARCHAR(3)", "nullable": false, "description": "Devise ISO 4217", "example": "EUR" },
+    { "table": "payments", "field": "payment_method", "type": "VARCHAR(50)", "nullable": false, "description": "Méthode : card, sepa, apple_pay", "example": "card" },
+    { "table": "payments", "field": "payment_provider", "type": "VARCHAR(50)", "nullable": false, "description": "Prestataire de paiement", "example": "stripe" },
+    { "table": "payments", "field": "provider_ref", "type": "VARCHAR(255)", "nullable": false, "description": "Référence externe Stripe", "example": "pi_3NxK2L2eZvKYlo2C0abc123" },
+    { "table": "payments", "field": "status", "type": "ENUM", "nullable": false, "description": "pending, succeeded, failed, refunded", "example": "succeeded" },
+    { "table": "reviews", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique de l'avis", "example": "a7b8c9d0-e1f2-3456-0123-567890123456" },
+    { "table": "reviews", "field": "booking_id", "type": "UUID", "nullable": false, "description": "Référence vers la réservation", "example": "d4e5f6a7-b8c9-0123-def0-234567890123" },
+    { "table": "reviews", "field": "reviewer_id", "type": "UUID", "nullable": false, "description": "Utilisateur qui laisse l'avis", "example": "e5f6a7b8-c9d0-1234-ef01-345678901234" },
+    { "table": "reviews", "field": "reviewed_id", "type": "UUID", "nullable": false, "description": "Utilisateur évalué", "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890" },
+    { "table": "reviews", "field": "rating", "type": "INTEGER", "nullable": false, "description": "Note de 1 à 5", "example": "5" },
+    { "table": "reviews", "field": "comment", "type": "TEXT", "nullable": true, "description": "Commentaire textuel", "example": "Véhicule impeccable, propriétaire réactif." },
+    { "table": "insurance", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique du contrat", "example": "b8c9d0e1-f2a3-4567-1234-678901234567" },
+    { "table": "insurance", "field": "vehicle_id", "type": "UUID", "nullable": false, "description": "Référence vers le véhicule assuré", "example": "b2c3d4e5-f6a7-8901-bcde-f12345678901" },
+    { "table": "insurance", "field": "company_name", "type": "VARCHAR(200)", "nullable": false, "description": "Nom de la compagnie d'assurance", "example": "MAIF" },
+    { "table": "insurance", "field": "contract_number", "type": "VARCHAR(100)", "nullable": false, "description": "Numéro de police d'assurance", "example": "MAIF-VSP-2026-001234" },
+    { "table": "insurance", "field": "coverage_type", "type": "VARCHAR(100)", "nullable": false, "description": "Type de couverture", "example": "tous risques" },
+    { "table": "insurance", "field": "covers_rental", "type": "BOOLEAN", "nullable": false, "description": "Couvre la location P2P", "example": "true" },
+    { "table": "insurance", "field": "expiry_date", "type": "DATE", "nullable": false, "description": "Date d'expiration du contrat", "example": "2027-01-01" },
+    { "table": "incidents", "field": "id", "type": "UUID", "nullable": false, "description": "Identifiant unique de l'incident", "example": "c9d0e1f2-a3b4-5678-2345-789012345678" },
+    { "table": "incidents", "field": "booking_id", "type": "UUID", "nullable": false, "description": "Référence vers la réservation concernée", "example": "d4e5f6a7-b8c9-0123-def0-234567890123" },
+    { "table": "incidents", "field": "reported_by", "type": "UUID", "nullable": false, "description": "Utilisateur déclarant l'incident", "example": "e5f6a7b8-c9d0-1234-ef01-345678901234" },
+    { "table": "incidents", "field": "type", "type": "VARCHAR(50)", "nullable": false, "description": "Type : damage, theft, breakdown, other", "example": "damage" },
+    { "table": "incidents", "field": "description", "type": "TEXT", "nullable": false, "description": "Description détaillée de l'incident", "example": "Rayure sur portière conducteur" },
+    { "table": "incidents", "field": "photos_urls", "type": "JSONB", "nullable": true, "description": "Photos du dommage", "example": "[\"https://cdn.dryvea.fr/inc/1.jpg\"]" },
+    { "table": "incidents", "field": "reported_at", "type": "TIMESTAMP", "nullable": false, "description": "Date et heure du signalement", "example": "2026-06-01T15:30:00Z" },
+    { "table": "incidents", "field": "status", "type": "ENUM", "nullable": false, "description": "open, investigating, resolved, closed", "example": "open" }
+  ],
+  "sqlSchema": "-- Dryvea Database Schema\n-- PostgreSQL 16+\n-- P2P Electric VSP Rental Platform\n\nCREATE EXTENSION IF NOT EXISTS \"pgcrypto\";\n\n-- Enums\nCREATE TYPE kyc_status_enum AS ENUM ('pending', 'approved', 'rejected');\nCREATE TYPE vehicle_status_enum AS ENUM ('available', 'rented', 'maintenance', 'inactive');\nCREATE TYPE booking_status_enum AS ENUM ('pending', 'confirmed', 'active', 'completed', 'cancelled');\nCREATE TYPE payment_status_enum AS ENUM ('pending', 'succeeded', 'failed', 'refunded');\nCREATE TYPE incident_status_enum AS ENUM ('open', 'investigating', 'resolved', 'closed');\n\n-- Users\nCREATE TABLE users (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    email VARCHAR(255) NOT NULL UNIQUE,\n    password_hash VARCHAR(255) NOT NULL,\n    first_name VARCHAR(100) NOT NULL,\n    last_name VARCHAR(100) NOT NULL,\n    birth_date DATE NOT NULL,\n    phone VARCHAR(20),\n    avatar_url TEXT,\n    is_verified BOOLEAN NOT NULL DEFAULT FALSE,\n    kyc_status kyc_status_enum NOT NULL DEFAULT 'pending',\n    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    CONSTRAINT chk_users_birth_date CHECK (birth_date <= CURRENT_DATE - INTERVAL '18 years')\n);\n\nCREATE INDEX idx_users_email ON users(email);\nCREATE INDEX idx_users_kyc_status ON users(kyc_status);\n\n-- Vehicles\nCREATE TABLE vehicles (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    owner_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,\n    brand VARCHAR(100) NOT NULL,\n    model VARCHAR(100) NOT NULL,\n    year INTEGER NOT NULL,\n    vin VARCHAR(17) NOT NULL UNIQUE,\n    license_plate VARCHAR(20) NOT NULL UNIQUE,\n    category VARCHAR(10) NOT NULL DEFAULT 'L6e',\n    max_speed INTEGER NOT NULL DEFAULT 45,\n    battery_capacity DECIMAL(5, 2) NOT NULL,\n    autonomy_km INTEGER NOT NULL,\n    photos_urls JSONB DEFAULT '[]'::jsonb,\n    status vehicle_status_enum NOT NULL DEFAULT 'available',\n    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    CONSTRAINT chk_vehicles_year CHECK (year >= 2000 AND year <= EXTRACT(YEAR FROM CURRENT_DATE) + 1),\n    CONSTRAINT chk_vehicles_max_speed CHECK (max_speed > 0 AND max_speed <= 45),\n    CONSTRAINT chk_vehicles_battery CHECK (battery_capacity > 0),\n    CONSTRAINT chk_vehicles_autonomy CHECK (autonomy_km > 0)\n);\n\nCREATE INDEX idx_vehicles_owner_id ON vehicles(owner_id);\nCREATE INDEX idx_vehicles_status ON vehicles(status);\nCREATE INDEX idx_vehicles_vin ON vehicles(vin);\n\n-- Listings\nCREATE TABLE listings (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    vehicle_id UUID NOT NULL REFERENCES vehicles(id) ON DELETE CASCADE,\n    title VARCHAR(200) NOT NULL,\n    description TEXT,\n    price_per_hour DECIMAL(8, 2) NOT NULL,\n    price_per_day DECIMAL(8, 2) NOT NULL,\n    deposit_amount DECIMAL(8, 2) NOT NULL DEFAULT 300.00,\n    location_lat DECIMAL(10, 7) NOT NULL,\n    location_lng DECIMAL(10, 7) NOT NULL,\n    location_address VARCHAR(500) NOT NULL,\n    availability_start TIMESTAMP WITH TIME ZONE,\n    availability_end TIMESTAMP WITH TIME ZONE,\n    is_active BOOLEAN NOT NULL DEFAULT TRUE,\n    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    CONSTRAINT chk_listings_prices CHECK (price_per_hour > 0 AND price_per_day > 0),\n    CONSTRAINT chk_listings_deposit CHECK (deposit_amount >= 0),\n    CONSTRAINT chk_listings_availability CHECK (\n        availability_start IS NULL OR availability_end IS NULL OR availability_start < availability_end\n    )\n);\n\nCREATE INDEX idx_listings_vehicle_id ON listings(vehicle_id);\nCREATE INDEX idx_listings_is_active ON listings(is_active) WHERE is_active = TRUE;\nCREATE INDEX idx_listings_location ON listings(location_lat, location_lng);\n\n-- Bookings\nCREATE TABLE bookings (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    listing_id UUID NOT NULL REFERENCES listings(id) ON DELETE RESTRICT,\n    renter_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,\n    start_datetime TIMESTAMP WITH TIME ZONE NOT NULL,\n    end_datetime TIMESTAMP WITH TIME ZONE NOT NULL,\n    total_price DECIMAL(10, 2) NOT NULL,\n    service_fee DECIMAL(8, 2) NOT NULL,\n    deposit_held DECIMAL(8, 2) NOT NULL DEFAULT 0,\n    status booking_status_enum NOT NULL DEFAULT 'pending',\n    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    CONSTRAINT chk_bookings_dates CHECK (start_datetime < end_datetime),\n    CONSTRAINT chk_bookings_total_price CHECK (total_price >= 0),\n    CONSTRAINT chk_bookings_service_fee CHECK (service_fee >= 0)\n);\n\nCREATE INDEX idx_bookings_listing_id ON bookings(listing_id);\nCREATE INDEX idx_bookings_renter_id ON bookings(renter_id);\nCREATE INDEX idx_bookings_status ON bookings(status);\nCREATE INDEX idx_bookings_dates ON bookings(start_datetime, end_datetime);\n\n-- Payments\nCREATE TABLE payments (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    booking_id UUID NOT NULL REFERENCES bookings(id) ON DELETE RESTRICT,\n    amount DECIMAL(10, 2) NOT NULL,\n    currency VARCHAR(3) NOT NULL DEFAULT 'EUR',\n    payment_method VARCHAR(50) NOT NULL,\n    payment_provider VARCHAR(50) NOT NULL DEFAULT 'stripe',\n    provider_ref VARCHAR(255) NOT NULL UNIQUE,\n    status payment_status_enum NOT NULL DEFAULT 'pending',\n    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    CONSTRAINT chk_payments_amount CHECK (amount > 0),\n    CONSTRAINT chk_payments_currency CHECK (currency = 'EUR')\n);\n\nCREATE INDEX idx_payments_booking_id ON payments(booking_id);\nCREATE INDEX idx_payments_status ON payments(status);\nCREATE INDEX idx_payments_provider_ref ON payments(provider_ref);\n\n-- Reviews\nCREATE TABLE reviews (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    booking_id UUID NOT NULL REFERENCES bookings(id) ON DELETE CASCADE,\n    reviewer_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,\n    reviewed_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,\n    rating INTEGER NOT NULL,\n    comment TEXT,\n    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    CONSTRAINT chk_reviews_rating CHECK (rating >= 1 AND rating <= 5),\n    CONSTRAINT chk_reviews_not_self CHECK (reviewer_id != reviewed_id),\n    CONSTRAINT uq_reviews_booking_reviewer UNIQUE (booking_id, reviewer_id)\n);\n\nCREATE INDEX idx_reviews_booking_id ON reviews(booking_id);\nCREATE INDEX idx_reviews_reviewed_id ON reviews(reviewed_id);\n\n-- Insurance\nCREATE TABLE insurance (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    vehicle_id UUID NOT NULL REFERENCES vehicles(id) ON DELETE CASCADE,\n    company_name VARCHAR(200) NOT NULL,\n    contract_number VARCHAR(100) NOT NULL UNIQUE,\n    coverage_type VARCHAR(100) NOT NULL,\n    covers_rental BOOLEAN NOT NULL DEFAULT FALSE,\n    expiry_date DATE NOT NULL,\n    CONSTRAINT chk_insurance_expiry CHECK (expiry_date > CURRENT_DATE - INTERVAL '1 year')\n);\n\nCREATE INDEX idx_insurance_vehicle_id ON insurance(vehicle_id);\nCREATE INDEX idx_insurance_expiry_date ON insurance(expiry_date);\n\n-- Incidents\nCREATE TABLE incidents (\n    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n    booking_id UUID NOT NULL REFERENCES bookings(id) ON DELETE RESTRICT,\n    reported_by UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,\n    type VARCHAR(50) NOT NULL,\n    description TEXT NOT NULL,\n    photos_urls JSONB DEFAULT '[]'::jsonb,\n    reported_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),\n    status incident_status_enum NOT NULL DEFAULT 'open',\n    CONSTRAINT chk_incidents_type CHECK (type IN ('damage', 'theft', 'breakdown', 'other'))\n);\n\nCREATE INDEX idx_incidents_booking_id ON incidents(booking_id);\nCREATE INDEX idx_incidents_reported_by ON incidents(reported_by);\nCREATE INDEX idx_incidents_status ON incidents(status);\n\n-- Trigger: auto-update updated_at on users\nCREATE OR REPLACE FUNCTION update_updated_at_column()\nRETURNS TRIGGER AS $$\nBEGIN\n    NEW.updated_at = NOW();\n    RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n\nCREATE TRIGGER trg_users_updated_at\n    BEFORE UPDATE ON users\n    FOR EACH ROW\n    EXECUTE FUNCTION update_updated_at_column();"
+}

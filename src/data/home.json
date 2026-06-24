@@ -1,0 +1,64 @@
+{
+  "project": {
+    "name": "Dryvea",
+    "tagline": "Plateforme P2P de location de véhicules sans permis électriques",
+    "description": "Dryvea Docs centralise toute la documentation interne du projet : juridique, design, base de données, architecture, suivi, tests et guides développeur."
+  },
+  "repositories": [
+    {
+      "name": "dryvea-platform",
+      "label": "Application principale",
+      "url": "https://github.com/dryvea/dryvea-platform",
+      "description": "API Node.js, frontend React et services métier"
+    },
+    {
+      "name": "dryvea-docs",
+      "label": "Documentation",
+      "url": "https://github.com/martinfaure/dryvea-docs",
+      "description": "Ce hub documentaire Notion-style"
+    }
+  ],
+  "team": [
+    {
+      "name": "Olivier Neugnot",
+      "initials": "ON",
+      "role": "Design & UX",
+      "github": "https://github.com/ONeugnot",
+      "githubUsername": "ONeugnot"
+    },
+    {
+      "name": "Daris Boumertit",
+      "initials": "DB",
+      "role": "Base de données & Tests",
+      "github": "https://github.com/Boumertit",
+      "githubUsername": "Boumertit"
+    },
+    {
+      "name": "Matteo Banzet",
+      "initials": "MB",
+      "role": "Backend & Infrastructure",
+      "github": "https://github.com/Psyko38",
+      "githubUsername": "Psyko38"
+    },
+    {
+      "name": "Martin Faure",
+      "initials": "MF",
+      "role": "Documentation & Frontend",
+      "github": "https://github.com/martinfaure",
+      "githubUsername": "martinfaure"
+    }
+  ],
+  "quickLinks": [
+    { "label": "Présentation Canva", "path": "/projet/presentation-canva" },
+    { "label": "Board projet", "path": "/projet" },
+    { "label": "Schéma SQL", "path": "/database/schema-sql" },
+    { "label": "Architecture", "path": "/architecture/globale" },
+    { "label": "Personas", "path": "/design/personas" },
+    { "label": "Plan de tests", "path": "/tests/plan" }
+  ],
+  "stack": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
+  "links": {
+    "staging": "staging.dryvea.fr",
+    "production": "app.dryvea.fr"
+  }
+}

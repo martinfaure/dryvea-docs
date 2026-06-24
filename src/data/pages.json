@@ -1,0 +1,284 @@
+{
+  "home": {
+    "id": "home",
+    "title": "Bonjour",
+    "icon": "home",
+    "breadcrumb": ["Accueil"],
+    "lastUpdated": "2026-06-24",
+    "body": "Bienvenue sur Dryvea Docs. Documentation interne du projet Dryvea — équipe Olivier Neugnot, Daris Boumertit, Matteo Banzet, Martin Faure. GitHub dryvea-platform dryvea-docs."
+  },
+  "contrat-location": {
+    "id": "contrat-location",
+    "title": "Contrat de location",
+    "icon": "file-text",
+    "breadcrumb": ["Documents", "Contrat de location"],
+    "lastUpdated": "2026-03-15",
+    "body": "Le contrat de location Dryvea définit les obligations réciproques entre le propriétaire du VSP et le locataire lors d'une transaction via la plateforme.\n\n## Objet du contrat\n\nCe contrat encadre la mise à disposition temporaire d'un véhicule sans permis de catégorie L6e, conformément à la réglementation française sur les voiturettes.\n\n## Parties contractantes\n\n- **Le propriétaire** : utilisateur inscrit ayant publié une annonce sur Dryvea\n- **Le locataire** : utilisateur ayant effectué une réservation confirmée\n- **Dryvea** : intermédiaire technique facilitant la mise en relation\n\n## Clauses principales\n\n1. Durée et horaires de la location\n2. État des lieux à la prise en charge et au retour\n3. Responsabilité en cas de dommage ou sinistre\n4. Dépôt de garantie et conditions de restitution\n5. Assurance obligatoire couvrant la période de location\n6. Conditions d'annulation et pénalités applicables"
+  },
+  "cgu-cgv": {
+    "id": "cgu-cgv",
+    "title": "CGU / CGV",
+    "icon": "file-text",
+    "breadcrumb": ["Documents", "CGU / CGV"],
+    "lastUpdated": "2026-05-01",
+    "body": "Les Conditions Générales d'Utilisation et de Vente régissent l'accès et l'utilisation de la plateforme Dryvea.\n\n## Conditions d'accès\n\nL'inscription est réservée aux personnes majeures (18 ans minimum) disposant d'un justificatif d'identité valide. Le processus KYC est obligatoire avant toute première location.\n\n## Commission plateforme\n\nDryvea prélève une commission de **15%** sur chaque transaction, incluse dans le prix affiché au locataire.\n\n## Responsabilités\n\nDryvea agit en qualité d'intermédiaire et ne peut être tenu responsable des dommages survenus durant la location, sous réserve des garanties légales applicables."
+  },
+  "politique-confidentialite": {
+    "id": "politique-confidentialite",
+    "title": "Politique de confidentialité",
+    "icon": "file-text",
+    "breadcrumb": ["Documents", "Politique de confidentialité"],
+    "lastUpdated": "2026-04-20",
+    "body": "Dryvea s'engage à protéger les données personnelles de ses utilisateurs conformément au Règlement Général sur la Protection des Données (RGPD).\n\n## Données collectées\n\n- Identité : nom, prénom, date de naissance, pièce d'identité\n- Contact : email, téléphone, adresse\n- Transactionnelles : historique de réservations et paiements\n- Techniques : adresse IP, logs de connexion, géolocalisation (avec consentement)\n\n## Durées de conservation\n\nLes données de compte sont conservées pendant la durée d'utilisation du service plus 3 ans. Les données de facturation sont conservées 10 ans conformément aux obligations comptables."
+  },
+  "mentions-legales": {
+    "id": "mentions-legales",
+    "title": "Mentions légales",
+    "icon": "file-text",
+    "breadcrumb": ["Documents", "Mentions légales"],
+    "lastUpdated": "2025-11-15",
+    "body": "## Éditeur\n\nDryvea SAS\nCapital social : 10 000 €\nSiège social : 42 Avenue de la Mobilité, 69003 Lyon\nRCS Lyon B 123 456 789\n\n## Directeur de publication\n\nJean Martin, Président\n\n## Hébergeur\n\nOVHcloud — 2 rue Kellermann, 59100 Roubaix"
+  },
+  "charte-responsabilite": {
+    "id": "charte-responsabilite",
+    "title": "Charte responsabilité & assurance",
+    "icon": "file-text",
+    "breadcrumb": ["Documents", "Charte responsabilité & assurance"],
+    "lastUpdated": "2026-05-20",
+    "body": "Cette charte clarifie la répartition des responsabilités entre propriétaire, locataire et assureur en cas d'incident durant une location P2P.\n\n## Couverture assurance\n\nChaque véhicule listé sur Dryvea doit disposer d'une assurance couvrant explicitement la location à des tiers (`covers_rental = true`).\n\n## Franchise\n\nEn cas de dommage responsable du locataire, une franchise de **500 €** s'applique, prélevée sur le dépôt de garantie.\n\n## Procédure sinistre\n\n1. Déclaration immédiate via l'application Dryvea\n2. Photos et description des dommages\n3. Notification automatique à l'assureur\n4. Expertise sous 72h ouvrées"
+  },
+  "figma-overview": {
+    "id": "figma-overview",
+    "title": "Figma — Vue d'ensemble",
+    "icon": "figma",
+    "breadcrumb": ["Maquettes & Design", "Figma — Vue d'ensemble"],
+    "lastUpdated": "2026-05-10",
+    "body": "Fichier Figma principal contenant l'ensemble des écrans et composants du design system Dryvea.\n\n## Accès\n\nFichier : **Dryvea — Design System v2**\nLien : figma.com/file/dryvea-design-system-v2\n\n## Contenu\n\n- Design tokens (typographie, espacements, composants)\n- Flows utilisateur complets (onboarding → réservation → paiement)\n- Variantes mobile (375px) et desktop (1440px)",
+    "figmaUrl": "https://www.figma.com/file/dryvea-design-system",
+    "frames": [
+      { "name": "Design System", "screen": "Tokens & Components" },
+      { "name": "User Flows", "screen": "Parcours complets" },
+      { "name": "Mobile Screens", "screen": "375px viewport" },
+      { "name": "Desktop Screens", "screen": "1440px viewport" }
+    ]
+  },
+  "maquette-homepage": {
+    "id": "maquette-homepage",
+    "title": "Maquette Homepage",
+    "icon": "layout",
+    "breadcrumb": ["Maquettes & Design", "Maquette Homepage"],
+    "lastUpdated": "2026-04-28",
+    "body": "Page d'accueil de la plateforme Dryvea avec recherche géolocalisée et annonces mises en avant.",
+    "figmaUrl": "https://www.figma.com/file/dryvea-homepage",
+    "frames": [
+      { "name": "Hero Section", "screen": "Recherche + CTA" },
+      { "name": "Featured Listings", "screen": "Grille annonces" },
+      { "name": "How It Works", "screen": "3 étapes" },
+      { "name": "Footer", "screen": "Liens & légal" }
+    ]
+  },
+  "maquette-annonce": {
+    "id": "maquette-annonce",
+    "title": "Maquette Annonce",
+    "icon": "layout",
+    "breadcrumb": ["Maquettes & Design", "Maquette Annonce"],
+    "lastUpdated": "2026-04-28",
+    "body": "Page détail d'une annonce de location VSP avec galerie photos, carte et calendrier de disponibilité.",
+    "figmaUrl": "https://www.figma.com/file/dryvea-listing",
+    "frames": [
+      { "name": "Photo Gallery", "screen": "Carousel images" },
+      { "name": "Listing Details", "screen": "Specs VSP + prix" },
+      { "name": "Map & Location", "screen": "Carte interactive" },
+      { "name": "Owner Profile", "screen": "Profil propriétaire" }
+    ]
+  },
+  "maquette-reservation": {
+    "id": "maquette-reservation",
+    "title": "Maquette Réservation",
+    "icon": "layout",
+    "breadcrumb": ["Maquettes & Design", "Maquette Réservation"],
+    "lastUpdated": "2026-05-02",
+    "body": "Flow de réservation en 4 étapes : dates, récapitulatif, paiement Stripe, confirmation.",
+    "figmaUrl": "https://www.figma.com/file/dryvea-booking",
+    "frames": [
+      { "name": "Date Selection", "screen": "Calendrier + créneaux" },
+      { "name": "Price Summary", "screen": "Détail tarif + frais" },
+      { "name": "Payment", "screen": "Stripe Elements" },
+      { "name": "Confirmation", "screen": "QR code + détails" }
+    ]
+  },
+  "maquette-profil": {
+    "id": "maquette-profil",
+    "title": "Maquette Profil",
+    "icon": "layout",
+    "breadcrumb": ["Maquettes & Design", "Maquette Profil"],
+    "lastUpdated": "2026-05-05",
+    "body": "Espace utilisateur avec onglets : mes annonces, mes réservations, avis reçus, paramètres KYC.",
+    "figmaUrl": "https://www.figma.com/file/dryvea-profile",
+    "frames": [
+      { "name": "Profile Header", "screen": "Avatar + stats" },
+      { "name": "My Listings", "screen": "Annonces actives" },
+      { "name": "My Bookings", "screen": "Historique locations" },
+      { "name": "Settings", "screen": "KYC + notifications" }
+    ]
+  },
+  "charte-graphique": {
+    "id": "charte-graphique",
+    "title": "Charte graphique",
+    "icon": "palette",
+    "breadcrumb": ["Maquettes & Design", "Charte graphique"],
+    "lastUpdated": "2026-05-12",
+    "body": "Identité visuelle et design system Dryvea — palette monochrome, typographie Inter, composants UI."
+  },
+  "personas": {
+    "id": "personas",
+    "title": "Personas",
+    "icon": "users",
+    "breadcrumb": ["Maquettes & Design", "Personas"],
+    "lastUpdated": "2026-05-18",
+    "body": "Profils utilisateurs types de la plateforme Dryvea — propriétaires, locataires et cas d'usage P2P VSP."
+  },
+  "mcd": {
+    "id": "mcd",
+    "title": "MCD (Modèle Conceptuel)",
+    "icon": "database",
+    "breadcrumb": ["Base de données", "MCD"],
+    "lastUpdated": "2026-06-01",
+    "body": "Modèle conceptuel de données représentant les entités métier de la plateforme Dryvea et leurs relations.\n\n## Entités principales\n\nLe modèle comprend 8 entités : User, Vehicle, Listing, Booking, Payment, Review, Insurance et Incident.\n\n## Relations clés\n\n- Un **User** possède plusieurs **Vehicle**\n- Un **Vehicle** peut avoir plusieurs **Listing** (historique)\n- Un **Listing** reçoit plusieurs **Booking**\n- Chaque **Booking** génère des **Payment** et potentiellement des **Review** et **Incident**"
+  },
+  "mld": {
+    "id": "mld",
+    "title": "MLD (Modèle Logique)",
+    "icon": "database",
+    "breadcrumb": ["Base de données", "MLD"],
+    "lastUpdated": "2026-06-01",
+    "body": "Modèle logique de données traduisant le MCD en tables relationnelles avec clés primaires, étrangères et contraintes d'unicité."
+  },
+  "schema-sql": {
+    "id": "schema-sql",
+    "title": "Schéma SQL",
+    "icon": "code",
+    "breadcrumb": ["Base de données", "Schéma SQL"],
+    "lastUpdated": "2026-06-01",
+    "body": "Script SQL complet pour initialiser la base de données PostgreSQL de Dryvea. Inclut les types ENUM, contraintes CHECK, index et trigger de mise à jour automatique."
+  },
+  "dictionnaire": {
+    "id": "dictionnaire",
+    "title": "Dictionnaire des données",
+    "icon": "table",
+    "breadcrumb": ["Base de données", "Dictionnaire des données"],
+    "lastUpdated": "2026-06-01",
+    "body": "Référentiel exhaustif de tous les champs de la base de données Dryvea avec types, contraintes de nullabilité, descriptions métier et exemples de valeurs."
+  },
+  "architecture-globale": {
+    "id": "architecture-globale",
+    "title": "Architecture globale",
+    "icon": "network",
+    "breadcrumb": ["Architecture", "Architecture globale"],
+    "lastUpdated": "2026-05-15",
+    "body": "Vue d'ensemble de l'architecture technique de Dryvea, de l'application client jusqu'à la persistance des données.\n\n## Stack technique\n\n- **Frontend** : React 19 + Vite, déployé sur Vercel\n- **API** : Node.js + Express, conteneurisé sur AWS ECS\n- **Base de données** : PostgreSQL 16 sur AWS RDS\n- **Cache** : Redis ElastiCache pour sessions et disponibilités\n- **Stockage** : AWS S3 pour photos véhicules et documents KYC\n- **Paiements** : Stripe Connect pour split payments propriétaire/plateforme"
+  },
+  "schema-api": {
+    "id": "schema-api",
+    "title": "Schéma API REST",
+    "icon": "server",
+    "breadcrumb": ["Architecture", "Schéma API REST"],
+    "lastUpdated": "2026-05-18",
+    "body": "## Endpoints principaux\n\n### Auth\n- `POST /api/v1/auth/register` — Inscription utilisateur\n- `POST /api/v1/auth/login` — Connexion JWT\n- `POST /api/v1/auth/refresh` — Renouvellement token\n\n### Listings\n- `GET /api/v1/listings` — Recherche avec filtres geo/prix\n- `GET /api/v1/listings/:id` — Détail annonce\n- `POST /api/v1/listings` — Créer annonce (auth owner)\n\n### Bookings\n- `POST /api/v1/bookings` — Créer réservation\n- `PATCH /api/v1/bookings/:id/status` — Changer statut\n- `GET /api/v1/bookings/me` — Mes réservations\n\n### Payments\n- `POST /api/v1/payments/intent` — Créer PaymentIntent Stripe\n- `POST /api/v1/payments/webhook` — Webhook Stripe\n\nAuthentification via Bearer JWT. Rate limiting : 100 req/min par IP."
+  },
+  "flux-paiement": {
+    "id": "flux-paiement",
+    "title": "Flux de paiement",
+    "icon": "credit-card",
+    "breadcrumb": ["Architecture", "Flux de paiement"],
+    "lastUpdated": "2026-05-20",
+    "body": "## Séquence de paiement\n\n1. Le locataire confirme sa réservation\n2. L'API crée un `PaymentIntent` Stripe avec montant total + dépôt\n3. Le frontend affiche Stripe Elements pour saisie CB\n4. Stripe confirme le paiement via webhook `payment_intent.succeeded`\n5. L'API met à jour le booking en `confirmed` et retient le dépôt\n6. À la fin de location : libération dépôt ou prélèvement franchise\n7. Split payment : 85% vers compte Connect propriétaire, 15% commission Dryvea\n\n## Gestion des remboursements\n\nAnnulation > 48h avant : remboursement intégral.\nAnnulation < 48h : 50% retenu au profit du propriétaire."
+  },
+  "infrastructure": {
+    "id": "infrastructure",
+    "title": "Infrastructure cloud",
+    "icon": "cloud",
+    "breadcrumb": ["Architecture", "Infrastructure cloud"],
+    "lastUpdated": "2026-05-22",
+    "body": "## Environnements\n\n| Env | URL | Branch |\n|-----|-----|--------|\n| Production | app.dryvea.fr | main |\n| Staging | staging.dryvea.fr | develop |\n| Dev | localhost:5173 | feature/* |\n\n## AWS Services\n\n- **ECS Fargate** : 2 tasks API (prod), auto-scaling CPU > 70%\n- **RDS PostgreSQL** : db.t4g.medium, Multi-AZ en production\n- **ElastiCache Redis** : cache.t4g.micro, cluster mode disabled\n- **S3** : bucket `dryvea-assets-prod`, CloudFront CDN\n- **Route 53** : DNS + health checks\n- **CloudWatch** : logs centralisés, alertes PagerDuty\n\n## CI/CD\n\nGitHub Actions → build Docker → push ECR → deploy ECS rolling update."
+  },
+  "getting-started": {
+    "id": "getting-started",
+    "title": "Getting Started",
+    "icon": "rocket",
+    "breadcrumb": ["Repo & Dev", "Getting Started"],
+    "lastUpdated": "2026-06-10",
+    "body": "Guide d'installation et de lancement du projet Dryvea en local.",
+    "devType": "getting-started"
+  },
+  "conventions": {
+    "id": "conventions",
+    "title": "Conventions de code",
+    "icon": "book-open",
+    "breadcrumb": ["Repo & Dev", "Conventions de code"],
+    "lastUpdated": "2026-06-10",
+    "body": "Standards de code appliqués sur l'ensemble des repositories Dryvea.",
+    "devType": "conventions"
+  },
+  "git-flow": {
+    "id": "git-flow",
+    "title": "Git Flow",
+    "icon": "git-branch",
+    "breadcrumb": ["Repo & Dev", "Git Flow"],
+    "lastUpdated": "2026-06-10",
+    "body": "Workflow Git adopté par l'équipe Dryvea pour le versioning et les releases.",
+    "devType": "git-flow"
+  },
+  "cicd": {
+    "id": "cicd",
+    "title": "CI/CD Pipeline",
+    "icon": "workflow",
+    "breadcrumb": ["Repo & Dev", "CI/CD Pipeline"],
+    "lastUpdated": "2026-06-10",
+    "body": "Pipeline d'intégration et déploiement continu via GitHub Actions.",
+    "devType": "cicd"
+  },
+  "projet": {
+    "id": "projet",
+    "title": "Board projet",
+    "icon": "kanban",
+    "breadcrumb": ["Projet", "Board projet"],
+    "lastUpdated": "2026-06-24",
+    "body": "Suivi de projet Dryvea — board hébergé sur AlwaysData."
+  },
+  "presentation-canva": {
+    "id": "presentation-canva",
+    "title": "Présentation Canva",
+    "icon": "presentation",
+    "breadcrumb": ["Projet", "Présentation Canva"],
+    "lastUpdated": "2026-06-24",
+    "body": "Présentation Canva du projet Dryvea — vision, concept et proposition de valeur."
+  },
+  "plan-tests": {
+    "id": "plan-tests",
+    "title": "Plan de tests",
+    "icon": "clipboard-check",
+    "breadcrumb": ["Tests & Recette", "Plan de tests"],
+    "lastUpdated": "2026-06-20",
+    "body": "Stratégie de tests MVP Dryvea — unitaires, intégration, E2E et recette staging.",
+    "testType": "plan"
+  },
+  "recette": {
+    "id": "recette",
+    "title": "Recette fonctionnelle",
+    "icon": "check-square",
+    "breadcrumb": ["Tests & Recette", "Recette fonctionnelle"],
+    "lastUpdated": "2026-06-22",
+    "body": "Scénarios de recette manuelle sur staging — parcours propriétaire et locataire.",
+    "testType": "recette"
+  },
+  "criteres-acceptation": {
+    "id": "criteres-acceptation",
+    "title": "Critères d'acceptation",
+    "icon": "list-checks",
+    "breadcrumb": ["Tests & Recette", "Critères d'acceptation"],
+    "lastUpdated": "2026-06-20",
+    "body": "Definition of Done par feature — conditions mesurables pour valider une livraison.",
+    "testType": "criteres"
+  }
+}

@@ -1,0 +1,118 @@
+[
+  {
+    "id": "marie-proprietaire",
+    "name": "Marie Dupont",
+    "role": "Propriétaire VSP",
+    "age": 52,
+    "location": "Lyon 3e",
+    "avatar": "MD",
+    "quote": "Mon Aixam me sert deux fois par semaine. Le reste du temps, autant qu'il profite à quelqu'un d'autre.",
+    "context": "Retraitée anticipée, propriétaire d'un Aixam City Pack électrique depuis 2023. Habite en centre-ville avec parking privé. Revenu complémentaire souhaité sans contrainte.",
+    "goals": [
+      "Rentabiliser son VSP inutilisé (300–500 €/mois visés)",
+      "Processus simple sans paperasse",
+      "Contrôle total sur les créneaux disponibles",
+      "Locataires vérifiés et assurés"
+    ],
+    "frustrations": [
+      "Peur des dégradations non couvertes par l'assurance",
+      "Complexité des démarches administratives VSP",
+      "Méfiance envers les inconnus pour confier son véhicule"
+    ],
+    "behaviors": [
+      "Consulte l'app le matin et le soir",
+      "Répond aux messages en moins de 2h",
+      "Photographie son VSP avant chaque location",
+      "Préfère les locations demi-journée ou journée"
+    ],
+    "techLevel": "Intermédiaire",
+    "devices": ["iPhone 13", "iPad"]
+  },
+  {
+    "id": "thomas-locataire",
+    "name": "Thomas Leroy",
+    "role": "Locataire urbain",
+    "age": 22,
+    "location": "Lyon 7e",
+    "avatar": "TL",
+    "quote": "Pas le permis, pas le budget pour un VSP à l'année. Une journée pour aller chez ma grand-mère, c'est parfait.",
+    "context": "Étudiant en master, vit en colocation sans permis de conduire. Utilise les transports en commun au quotidien. Besoin ponctuel de mobilité individuelle pour trajets > 5 km.",
+    "goals": [
+      "Louer un VSP pour 1 journée max, sans engagement",
+      "Prix transparent (pas de frais cachés)",
+      "VSP proche de chez lui (< 1 km)",
+      "Réservation en moins de 3 minutes"
+    ],
+    "frustrations": [
+      "Peu d'options de location VSP sans permis",
+      "Dépôt de garantie trop élevé",
+      "Processus KYC perçu comme long au premier usage"
+    ],
+    "behaviors": [
+      "Compare les prix avant de réserver",
+      "Lit les avis propriétaire systématiquement",
+      "Utilise Apple Pay pour payer",
+      "Partage son expérience sur Instagram Stories"
+    ],
+    "techLevel": "Avancé",
+    "devices": ["iPhone 15", "MacBook Air"]
+  },
+  {
+    "id": "henri-senior",
+    "name": "Henri Moreau",
+    "role": "Locataire senior",
+    "age": 68,
+    "location": "Villeurbanne",
+    "avatar": "HM",
+    "quote": "Mon permis a été suspendu. Le VSP me redonne un peu d'autonomie le temps de la suspension.",
+    "context": "Retraité, permis suspendu 6 mois suite à infraction. Connaît les VSP depuis 10 ans. Cherche une solution fiable et rassurante, avec assistance en cas de panne.",
+    "goals": [
+      "Autonomie quotidienne (courses, rendez-vous médicaux)",
+      "Assistance dépannage incluse ou facilement accessible",
+      "Interface claire avec gros textes",
+      "Propriétaire joignable par téléphone"
+    ],
+    "frustrations": [
+      "Applications trop complexes avec trop de menus",
+      "Peur de ne pas savoir gérer en cas de panne batterie",
+      "Conditions d'assurance incompréhensibles"
+    ],
+    "behaviors": [
+      "Appelle le propriétaire avant la première location",
+      "Privilégie les VSP avec autonomie > 60 km",
+      "Loue 2 à 3 fois par semaine, créneaux réguliers",
+      "Demande de l'aide à sa fille pour l'inscription initiale"
+    ],
+    "techLevel": "Débutant",
+    "devices": ["Samsung Galaxy A54"]
+  },
+  {
+    "id": "camille-pro",
+    "name": "Camille Rousseau",
+    "role": "Propriétaire multi-VSP",
+    "age": 35,
+    "location": "Grenoble",
+    "avatar": "CR",
+    "quote": "J'ai 3 VSP dans ma micro-flotte. Dryvea doit m'aider à les gérer sans y passer mes soirées.",
+    "context": "Auto-entrepreneuse dans la mobilité douce. Possède 3 VSP (2 Aixam, 1 Ligier) qu'elle propose en location. Vision business, cherche à optimiser le taux d'occupation.",
+    "goals": [
+      "Dashboard multi-véhicules avec stats de revenus",
+      "Tarification dynamique selon la demande",
+      "Gestion centralisée du calendrier",
+      "Export comptable mensuel"
+    ],
+    "frustrations": [
+      "Pas de vue consolidée sur plusieurs annonces",
+      "Synchronisation manuelle des calendriers",
+      "Commission plateforme impactant la marge"
+    ],
+    "behaviors": [
+      "Analyse ses stats chaque lundi matin",
+      "Ajuste les prix selon la météo et les événements locaux",
+      "Répond via l'app, jamais par email",
+      "Teste les nouvelles features en beta"
+    ],
+    "techLevel": "Avancé",
+    "devices": ["iPhone 14 Pro", "MacBook Pro", "iPad Pro"]
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "id": "contrat-location",
+    "title": "Contrat de location",
+    "type": "PDF",
+    "filename": "dryvea-contrat-location-v2.1.pdf",
+    "size": "245 Ko",
+    "status": "validated",
+    "version": "2.1",
+    "lastModified": "2026-03-15",
+    "description": "Contrat type de location de véhicule sans permis (VSP) entre propriétaire et locataire via la plateforme Dryvea.",
+    "versions": [
+      { "version": "2.1", "date": "2026-03-15", "author": "Marie Dupont", "changes": "Mise à jour clauses assurance et dépôt de garantie" },
+      { "version": "2.0", "date": "2026-01-10", "author": "Marie Dupont", "changes": "Ajout clause résiliation anticipée" },
+      { "version": "1.0", "date": "2025-11-20", "author": "Jean Martin", "changes": "Version initiale" }
+    ]
+  },
+  {
+    "id": "cgu-cgv",
+    "title": "CGU / CGV",
+    "type": "DOCX",
+    "filename": "dryvea-cgu-cgv-v3.0.docx",
+    "size": "128 Ko",
+    "status": "review",
+    "version": "3.0",
+    "lastModified": "2026-05-01",
+    "description": "Conditions générales d'utilisation et de vente de la plateforme Dryvea — location P2P de VSP électriques.",
+    "versions": [
+      { "version": "3.0", "date": "2026-05-01", "author": "Marie Dupont", "changes": "Révision commission plateforme et médiation" },
+      { "version": "2.5", "date": "2026-02-14", "author": "Jean Martin", "changes": "Conformité RGPD et droit de rétractation" },
+      { "version": "2.0", "date": "2025-12-01", "author": "Jean Martin", "changes": "Version initiale publiée" }
+    ]
+  },
+  {
+    "id": "politique-confidentialite",
+    "title": "Politique de confidentialité",
+    "type": "PDF",
+    "filename": "dryvea-politique-confidentialite-v1.2.pdf",
+    "size": "98 Ko",
+    "status": "validated",
+    "version": "1.2",
+    "lastModified": "2026-04-20",
+    "description": "Politique de traitement des données personnelles conforme au RGPD pour les utilisateurs Dryvea.",
+    "versions": [
+      { "version": "1.2", "date": "2026-04-20", "author": "Sophie Bernard", "changes": "Mise à jour sous-traitants et durées de conservation" },
+      { "version": "1.1", "date": "2026-02-01", "author": "Sophie Bernard", "changes": "Ajout cookies analytics" },
+      { "version": "1.0", "date": "2025-11-15", "author": "Sophie Bernard", "changes": "Version initiale" }
+    ]
+  },
+  {
+    "id": "mentions-legales",
+    "title": "Mentions légales",
+    "type": "PDF",
+    "filename": "dryvea-mentions-legales-v1.0.pdf",
+    "size": "45 Ko",
+    "status": "validated",
+    "version": "1.0",
+    "lastModified": "2025-11-15",
+    "description": "Informations légales obligatoires : éditeur, hébergeur, directeur de publication.",
+    "versions": [
+      { "version": "1.0", "date": "2025-11-15", "author": "Jean Martin", "changes": "Version initiale" }
+    ]
+  },
+  {
+    "id": "charte-responsabilite",
+    "title": "Charte responsabilité & assurance",
+    "type": "PDF",
+    "filename": "dryvea-charte-responsabilite-v1.1.pdf",
+    "size": "156 Ko",
+    "status": "draft",
+    "version": "1.1",
+    "lastModified": "2026-05-20",
+    "description": "Charte définissant les responsabilités propriétaire/locataire et les couvertures assurance VSP en location P2P.",
+    "versions": [
+      { "version": "1.1", "date": "2026-05-20", "author": "Marie Dupont", "changes": "Brouillon — ajout franchise et sinistres" },
+      { "version": "1.0", "date": "2026-01-05", "author": "Marie Dupont", "changes": "Version initiale" }
+    ]
+  }
+]

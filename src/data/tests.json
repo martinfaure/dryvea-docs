@@ -1,0 +1,199 @@
+{
+  "plan": {
+    "version": "1.2",
+    "lastUpdated": "2026-06-20",
+    "scope": "MVP Dryvea — parcours propriétaire et locataire",
+    "environments": [
+      { "name": "Unit", "tool": "Jest", "coverage": "≥ 80% services" },
+      { "name": "Integration", "tool": "Supertest + PostgreSQL test", "coverage": "API endpoints critiques" },
+      { "name": "E2E", "tool": "Playwright", "coverage": "5 parcours principaux" },
+      { "name": "Staging", "tool": "Recette manuelle", "coverage": "Checklist complète" },
+      { "name": "Production", "tool": "Smoke tests post-deploy", "coverage": "Health + auth + search" }
+    ],
+    "suites": [
+      {
+        "id": "auth",
+        "name": "Authentification & KYC",
+        "priority": "Critique",
+        "tests": [
+          { "id": "AUTH-01", "name": "Inscription email + mot de passe", "type": "E2E", "automated": true },
+          { "id": "AUTH-02", "name": "Vérification email (lien expiration 24h)", "type": "Integration", "automated": true },
+          { "id": "AUTH-03", "name": "Upload pièce d'identité KYC", "type": "E2E", "automated": true },
+          { "id": "AUTH-04", "name": "Blocage location si KYC pending", "type": "Integration", "automated": true },
+          { "id": "AUTH-05", "name": "Refresh token JWT", "type": "Unit", "automated": true }
+        ]
+      },
+      {
+        "id": "listings",
+        "name": "Annonces & recherche",
+        "priority": "Critique",
+        "tests": [
+          { "id": "LIST-01", "name": "Création annonce avec photos (max 8)", "type": "E2E", "automated": true },
+          { "id": "LIST-02", "name": "Recherche géolocalisée rayon 5 km", "type": "E2E", "automated": true },
+          { "id": "LIST-03", "name": "Filtres autonomie et prix", "type": "E2E", "automated": true },
+          { "id": "LIST-04", "name": "Désactivation annonce par propriétaire", "type": "Integration", "automated": true }
+        ]
+      },
+      {
+        "id": "booking",
+        "name": "Réservation",
+        "priority": "Critique",
+        "tests": [
+          { "id": "BOOK-01", "name": "Sélection créneaux disponibles", "type": "E2E", "automated": true },
+          { "id": "BOOK-02", "name": "Rejet créneaux chevauchants", "type": "Unit", "automated": true },
+          { "id": "BOOK-03", "name": "Calcul prix horaire vs journalier", "type": "Unit", "automated": true },
+          { "id": "BOOK-04", "name": "Annulation > 48h — remboursement intégral", "type": "Integration", "automated": false },
+          { "id": "BOOK-05", "name": "État des lieux départ/retour photos", "type": "E2E", "automated": false }
+        ]
+      },
+      {
+        "id": "payment",
+        "name": "Paiement Stripe",
+        "priority": "Critique",
+        "tests": [
+          { "id": "PAY-01", "name": "PaymentIntent création montant correct", "type": "Integration", "automated": true },
+          { "id": "PAY-02", "name": "Retenue dépôt de garantie", "type": "Integration", "automated": true },
+          { "id": "PAY-03", "name": "Split 85/15 propriétaire/plateforme", "type": "Integration", "automated": true },
+          { "id": "PAY-04", "name": "Webhook payment_intent.succeeded", "type": "Integration", "automated": true },
+          { "id": "PAY-05", "name": "Remboursement partiel annulation tardive", "type": "Manual", "automated": false }
+        ]
+      }
+    ]
+  },
+  "recette": {
+    "version": "1.0",
+    "lastUpdated": "2026-06-22",
+    "environment": "staging.dryvea.fr",
+    "responsable": "Sophie Bernard",
+    "scenarios": [
+      {
+        "id": "REC-01",
+        "title": "Parcours locataire — première location",
+        "persona": "Thomas Leroy",
+        "steps": [
+          "Créer un compte avec email valide",
+          "Compléter le profil et le KYC (CNI + selfie)",
+          "Rechercher un VSP à moins de 1 km",
+          "Consulter la fiche annonce (photos, prix, avis)",
+          "Sélectionner un créneau demi-journée demain",
+          "Payer par carte (Stripe test 4242...)",
+          "Recevoir la confirmation par email et push",
+          "Consulter les coordonnées propriétaire J-1"
+        ],
+        "expectedResult": "Réservation confirmée, dépôt retenu, statut booking = confirmed",
+        "status": "passed"
+      },
+      {
+        "id": "REC-02",
+        "title": "Parcours propriétaire — publication annonce",
+        "persona": "Marie Dupont",
+        "steps": [
+          "Se connecter avec compte vérifié KYC approved",
+          "Ajouter un véhicule (VIN, immatriculation, photos)",
+          "Vérifier contrat assurance covers_rental = true",
+          "Créer une annonce avec tarifs horaire/journalier",
+          "Définir disponibilités sur 2 semaines",
+          "Publier et vérifier apparition en recherche"
+        ],
+        "expectedResult": "Annonce active visible sur la carte, calendrier synchronisé",
+        "status": "passed"
+      },
+      {
+        "id": "REC-03",
+        "title": "État des lieux et retour véhicule",
+        "persona": "Thomas Leroy",
+        "steps": [
+          "Au départ : prendre 4 photos obligatoires (4 angles)",
+          "Confirmer prise en charge — statut booking = active",
+          "Au retour : reprendre 4 photos",
+          "Signaler une micro-rayure (incident type damage)",
+          "Terminer la location — statut booking = completed"
+        ],
+        "expectedResult": "Incident créé, dépôt partiellement retenu si franchise applicable",
+        "status": "in_progress"
+      },
+      {
+        "id": "REC-04",
+        "title": "Annulation locataire < 48h",
+        "persona": "Henri Moreau",
+        "steps": [
+          "Réserver un créneau J+1",
+          "Annuler 24h avant le début",
+          "Vérifier email confirmation annulation",
+          "Contrôler remboursement 50% sur compte bancaire"
+        ],
+        "expectedResult": "Booking cancelled, remboursement partiel sous 5 jours ouvrés",
+        "status": "pending"
+      },
+      {
+        "id": "REC-05",
+        "title": "Multi-véhicules — dashboard propriétaire pro",
+        "persona": "Camille Rousseau",
+        "steps": [
+          "Se connecter avec compte 3 véhicules",
+          "Consulter le dashboard revenus consolidés",
+          "Modifier tarif dynamique sur une annonce",
+          "Exporter le rapport mensuel CSV"
+        ],
+        "expectedResult": "Stats correctes, export CSV conforme aux transactions Stripe",
+        "status": "pending"
+      }
+    ]
+  },
+  "criteres": [
+    {
+      "id": "CA-01",
+      "feature": "Inscription & KYC",
+      "criteres": [
+        "Un utilisateur majeur peut créer un compte en moins de 2 minutes",
+        "Le KYC bloque toute action de location tant que status ≠ approved",
+        "Les documents KYC sont stockés chiffrés sur S3, accessibles admin uniquement"
+      ]
+    },
+    {
+      "id": "CA-02",
+      "feature": "Recherche d'annonces",
+      "criteres": [
+        "La recherche par géolocalisation retourne des résultats en < 500 ms (p95)",
+        "Seules les annonces is_active = true et véhicule status = available sont affichées",
+        "Les filtres autonomie, prix et catégorie L6e sont combinables"
+      ]
+    },
+    {
+      "id": "CA-03",
+      "feature": "Réservation",
+      "criteres": [
+        "Impossible de réserver un créneau déjà confirmé (contrainte applicative + DB)",
+        "Le prix total affiché inclut la commission 15% avant paiement",
+        "Le locataire reçoit confirmation email + push dans les 30 secondes"
+      ]
+    },
+    {
+      "id": "CA-04",
+      "feature": "Paiement",
+      "criteres": [
+        "Le dépôt de garantie est retenu via Stripe PaymentIntent séparé",
+        "Le split Connect verse 85% au propriétaire sous 48h post-location",
+        "Toute anomalie webhook déclenche une alerte PagerDuty"
+      ]
+    },
+    {
+      "id": "CA-05",
+      "feature": "Assurance & incidents",
+      "criteres": [
+        "Impossible de publier une annonce si covers_rental = false",
+        "Un incident génère une notification au propriétaire et à l'équipe support",
+        "Les photos d'incident sont horodatées et géolocalisées"
+      ]
+    },
+    {
+      "id": "CA-06",
+      "feature": "Performance & sécurité",
+      "criteres": [
+        "Lighthouse Performance score ≥ 85 sur mobile",
+        "Aucune donnée sensible (CB, CNI) transite en clair",
+        "Rate limiting 100 req/min par IP sur endpoints publics"
+      ]
+    }
+  ]
+}

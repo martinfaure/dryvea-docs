@@ -1,0 +1,88 @@
+[
+  {
+    "id": "documents",
+    "label": "Documents",
+    "icon": "folder",
+    "children": [
+      { "id": "contrat-location", "label": "Contrat de location", "path": "/documents/contrat-location", "icon": "file-text" },
+      { "id": "cgu-cgv", "label": "CGU / CGV", "path": "/documents/cgu-cgv", "icon": "file-text" },
+      { "id": "politique-confidentialite", "label": "Politique de confidentialité", "path": "/documents/politique-confidentialite", "icon": "file-text" },
+      { "id": "mentions-legales", "label": "Mentions légales", "path": "/documents/mentions-legales", "icon": "file-text" },
+      { "id": "charte-responsabilite", "label": "Charte responsabilité & assurance", "path": "/documents/charte-responsabilite", "icon": "file-text" }
+    ]
+  },
+  {
+    "id": "design",
+    "label": "Maquettes & Design",
+    "icon": "folder",
+    "children": [
+      { "id": "figma-overview", "label": "Figma — Vue d'ensemble", "path": "/design/figma-overview", "icon": "figma" },
+      { "id": "charte-graphique", "label": "Charte graphique", "path": "/design/charte-graphique", "icon": "palette" },
+      { "id": "personas", "label": "Personas", "path": "/design/personas", "icon": "users" },
+      { "id": "maquette-homepage", "label": "Maquette Homepage", "path": "/design/maquette-homepage", "icon": "layout" },
+      { "id": "maquette-annonce", "label": "Maquette Annonce", "path": "/design/maquette-annonce", "icon": "layout" },
+      { "id": "maquette-reservation", "label": "Maquette Réservation", "path": "/design/maquette-reservation", "icon": "layout" },
+      { "id": "maquette-profil", "label": "Maquette Profil", "path": "/design/maquette-profil", "icon": "layout" }
+    ]
+  },
+  {
+    "id": "database",
+    "label": "Base de données",
+    "icon": "folder",
+    "children": [
+      { "id": "mcd", "label": "MCD (Modèle Conceptuel)", "path": "/database/mcd", "icon": "database" },
+      { "id": "mld", "label": "MLD (Modèle Logique)", "path": "/database/mld", "icon": "database" },
+      { "id": "schema-sql", "label": "Schéma SQL", "path": "/database/schema-sql", "icon": "code" },
+      { "id": "dictionnaire", "label": "Dictionnaire des données", "path": "/database/dictionnaire", "icon": "table" }
+    ]
+  },
+  {
+    "id": "architecture",
+    "label": "Architecture",
+    "icon": "folder",
+    "children": [
+      { "id": "architecture-globale", "label": "Architecture globale", "path": "/architecture/globale", "icon": "network" },
+      { "id": "schema-api", "label": "Schéma API REST", "path": "/architecture/schema-api", "icon": "server" },
+      { "id": "flux-paiement", "label": "Flux de paiement", "path": "/architecture/flux-paiement", "icon": "credit-card" },
+      { "id": "infrastructure", "label": "Infrastructure cloud", "path": "/architecture/infrastructure", "icon": "cloud" }
+    ]
+  },
+  {
+    "id": "projet",
+    "label": "Projet",
+    "icon": "folder",
+    "children": [
+      { "id": "presentation-canva", "label": "Présentation Canva", "path": "/projet/presentation-canva", "icon": "presentation" },
+      { "id": "projet-board", "label": "Board projet", "path": "/projet", "icon": "kanban" }
+    ]
+  },
+  {
+    "id": "tests",
+    "label": "Tests & Recette",
+    "icon": "folder",
+    "children": [
+      { "id": "plan-tests", "label": "Plan de tests", "path": "/tests/plan", "icon": "clipboard-check" },
+      { "id": "recette", "label": "Recette fonctionnelle", "path": "/tests/recette", "icon": "check-square" },
+      { "id": "criteres-acceptation", "label": "Critères d'acceptation", "path": "/tests/criteres", "icon": "list-checks" }
+    ]
+  },
+  {
+    "id": "dev",
+    "label": "Repo & Dev",
+    "icon": "folder",
+    "children": [
+      { "id": "getting-started", "label": "Getting Started", "path": "/dev/getting-started", "icon": "rocket" },
+      { "id": "conventions", "label": "Conventions de code", "path": "/dev/conventions", "icon": "book-open" },
+      { "id": "git-flow", "label": "Git Flow", "path": "/dev/git-flow", "icon": "git-branch" },
+      { "id": "cicd", "label": "CI/CD Pipeline", "path": "/dev/cicd", "icon": "workflow" }
+    ]
+  },
+  {
+    "id": "juridique",
+    "label": "Juridique",
+    "icon": "folder",
+    "children": [
+      { "id": "juridique-link", "label": "Documents juridiques", "path": "/documents/contrat-location", "icon": "scale" }
+    ]
+  }
+]
