@@ -1,6 +1,87 @@
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Markdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import ImageLightbox from '../../components/ImageLightbox'
 import PageLayout from '../../components/PageLayout'
 import pages from '../../data/pages.json'
+
+function ImageMarkdown({ src, alt }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <img
+        src={src}
+        alt={alt}
+        className="max-w-full h-auto my-4 cursor-zoom-in"
+        onClick={() => setOpen(true)}
+      />
+      <ImageLightbox src={src} alt={alt} isOpen={open} onClose={() => setOpen(false)} />
+    </>
+  )
+}
+
+const mdComponents = {
+  h2: ({ children }) => (
+    <h2 className="text-xl font-semibold mt-8 mb-3 text-black">{children}</h2>
+  ),
+  h3: ({ children }) => (
+    <h3 className="text-base font-semibold mt-6 mb-2 text-black">{children}</h3>
+  ),
+  p: ({ children }) => (
+    <p className="text-[15px] leading-relaxed my-3 text-black">{children}</p>
+  ),
+  ul: ({ children }) => (
+    <ul className="list-disc pl-5 space-y-1.5 my-3 text-[15px] leading-relaxed">{children}</ul>
+  ),
+  ol: ({ children }) => (
+    <ol className="list-decimal pl-5 space-y-1.5 my-3 text-[15px] leading-relaxed">{children}</ol>
+  ),
+  li: ({ children }) => <li>{children}</li>,
+  table: ({ children }) => (
+    <div className="my-4 overflow-x-auto">
+      <table className="w-full text-sm border-collapse">{children}</table>
+    </div>
+  ),
+  thead: ({ children }) => <thead className="border-b-2 border-black">{children}</thead>,
+  tbody: ({ children }) => <tbody>{children}</tbody>,
+  tr: ({ children, ...props }) => {
+    const isHeader = props.node?.parent?.tagName === 'thead'
+    return (
+      <tr className={isHeader ? '' : 'border-b border-gray-100'}>{children}</tr>
+    )
+  },
+  th: ({ children }) => (
+    <th className="px-3 py-2 text-left font-semibold">{children}</th>
+  ),
+  td: ({ children }) => (
+    <td className="px-3 py-2 text-left">{children}</td>
+  ),
+  strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+  code: ({ children, className }) => {
+    const isBlock = className?.includes('language-')
+    if (isBlock) {
+      return (
+        <code className="block bg-gray-50 p-4 my-3 text-[13px] font-mono overflow-x-auto">
+          {children}
+        </code>
+      )
+    }
+    return (
+      <code className="bg-gray-50 px-1 py-0.5 text-[13px] font-mono">{children}</code>
+    )
+  },
+  blockquote: ({ children }) => (
+    <blockquote className="border-l-4 border-gray-200 pl-4 my-4 text-[15px] text-gray-600 italic">
+      {children}
+    </blockquote>
+  ),
+  a: ({ href, children }) => (
+    <a href={href} className="text-black underline decoration-gray-300 hover:decoration-black transition-colors" target="_blank" rel="noopener noreferrer">{children}</a>
+  ),
+  hr: () => <hr className="border-gray-100 my-6" />,
+  img: ({ src, alt }) => <ImageMarkdown src={src} alt={alt} />,
+}
 
 const pageIdMap = {
   globale: 'architecture-globale',
@@ -29,59 +110,9 @@ export default function ArchitecturePage() {
       <div className="space-y-8">
         {isGlobal && <ArchitectureDiagram />}
 
-        <div className="prose-dryvea">
-          {page.body.split('\n\n').map((block, i) => {
-            if (block.startsWith('## ')) {
-              return (
-                <div key={i}>
-                  <h2 className="text-xl font-semibold mt-8 mb-3">{block.split('\n')[0].slice(3)}</h2>
-                  {block.split('\n').slice(1).map((line, j) => (
-                    <p key={j} className="text-[15px] leading-relaxed my-2 text-black">
-                      {line.startsWith('- ') ? null : line}
-                    </p>
-                  ))}
-                </div>
-              )
-            }
-            if (block.startsWith('- ')) {
-              const items = block.split('\n').filter((l) => l.startsWith('- '))
-              return (
-                <ul key={i} className="list-disc pl-5 space-y-1.5 my-3 text-[15px]">
-                  {items.map((item, j) => (
-                    <li key={j}>{item.slice(2).replace(/\*\*(.+?)\*\*/g, '$1')}</li>
-                  ))}
-                </ul>
-              )
-            }
-            if (block.startsWith('|')) {
-              const rows = block.split('\n').filter((r) => !r.includes('---'))
-              return (
-                <table key={i} className="w-full text-sm border-collapse my-4">
-                  <tbody>
-                    {rows.map((row, ri) => {
-                      const cells = row.split('|').filter(Boolean).map((c) => c.trim())
-                      const Tag = ri === 0 ? 'th' : 'td'
-                      return (
-                        <tr key={ri} className={ri === 0 ? 'border-b-2 border-black' : 'border-b border-gray-100'}>
-                          {cells.map((cell, ci) => (
-                            <Tag key={ci} className={`px-3 py-2 text-left ${ri === 0 ? 'font-semibold' : ''}`}>
-                              {cell}
-                            </Tag>
-                          ))}
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </table>
-              )
-            }
-            return (
-              <p key={i} className="text-[15px] leading-relaxed my-3 text-black">
-                {block}
-              </p>
-            )
-          })}
-        </div>
+        <Markdown remarkPlugins={[remarkGfm]} components={mdComponents}>
+          {page.body}
+        </Markdown>
       </div>
     </PageLayout>
   )
