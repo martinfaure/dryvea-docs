@@ -5,8 +5,7 @@ import SearchModal from './components/SearchModal'
 import { useSearchShortcut } from './hooks/useSearch'
 import Home from './pages/Home'
 import DocumentPage from './pages/documents/DocumentPage'
-import McdPage from './pages/database/McdPage'
-import MldPage from './pages/database/MldPage'
+import McdMldPage from './pages/database/McdMldPage'
 import SqlPage from './pages/database/SqlPage'
 import DictionaryPage from './pages/database/DictionaryPage'
 import FigmaPage from './pages/design/FigmaPage'
@@ -53,8 +52,7 @@ export default function App() {
             <Route path="/design/personas" element={<PersonasPage />} />
             <Route path="/design/:designId" element={<FigmaPage />} />
 
-            <Route path="/database/mcd" element={<McdPage />} />
-            <Route path="/database/mld" element={<MldPage />} />
+            <Route path="/database/mcd-mld" element={<McdMldPage />} />
             <Route path="/database/schema-sql" element={<SqlPage />} />
             <Route path="/database/dictionnaire" element={<DictionaryPage />} />
 

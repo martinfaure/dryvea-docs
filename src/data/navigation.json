@@ -30,8 +30,7 @@
     "label": "Base de données",
     "icon": "folder",
     "children": [
-      { "id": "mcd", "label": "MCD (Modèle Conceptuel)", "path": "/database/mcd", "icon": "database" },
-      { "id": "mld", "label": "MLD (Modèle Logique)", "path": "/database/mld", "icon": "database" },
+      { "id": "mcd-mld", "label": "MCD / MLD", "path": "/database/mcd-mld", "icon": "database" },
       { "id": "schema-sql", "label": "Schéma SQL", "path": "/database/schema-sql", "icon": "code" },
       { "id": "dictionnaire", "label": "Dictionnaire des données", "path": "/database/dictionnaire", "icon": "table" }
     ]
