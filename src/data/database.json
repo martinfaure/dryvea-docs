@@ -1,342 +1,1789 @@
-{
-  "entities": [
-    {
-      "name": "utilisateur",
-      "description": "Utilisateur de la plateforme (propriétaire ou locataire)",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "nom", "type": "VARCHAR(80)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "prenom", "type": "VARCHAR(80)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "email", "type": "VARCHAR(150)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "mot_de_passe", "type": "VARCHAR(255)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "telephone", "type": "VARCHAR(20)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "date_naissance", "type": "DATE", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "adresse", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "ville", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "num_permis", "type": "VARCHAR(50)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "permis_verifie", "type": "TINYINT(1)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "est_proprietaire", "type": "TINYINT(1)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "photo_profil", "type": "VARCHAR(255)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "note_moyenne", "type": "DECIMAL(3,2)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "actif", "type": "TINYINT(1)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "type_voiture",
-      "description": "Catégorie de véhicule (citadine, SUV, électrique, etc.)",
-      "attributes": [
-        { "name": "id", "type": "INT UNSIGNED", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "libelle", "type": "VARCHAR(60)", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "voiture",
-      "description": "Véhicule enregistré sur la plateforme",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "id_proprietaire", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "utilisateur" },
-        { "name": "id_type", "type": "INT UNSIGNED", "isPrimaryKey": false, "isForeignKey": true, "references": "type_voiture" },
-        { "name": "marque", "type": "VARCHAR(60)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "modele", "type": "VARCHAR(80)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "annee", "type": "YEAR", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "couleur", "type": "VARCHAR(40)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "immatriculation", "type": "VARCHAR(20)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "kilometrage", "type": "INT UNSIGNED", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "carburant", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "boite_vitesse", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "nb_places", "type": "TINYINT UNSIGNED", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "prix_par_jour", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "caution", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "ville", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "adresse", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "latitude", "type": "DECIMAL(10,7)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "longitude", "type": "DECIMAL(10,7)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "disponible", "type": "TINYINT(1)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "verifie", "type": "TINYINT(1)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "note_moyenne", "type": "DECIMAL(3,2)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "description", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "photo_voiture",
-      "description": "Photos associées à un véhicule",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "id_voiture", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "voiture" },
-        { "name": "chemin", "type": "VARCHAR(255)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "est_principale", "type": "TINYINT(1)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "equipement",
-      "description": "Liste des équipements disponibles pour les véhicules",
-      "attributes": [
-        { "name": "id", "type": "INT UNSIGNED", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "nom", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "categorie", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "voiture_equipement",
-      "description": "Association équipement-véhicule (pivot N:N)",
-      "attributes": [
-        { "name": "id_voiture", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": true, "references": "voiture" },
-        { "name": "id_equipement", "type": "INT UNSIGNED", "isPrimaryKey": true, "isForeignKey": true, "references": "equipement" }
-      ]
-    },
-    {
-      "name": "reservation",
-      "description": "Réservation de location entre un locataire et un véhicule",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "id_voiture", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "voiture" },
-        { "name": "id_locataire", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "utilisateur" },
-        { "name": "date_debut", "type": "DATE", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "date_fin", "type": "DATE", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "nb_jours", "type": "SMALLINT UNSIGNED", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "prix_total", "type": "DECIMAL(10,2)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "caution_payee", "type": "DECIMAL(8,2)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "statut", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "message", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "motif_annulation", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "avis",
-      "description": "Avis laissé après une location",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "id_reservation", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "reservation" },
-        { "name": "id_auteur", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "utilisateur" },
-        { "name": "id_cible", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "type_cible", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "note", "type": "TINYINT UNSIGNED", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "commentaire", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "paiement",
-      "description": "Transaction financière liée à une réservation",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "id_reservation", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "reservation" },
-        { "name": "montant", "type": "DECIMAL(10,2)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "methode", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "statut", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "id_transaction", "type": "VARCHAR(100)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "date_paiement", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "message",
-      "description": "Message envoyé entre utilisateurs",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "id_expediteur", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "utilisateur" },
-        { "name": "id_reservation", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "reservation" },
-        { "name": "contenu", "type": "TEXT", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "lu", "type": "TINYINT(1)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "dm",
-      "description": "Conversation de messagerie directe entre deux utilisateurs",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "id_personne_1", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "utilisateur" },
-        { "name": "id_personne_2", "type": "VARCHAR(36)", "isPrimaryKey": false, "isForeignKey": true, "references": "utilisateur" },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    },
-    {
-      "name": "dm_message",
-      "description": "Association entre conversation DM et messages",
-      "attributes": [
-        { "name": "id_dm", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": true, "references": "dm" },
-        { "name": "id_message", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": true, "references": "message" }
-      ]
-    },
-    {
-      "name": "admin",
-      "description": "Administrateurs de la plateforme",
-      "attributes": [
-        { "name": "id", "type": "VARCHAR(36)", "isPrimaryKey": true, "isForeignKey": false },
-        { "name": "nom", "type": "VARCHAR(80)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "email", "type": "VARCHAR(150)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "mot_de_passe", "type": "VARCHAR(255)", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "role", "type": "ENUM", "isPrimaryKey": false, "isForeignKey": false },
-        { "name": "created_at", "type": "TIMESTAMP", "isPrimaryKey": false, "isForeignKey": false }
-      ]
-    }
-  ],
-  "relations": [
-    { "from": "voiture", "to": "utilisateur", "cardinality": "N:1", "label": "id_proprietaire" },
-    { "from": "voiture", "to": "type_voiture", "cardinality": "N:1", "label": "id_type" },
-    { "from": "photo_voiture", "to": "voiture", "cardinality": "N:1", "label": "id_voiture" },
-    { "from": "voiture_equipement", "to": "voiture", "cardinality": "N:1", "label": "id_voiture" },
-    { "from": "voiture_equipement", "to": "equipement", "cardinality": "N:1", "label": "id_equipement" },
-    { "from": "reservation", "to": "voiture", "cardinality": "N:1", "label": "id_voiture" },
-    { "from": "reservation", "to": "utilisateur", "cardinality": "N:1", "label": "id_locataire" },
-    { "from": "avis", "to": "reservation", "cardinality": "N:1", "label": "id_reservation" },
-    { "from": "avis", "to": "utilisateur", "cardinality": "N:1", "label": "id_auteur" },
-    { "from": "paiement", "to": "reservation", "cardinality": "N:1", "label": "id_reservation" },
-    { "from": "message", "to": "utilisateur", "cardinality": "N:1", "label": "id_expediteur" },
-    { "from": "message", "to": "reservation", "cardinality": "N:1", "label": "id_reservation" },
-    { "from": "dm", "to": "utilisateur", "cardinality": "N:1", "label": "id_personne_1" },
-    { "from": "dm", "to": "utilisateur", "cardinality": "N:1", "label": "id_personne_2" },
-    { "from": "dm_message", "to": "dm", "cardinality": "N:1", "label": "id_dm" },
-    { "from": "dm_message", "to": "message", "cardinality": "N:1", "label": "id_message" }
-  ],
-  "mldTables": [
-    {
-      "name": "utilisateur",
-      "primaryKey": "id",
-      "foreignKeys": [],
-      "columns": ["id PK", "nom", "prenom", "email UK", "mot_de_passe", "telephone", "date_naissance", "adresse", "ville", "num_permis", "permis_verifie", "est_proprietaire", "photo_profil", "note_moyenne", "actif", "created_at"]
-    },
-    {
-      "name": "type_voiture",
-      "primaryKey": "id",
-      "foreignKeys": [],
-      "columns": ["id PK", "libelle UK"]
-    },
-    {
-      "name": "voiture",
-      "primaryKey": "id",
-      "foreignKeys": ["id_proprietaire → utilisateur(id)", "id_type → type_voiture(id)"],
-      "columns": ["id PK", "id_proprietaire FK", "id_type FK", "marque", "modele", "annee", "couleur", "immatriculation UK", "kilometrage", "carburant", "boite_vitesse", "nb_places", "prix_par_jour", "caution", "ville", "adresse", "latitude", "longitude", "disponible", "verifie", "note_moyenne", "description", "created_at"]
-    },
-    {
-      "name": "photo_voiture",
-      "primaryKey": "id",
-      "foreignKeys": ["id_voiture → voiture(id)"],
-      "columns": ["id PK", "id_voiture FK", "chemin", "est_principale", "created_at"]
-    },
-    {
-      "name": "equipement",
-      "primaryKey": "id",
-      "foreignKeys": [],
-      "columns": ["id PK", "nom UK", "categorie"]
-    },
-    {
-      "name": "voiture_equipement",
-      "primaryKey": "(id_voiture, id_equipement)",
-      "foreignKeys": ["id_voiture → voiture(id)", "id_equipement → equipement(id)"],
-      "columns": ["id_voiture PK FK", "id_equipement PK FK"]
-    },
-    {
-      "name": "reservation",
-      "primaryKey": "id",
-      "foreignKeys": ["id_voiture → voiture(id)", "id_locataire → utilisateur(id)"],
-      "columns": ["id PK", "id_voiture FK", "id_locataire FK", "date_debut", "date_fin", "nb_jours", "prix_total", "caution_payee", "statut", "message", "motif_annulation", "created_at"]
-    },
-    {
-      "name": "avis",
-      "primaryKey": "id",
-      "foreignKeys": ["id_reservation → reservation(id)", "id_auteur → utilisateur(id)"],
-      "columns": ["id PK", "id_reservation FK", "id_auteur FK", "id_cible", "type_cible", "note", "commentaire", "created_at"]
-    },
-    {
-      "name": "paiement",
-      "primaryKey": "id",
-      "foreignKeys": ["id_reservation → reservation(id)"],
-      "columns": ["id PK", "id_reservation FK", "montant", "methode", "statut", "id_transaction", "date_paiement"]
-    },
-    {
-      "name": "message",
-      "primaryKey": "id",
-      "foreignKeys": ["id_expediteur → utilisateur(id)", "id_reservation → reservation(id)"],
-      "columns": ["id PK", "id_expediteur FK", "id_reservation FK", "contenu", "lu", "created_at"]
-    },
-    {
-      "name": "dm",
-      "primaryKey": "id",
-      "foreignKeys": ["id_personne_1 → utilisateur(id)", "id_personne_2 → utilisateur(id)"],
-      "columns": ["id PK", "id_personne_1 FK", "id_personne_2 FK", "created_at"]
-    },
-    {
-      "name": "dm_message",
-      "primaryKey": "(id_dm, id_message)",
-      "foreignKeys": ["id_dm → dm(id)", "id_message → message(id)"],
-      "columns": ["id_dm PK FK", "id_message PK FK"]
-    },
-    {
-      "name": "admin",
-      "primaryKey": "id",
-      "foreignKeys": [],
-      "columns": ["id PK", "nom", "email UK", "mot_de_passe", "role", "created_at"]
-    }
-  ],
-  "dictionary": [
-    { "table": "utilisateur", "field": "id", "type": "VARCHAR(36)", "nullable": false, "description": "Identifiant unique UUID", "example": "a1b2c3d4-0001-4000-8000-000000000001" },
-    { "table": "utilisateur", "field": "nom", "type": "VARCHAR(80)", "nullable": false, "description": "Nom de famille", "example": "Martin" },
-    { "table": "utilisateur", "field": "prenom", "type": "VARCHAR(80)", "nullable": false, "description": "Prénom", "example": "Lucas" },
-    { "table": "utilisateur", "field": "email", "type": "VARCHAR(150)", "nullable": false, "description": "Adresse email de connexion (unique)", "example": "lucas.martin@gmail.com" },
-    { "table": "utilisateur", "field": "mot_de_passe", "type": "VARCHAR(255)", "nullable": false, "description": "Hash bcrypt du mot de passe", "example": "$2y$10$..." },
-    { "table": "utilisateur", "field": "telephone", "type": "VARCHAR(20)", "nullable": true, "description": "Numéro de téléphone", "example": "0612345678" },
-    { "table": "utilisateur", "field": "date_naissance", "type": "DATE", "nullable": true, "description": "Date de naissance", "example": "1990-04-15" },
-    { "table": "utilisateur", "field": "adresse", "type": "TEXT", "nullable": true, "description": "Adresse postale", "example": "12 rue des Lilas" },
-    { "table": "utilisateur", "field": "ville", "type": "VARCHAR(100)", "nullable": true, "description": "Ville de résidence", "example": "Paris" },
-    { "table": "utilisateur", "field": "num_permis", "type": "VARCHAR(50)", "nullable": true, "description": "Numéro de permis de conduire", "example": "P-123456" },
-    { "table": "utilisateur", "field": "permis_verifie", "type": "TINYINT(1)", "nullable": false, "default": "0", "description": "Permis vérifié administrativement", "example": "1" },
-    { "table": "utilisateur", "field": "est_proprietaire", "type": "TINYINT(1)", "nullable": false, "default": "0", "description": "L'utilisateur est-il propriétaire d'un véhicule ?", "example": "1" },
-    { "table": "utilisateur", "field": "photo_profil", "type": "VARCHAR(255)", "nullable": true, "description": "URL de la photo de profil", "example": "uploads/profil.jpg" },
-    { "table": "utilisateur", "field": "note_moyenne", "type": "DECIMAL(3,2)", "nullable": false, "default": "0.00", "description": "Note moyenne pondérée", "example": "4.80" },
-    { "table": "utilisateur", "field": "actif", "type": "TINYINT(1)", "nullable": false, "default": "1", "description": "Compte actif", "example": "1" },
-    { "table": "utilisateur", "field": "created_at", "type": "TIMESTAMP", "nullable": false, "default": "CURRENT_TIMESTAMP", "description": "Date de création", "example": "2026-05-27 08:56:25" },
-    { "table": "type_voiture", "field": "id", "type": "INT UNSIGNED", "nullable": false, "description": "Identifiant auto-incrémenté", "example": "1" },
-    { "table": "type_voiture", "field": "libelle", "type": "VARCHAR(60)", "nullable": false, "description": "Libellé du type (unique)", "example": "Citadine" },
-    { "table": "voiture", "field": "id", "type": "VARCHAR(36)", "nullable": false, "description": "Identifiant unique UUID", "example": "c3d4e5f6-0003-4000-8000-000000000001" },
-    { "table": "voiture", "field": "id_proprietaire", "type": "VARCHAR(36)", "nullable": false, "description": "FK vers utilisateur propriétaire", "example": "a1b2c3d4-0001-4000-8000-000000000001" },
-    { "table": "voiture", "field": "id_type", "type": "INT UNSIGNED", "nullable": false, "description": "FK vers type_voiture", "example": "2" },
-    { "table": "voiture", "field": "marque", "type": "VARCHAR(60)", "nullable": false, "description": "Marque du véhicule", "example": "Renault" },
-    { "table": "voiture", "field": "modele", "type": "VARCHAR(80)", "nullable": false, "description": "Modèle du véhicule", "example": "Clio 5" },
-    { "table": "voiture", "field": "annee", "type": "YEAR", "nullable": false, "description": "Année de mise en circulation", "example": "2021" },
-    { "table": "voiture", "field": "couleur", "type": "VARCHAR(40)", "nullable": true, "description": "Couleur", "example": "Gris" },
-    { "table": "voiture", "field": "immatriculation", "type": "VARCHAR(20)", "nullable": false, "description": "Plaque d'immatriculation (unique)", "example": "AB-123-CD" },
-    { "table": "voiture", "field": "kilometrage", "type": "INT UNSIGNED", "nullable": false, "default": "0", "description": "Kilométrage actuel", "example": "32000" },
-    { "table": "voiture", "field": "carburant", "type": "ENUM(essence,diesel,electrique,hybride,gpl)", "nullable": false, "description": "Type de carburant", "example": "essence" },
-    { "table": "voiture", "field": "boite_vitesse", "type": "ENUM(manuelle,automatique)", "nullable": false, "description": "Type de boîte de vitesses", "example": "manuelle" },
-    { "table": "voiture", "field": "nb_places", "type": "TINYINT UNSIGNED", "nullable": false, "default": "5", "description": "Nombre de places", "example": "5" },
-    { "table": "voiture", "field": "prix_par_jour", "type": "DECIMAL(8,2)", "nullable": false, "description": "Prix de location par jour", "example": "45.00" },
-    { "table": "voiture", "field": "caution", "type": "DECIMAL(8,2)", "nullable": false, "default": "0.00", "description": "Montant de la caution", "example": "300.00" },
-    { "table": "voiture", "field": "ville", "type": "VARCHAR(100)", "nullable": false, "description": "Ville de stationnement", "example": "Paris" },
-    { "table": "voiture", "field": "adresse", "type": "TEXT", "nullable": true, "description": "Adresse exacte de stationnement", "example": "12 rue des Lilas" },
-    { "table": "voiture", "field": "latitude", "type": "DECIMAL(10,7)", "nullable": true, "description": "Latitude", "example": "48.8566000" },
-    { "table": "voiture", "field": "longitude", "type": "DECIMAL(10,7)", "nullable": true, "description": "Longitude", "example": "2.3522000" },
-    { "table": "voiture", "field": "disponible", "type": "TINYINT(1)", "nullable": false, "default": "1", "description": "Véhicule disponible à la location", "example": "1" },
-    { "table": "voiture", "field": "verifie", "type": "TINYINT(1)", "nullable": false, "default": "0", "description": "Véhicule vérifié par l'admin", "example": "1" },
-    { "table": "voiture", "field": "note_moyenne", "type": "DECIMAL(3,2)", "nullable": false, "default": "0.00", "description": "Note moyenne du véhicule", "example": "4.50" },
-    { "table": "voiture", "field": "description", "type": "TEXT", "nullable": true, "description": "Description textuelle", "example": "Petite citadine idéale pour Paris." },
-    { "table": "reservation", "field": "id", "type": "VARCHAR(36)", "nullable": false, "description": "Identifiant unique UUID", "example": "e5f6a7b8-0005-4000-8000-000000000001" },
-    { "table": "reservation", "field": "id_voiture", "type": "VARCHAR(36)", "nullable": false, "description": "FK vers voiture", "example": "c3d4e5f6-0003-4000-8000-000000000001" },
-    { "table": "reservation", "field": "id_locataire", "type": "VARCHAR(36)", "nullable": false, "description": "FK vers utilisateur locataire", "example": "a1b2c3d4-0001-4000-8000-000000000003" },
-    { "table": "reservation", "field": "date_debut", "type": "DATE", "nullable": false, "description": "Date de début", "example": "2026-06-01" },
-    { "table": "reservation", "field": "date_fin", "type": "DATE", "nullable": false, "description": "Date de fin", "example": "2026-06-05" },
-    { "table": "reservation", "field": "nb_jours", "type": "SMALLINT UNSIGNED", "nullable": false, "description": "Nombre de jours", "example": "4" },
-    { "table": "reservation", "field": "prix_total", "type": "DECIMAL(10,2)", "nullable": false, "description": "Prix total de la réservation", "example": "180.00" },
-    { "table": "reservation", "field": "caution_payee", "type": "DECIMAL(8,2)", "nullable": false, "default": "0.00", "description": "Caution versée", "example": "300.00" },
-    { "table": "reservation", "field": "statut", "type": "ENUM(en_attente,confirmee,en_cours,terminee,annulee,refusee)", "nullable": false, "default": "en_attente", "description": "Statut de la réservation", "example": "terminee" },
-    { "table": "reservation", "field": "message", "type": "TEXT", "nullable": true, "description": "Message du locataire", "example": "Bonjour, je serai ponctuel." },
-    { "table": "reservation", "field": "motif_annulation", "type": "TEXT", "nullable": true, "description": "Motif d'annulation", "example": "Imprévu professionnel" },
-    { "table": "paiement", "field": "id", "type": "VARCHAR(36)", "nullable": false, "description": "Identifiant unique UUID", "example": "f6a7b8c9-0006-4000-8000-000000000001" },
-    { "table": "paiement", "field": "id_reservation", "type": "VARCHAR(36)", "nullable": false, "description": "FK vers reservation", "example": "e5f6a7b8-0005-4000-8000-000000000001" },
-    { "table": "paiement", "field": "montant", "type": "DECIMAL(10,2)", "nullable": false, "description": "Montant du paiement", "example": "180.00" },
-    { "table": "paiement", "field": "methode", "type": "ENUM(carte,virement,paypal)", "nullable": false, "description": "Méthode de paiement", "example": "carte" },
-    { "table": "paiement", "field": "statut", "type": "ENUM(en_attente,valide,refuse,rembourse)", "nullable": false, "default": "en_attente", "description": "Statut du paiement", "example": "valide" },
-    { "table": "paiement", "field": "id_transaction", "type": "VARCHAR(100)", "nullable": true, "description": "Référence de transaction externe", "example": "txn_001_stripe_abc123" },
-    { "table": "paiement", "field": "date_paiement", "type": "TIMESTAMP", "nullable": false, "description": "Date du paiement", "example": "2026-05-27 08:56:25" },
-    { "table": "avis", "field": "id", "type": "VARCHAR(36)", "nullable": false, "description": "Identifiant unique UUID", "example": "a7b8c9d0-0007-4000-8000-000000000001" },
-    { "table": "avis", "field": "id_reservation", "type": "VARCHAR(36)", "nullable": false, "description": "FK vers reservation", "example": "e5f6a7b8-0005-4000-8000-000000000001" },
-    { "table": "avis", "field": "id_auteur", "type": "VARCHAR(36)", "nullable": false, "description": "FK vers utilisateur auteur", "example": "a1b2c3d4-0001-4000-8000-000000000003" },
-    { "table": "avis", "field": "note", "type": "TINYINT UNSIGNED", "nullable": false, "description": "Note de 1 à 5", "example": "5" },
-    { "table": "avis", "field": "commentaire", "type": "TEXT", "nullable": true, "description": "Commentaire textuel", "example": "Voiture impeccable, propre et conforme." }
-  ],
-  "sqlSchema": "-- Dryvea Database Schema\n-- MySQL 8+ / MariaDB\n-- Location P2P de v\u00e9hicules\n\nCREATE TABLE utilisateur (\n    id VARCHAR(36) NOT NULL,\n    nom VARCHAR(80) NOT NULL,\n    prenom VARCHAR(80) NOT NULL,\n    email VARCHAR(150) NOT NULL UNIQUE,\n    mot_de_passe VARCHAR(255) NOT NULL,\n    telephone VARCHAR(20),\n    date_naissance DATE,\n    adresse TEXT,\n    ville VARCHAR(100),\n    num_permis VARCHAR(50),\n    permis_verifie TINYINT(1) DEFAULT 0,\n    est_proprietaire TINYINT(1) DEFAULT 0,\n    photo_profil VARCHAR(255),\n    note_moyenne DECIMAL(3,2) DEFAULT 0.00,\n    actif TINYINT(1) DEFAULT 1,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    UNIQUE KEY email (email)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE type_voiture (\n    id INT UNSIGNED AUTO_INCREMENT,\n    libelle VARCHAR(60) NOT NULL UNIQUE,\n    PRIMARY KEY (id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE voiture (\n    id VARCHAR(36) NOT NULL,\n    id_proprietaire VARCHAR(36) NOT NULL,\n    id_type INT UNSIGNED NOT NULL,\n    marque VARCHAR(60) NOT NULL,\n    modele VARCHAR(80) NOT NULL,\n    annee YEAR NOT NULL,\n    couleur VARCHAR(40),\n    immatriculation VARCHAR(20) NOT NULL UNIQUE,\n    kilometrage INT UNSIGNED DEFAULT 0,\n    carburant ENUM('essence','diesel','electrique','hybride','gpl') NOT NULL,\n    boite_vitesse ENUM('manuelle','automatique') NOT NULL,\n    nb_places TINYINT UNSIGNED DEFAULT 5,\n    prix_par_jour DECIMAL(8,2) NOT NULL,\n    caution DECIMAL(8,2) DEFAULT 0.00,\n    ville VARCHAR(100) NOT NULL,\n    adresse TEXT,\n    latitude DECIMAL(10,7),\n    longitude DECIMAL(10,7),\n    disponible TINYINT(1) DEFAULT 1,\n    verifie TINYINT(1) DEFAULT 0,\n    note_moyenne DECIMAL(3,2) DEFAULT 0.00,\n    description TEXT,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    UNIQUE KEY immatriculation (immatriculation),\n    KEY id_proprietaire (id_proprietaire),\n    KEY id_type (id_type),\n    FOREIGN KEY (id_proprietaire) REFERENCES utilisateur(id) ON DELETE CASCADE,\n    FOREIGN KEY (id_type) REFERENCES type_voiture(id) ON DELETE RESTRICT\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE photo_voiture (\n    id VARCHAR(36) NOT NULL,\n    id_voiture VARCHAR(36) NOT NULL,\n    chemin VARCHAR(255) NOT NULL,\n    est_principale TINYINT(1) DEFAULT 0,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    KEY id_voiture (id_voiture),\n    FOREIGN KEY (id_voiture) REFERENCES voiture(id) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE equipement (\n    id INT UNSIGNED AUTO_INCREMENT,\n    nom VARCHAR(100) NOT NULL UNIQUE,\n    categorie ENUM('confort','securite','multimedia','enfant','pratique') NOT NULL,\n    PRIMARY KEY (id)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE voiture_equipement (\n    id_voiture VARCHAR(36) NOT NULL,\n    id_equipement INT UNSIGNED NOT NULL,\n    PRIMARY KEY (id_voiture, id_equipement),\n    FOREIGN KEY (id_voiture) REFERENCES voiture(id) ON DELETE CASCADE,\n    FOREIGN KEY (id_equipement) REFERENCES equipement(id) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE reservation (\n    id VARCHAR(36) NOT NULL,\n    id_voiture VARCHAR(36) NOT NULL,\n    id_locataire VARCHAR(36) NOT NULL,\n    date_debut DATE NOT NULL,\n    date_fin DATE NOT NULL,\n    nb_jours SMALLINT UNSIGNED NOT NULL,\n    prix_total DECIMAL(10,2) NOT NULL,\n    caution_payee DECIMAL(8,2) DEFAULT 0.00,\n    statut ENUM('en_attente','confirmee','en_cours','terminee','annulee','refusee') DEFAULT 'en_attente',\n    message TEXT,\n    motif_annulation TEXT,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    KEY id_voiture (id_voiture),\n    KEY id_locataire (id_locataire),\n    FOREIGN KEY (id_voiture) REFERENCES voiture(id) ON DELETE RESTRICT,\n    FOREIGN KEY (id_locataire) REFERENCES utilisateur(id) ON DELETE RESTRICT\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE avis (\n    id VARCHAR(36) NOT NULL,\n    id_reservation VARCHAR(36) NOT NULL,\n    id_auteur VARCHAR(36) NOT NULL,\n    id_cible VARCHAR(36) NOT NULL,\n    type_cible ENUM('voiture','locataire','proprietaire') NOT NULL,\n    note TINYINT UNSIGNED NOT NULL,\n    commentaire TEXT,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    KEY id_reservation (id_reservation),\n    KEY id_auteur (id_auteur),\n    FOREIGN KEY (id_reservation) REFERENCES reservation(id) ON DELETE CASCADE,\n    FOREIGN KEY (id_auteur) REFERENCES utilisateur(id) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE paiement (\n    id VARCHAR(36) NOT NULL,\n    id_reservation VARCHAR(36) NOT NULL,\n    montant DECIMAL(10,2) NOT NULL,\n    methode ENUM('carte','virement','paypal') NOT NULL,\n    statut ENUM('en_attente','valide','refuse','rembourse') DEFAULT 'en_attente',\n    id_transaction VARCHAR(100),\n    date_paiement TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    KEY id_reservation (id_reservation),\n    FOREIGN KEY (id_reservation) REFERENCES reservation(id) ON DELETE RESTRICT\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE message (\n    id VARCHAR(36) NOT NULL,\n    id_expediteur VARCHAR(36) NOT NULL,\n    id_reservation VARCHAR(36),\n    contenu TEXT NOT NULL,\n    lu TINYINT(1) DEFAULT 0,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    KEY id_expediteur (id_expediteur),\n    KEY id_reservation (id_reservation),\n    FOREIGN KEY (id_expediteur) REFERENCES utilisateur(id) ON DELETE CASCADE,\n    FOREIGN KEY (id_reservation) REFERENCES reservation(id) ON DELETE SET NULL\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE dm (\n    id VARCHAR(36) NOT NULL,\n    id_personne_1 VARCHAR(36) NOT NULL,\n    id_personne_2 VARCHAR(36) NOT NULL,\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    UNIQUE KEY paire_unique (id_personne_1, id_personne_2),\n    CONSTRAINT dm_chk_ordre CHECK (id_personne_1 < id_personne_2),\n    FOREIGN KEY (id_personne_1) REFERENCES utilisateur(id) ON DELETE CASCADE,\n    FOREIGN KEY (id_personne_2) REFERENCES utilisateur(id) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE dm_message (\n    id_dm VARCHAR(36) NOT NULL,\n    id_message VARCHAR(36) NOT NULL,\n    PRIMARY KEY (id_dm, id_message),\n    UNIQUE KEY id_message (id_message),\n    FOREIGN KEY (id_dm) REFERENCES dm(id) ON DELETE CASCADE,\n    FOREIGN KEY (id_message) REFERENCES message(id) ON DELETE CASCADE\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\nCREATE TABLE admin (\n    id VARCHAR(36) NOT NULL,\n    nom VARCHAR(80) NOT NULL,\n    email VARCHAR(150) NOT NULL UNIQUE,\n    mot_de_passe VARCHAR(255) NOT NULL,\n    role ENUM('super_admin','moderateur','support') DEFAULT 'moderateur',\n    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n    PRIMARY KEY (id),\n    UNIQUE KEY email (email)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;"
+﻿{
+    "entities":  [
+                     {
+                         "name":  "utilisateur",
+                         "description":  "Utilisateur de la plateforme (propriÃ©taire ou locataire)",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "nom",
+                                                "type":  "VARCHAR(80)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "prenom",
+                                                "type":  "VARCHAR(80)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "email",
+                                                "type":  "VARCHAR(150)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "mot_de_passe",
+                                                "type":  "VARCHAR(255)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "telephone",
+                                                "type":  "VARCHAR(20)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "date_naissance",
+                                                "type":  "DATE",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "adresse",
+                                                "type":  "TEXT",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "ville",
+                                                "type":  "VARCHAR(100)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "num_permis",
+                                                "type":  "VARCHAR(50)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "permis_verifie",
+                                                "type":  "TINYINT(1)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "est_proprietaire",
+                                                "type":  "TINYINT(1)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "photo_profil",
+                                                "type":  "VARCHAR(255)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "note_moyenne",
+                                                "type":  "DECIMAL(3,2)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "actif",
+                                                "type":  "TINYINT(1)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "type_voiture",
+                         "description":  "CatÃ©gorie de vÃ©hicule (citadine, SUV, Ã©lectrique, etc.)",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "INT UNSIGNED",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "libelle",
+                                                "type":  "VARCHAR(60)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "voiture",
+                         "description":  "VÃ©hicule enregistrÃ© sur la plateforme",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_proprietaire",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "utilisateur"
+                                            },
+                                            {
+                                                "name":  "id_type",
+                                                "type":  "INT UNSIGNED",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "type_voiture"
+                                            },
+                                            {
+                                                "name":  "marque",
+                                                "type":  "VARCHAR(60)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "modele",
+                                                "type":  "VARCHAR(80)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "annee",
+                                                "type":  "YEAR",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "couleur",
+                                                "type":  "VARCHAR(40)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "immatriculation",
+                                                "type":  "VARCHAR(20)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "kilometrage",
+                                                "type":  "INT UNSIGNED",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "carburant",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "boite_vitesse",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "nb_places",
+                                                "type":  "TINYINT UNSIGNED",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "prix_par_jour",
+                                                "type":  "DECIMAL(8,2)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "caution",
+                                                "type":  "DECIMAL(8,2)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "ville",
+                                                "type":  "VARCHAR(100)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "adresse",
+                                                "type":  "TEXT",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "latitude",
+                                                "type":  "DECIMAL(10,7)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "longitude",
+                                                "type":  "DECIMAL(10,7)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "disponible",
+                                                "type":  "TINYINT(1)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "verifie",
+                                                "type":  "TINYINT(1)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "note_moyenne",
+                                                "type":  "DECIMAL(3,2)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "description",
+                                                "type":  "TEXT",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "photo_voiture",
+                         "description":  "Photos associÃ©es Ã  un vÃ©hicule",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_voiture",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "voiture"
+                                            },
+                                            {
+                                                "name":  "chemin",
+                                                "type":  "VARCHAR(255)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "est_principale",
+                                                "type":  "TINYINT(1)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "equipement",
+                         "description":  "Liste des Ã©quipements disponibles pour les vÃ©hicules",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "INT UNSIGNED",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "nom",
+                                                "type":  "VARCHAR(100)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "categorie",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "voiture_equipement",
+                         "description":  "Association Ã©quipement-vÃ©hicule (pivot N:N)",
+                         "attributes":  [
+                                            {
+                                                "name":  "id_voiture",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  true,
+                                                "references":  "voiture"
+                                            },
+                                            {
+                                                "name":  "id_equipement",
+                                                "type":  "INT UNSIGNED",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  true,
+                                                "references":  "equipement"
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "reservation",
+                         "description":  "RÃ©servation de location entre un locataire et un vÃ©hicule",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_voiture",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "voiture"
+                                            },
+                                            {
+                                                "name":  "id_locataire",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "utilisateur"
+                                            },
+                                            {
+                                                "name":  "date_debut",
+                                                "type":  "DATE",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "date_fin",
+                                                "type":  "DATE",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "nb_jours",
+                                                "type":  "SMALLINT UNSIGNED",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "prix_total",
+                                                "type":  "DECIMAL(10,2)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "caution_payee",
+                                                "type":  "DECIMAL(8,2)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "statut",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "message",
+                                                "type":  "TEXT",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "motif_annulation",
+                                                "type":  "TEXT",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "avis",
+                         "description":  "Avis laissÃ© aprÃ¨s une location",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_reservation",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "reservation"
+                                            },
+                                            {
+                                                "name":  "id_auteur",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "utilisateur"
+                                            },
+                                            {
+                                                "name":  "id_cible",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "type_cible",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "note",
+                                                "type":  "TINYINT UNSIGNED",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "commentaire",
+                                                "type":  "TEXT",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "paiement",
+                         "description":  "Transaction financiÃ¨re liÃ©e Ã  une rÃ©servation",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_reservation",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "reservation"
+                                            },
+                                            {
+                                                "name":  "montant",
+                                                "type":  "DECIMAL(10,2)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "methode",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "statut",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_transaction",
+                                                "type":  "VARCHAR(100)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "date_paiement",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "message",
+                         "description":  "Message envoyÃ© entre utilisateurs",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_expediteur",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "utilisateur"
+                                            },
+                                            {
+                                                "name":  "id_reservation",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "reservation"
+                                            },
+                                            {
+                                                "name":  "contenu",
+                                                "type":  "TEXT",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "lu",
+                                                "type":  "TINYINT(1)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "dm",
+                         "description":  "Conversation de messagerie directe entre deux utilisateurs",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "id_personne_1",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "utilisateur"
+                                            },
+                                            {
+                                                "name":  "id_personne_2",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  true,
+                                                "references":  "utilisateur"
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "dm_message",
+                         "description":  "Association entre conversation DM et messages",
+                         "attributes":  [
+                                            {
+                                                "name":  "id_dm",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  true,
+                                                "references":  "dm"
+                                            },
+                                            {
+                                                "name":  "id_message",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  true,
+                                                "references":  "message"
+                                            }
+                                        ]
+                     },
+                     {
+                         "name":  "admin",
+                         "description":  "Administrateurs de la plateforme",
+                         "attributes":  [
+                                            {
+                                                "name":  "id",
+                                                "type":  "VARCHAR(36)",
+                                                "isPrimaryKey":  true,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "nom",
+                                                "type":  "VARCHAR(80)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "email",
+                                                "type":  "VARCHAR(150)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "mot_de_passe",
+                                                "type":  "VARCHAR(255)",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "role",
+                                                "type":  "ENUM",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            },
+                                            {
+                                                "name":  "created_at",
+                                                "type":  "TIMESTAMP",
+                                                "isPrimaryKey":  false,
+                                                "isForeignKey":  false
+                                            }
+                                        ]
+                     }
+                 ],
+    "relations":  [
+                      {
+                          "from":  "voiture",
+                          "to":  "utilisateur",
+                          "cardinality":  "N:1",
+                          "label":  "id_proprietaire"
+                      },
+                      {
+                          "from":  "voiture",
+                          "to":  "type_voiture",
+                          "cardinality":  "N:1",
+                          "label":  "id_type"
+                      },
+                      {
+                          "from":  "photo_voiture",
+                          "to":  "voiture",
+                          "cardinality":  "N:1",
+                          "label":  "id_voiture"
+                      },
+                      {
+                          "from":  "voiture_equipement",
+                          "to":  "voiture",
+                          "cardinality":  "N:1",
+                          "label":  "id_voiture"
+                      },
+                      {
+                          "from":  "voiture_equipement",
+                          "to":  "equipement",
+                          "cardinality":  "N:1",
+                          "label":  "id_equipement"
+                      },
+                      {
+                          "from":  "reservation",
+                          "to":  "voiture",
+                          "cardinality":  "N:1",
+                          "label":  "id_voiture"
+                      },
+                      {
+                          "from":  "reservation",
+                          "to":  "utilisateur",
+                          "cardinality":  "N:1",
+                          "label":  "id_locataire"
+                      },
+                      {
+                          "from":  "avis",
+                          "to":  "reservation",
+                          "cardinality":  "N:1",
+                          "label":  "id_reservation"
+                      },
+                      {
+                          "from":  "avis",
+                          "to":  "utilisateur",
+                          "cardinality":  "N:1",
+                          "label":  "id_auteur"
+                      },
+                      {
+                          "from":  "paiement",
+                          "to":  "reservation",
+                          "cardinality":  "N:1",
+                          "label":  "id_reservation"
+                      },
+                      {
+                          "from":  "message",
+                          "to":  "utilisateur",
+                          "cardinality":  "N:1",
+                          "label":  "id_expediteur"
+                      },
+                      {
+                          "from":  "message",
+                          "to":  "reservation",
+                          "cardinality":  "N:1",
+                          "label":  "id_reservation"
+                      },
+                      {
+                          "from":  "dm",
+                          "to":  "utilisateur",
+                          "cardinality":  "N:1",
+                          "label":  "id_personne_1"
+                      },
+                      {
+                          "from":  "dm",
+                          "to":  "utilisateur",
+                          "cardinality":  "N:1",
+                          "label":  "id_personne_2"
+                      },
+                      {
+                          "from":  "dm_message",
+                          "to":  "dm",
+                          "cardinality":  "N:1",
+                          "label":  "id_dm"
+                      },
+                      {
+                          "from":  "dm_message",
+                          "to":  "message",
+                          "cardinality":  "N:1",
+                          "label":  "id_message"
+                      }
+                  ],
+    "mldTables":  [
+                      {
+                          "name":  "utilisateur",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "nom",
+                                          "prenom",
+                                          "email UK",
+                                          "mot_de_passe",
+                                          "telephone",
+                                          "date_naissance",
+                                          "adresse",
+                                          "ville",
+                                          "num_permis",
+                                          "permis_verifie",
+                                          "est_proprietaire",
+                                          "photo_profil",
+                                          "note_moyenne",
+                                          "actif",
+                                          "created_at"
+                                      ]
+                      },
+                      {
+                          "name":  "type_voiture",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "libelle UK"
+                                      ]
+                      },
+                      {
+                          "name":  "voiture",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+                                              "id_proprietaire â†’ utilisateur(id)",
+                                              "id_type â†’ type_voiture(id)"
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "id_proprietaire FK",
+                                          "id_type FK",
+                                          "marque",
+                                          "modele",
+                                          "annee",
+                                          "couleur",
+                                          "immatriculation UK",
+                                          "kilometrage",
+                                          "carburant",
+                                          "boite_vitesse",
+                                          "nb_places",
+                                          "prix_par_jour",
+                                          "caution",
+                                          "ville",
+                                          "adresse",
+                                          "latitude",
+                                          "longitude",
+                                          "disponible",
+                                          "verifie",
+                                          "note_moyenne",
+                                          "description",
+                                          "created_at"
+                                      ]
+                      },
+                      {
+                          "name":  "photo_voiture",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+                                              "id_voiture â†’ voiture(id)"
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "id_voiture FK",
+                                          "chemin",
+                                          "est_principale",
+                                          "created_at"
+                                      ]
+                      },
+                      {
+                          "name":  "equipement",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "nom UK",
+                                          "categorie"
+                                      ]
+                      },
+                      {
+                          "name":  "voiture_equipement",
+                          "primaryKey":  "(id_voiture, id_equipement)",
+                          "foreignKeys":  [
+                                              "id_voiture â†’ voiture(id)",
+                                              "id_equipement â†’ equipement(id)"
+                                          ],
+                          "columns":  [
+                                          "id_voiture PK FK",
+                                          "id_equipement PK FK"
+                                      ]
+                      },
+                      {
+                          "name":  "reservation",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+                                              "id_voiture â†’ voiture(id)",
+                                              "id_locataire â†’ utilisateur(id)"
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "id_voiture FK",
+                                          "id_locataire FK",
+                                          "date_debut",
+                                          "date_fin",
+                                          "nb_jours",
+                                          "prix_total",
+                                          "caution_payee",
+                                          "statut",
+                                          "message",
+                                          "motif_annulation",
+                                          "created_at"
+                                      ]
+                      },
+                      {
+                          "name":  "avis",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+                                              "id_reservation â†’ reservation(id)",
+                                              "id_auteur â†’ utilisateur(id)"
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "id_reservation FK",
+                                          "id_auteur FK",
+                                          "id_cible",
+                                          "type_cible",
+                                          "note",
+                                          "commentaire",
+                                          "created_at"
+                                      ]
+                      },
+                      {
+                          "name":  "paiement",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+                                              "id_reservation â†’ reservation(id)"
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "id_reservation FK",
+                                          "montant",
+                                          "methode",
+                                          "statut",
+                                          "id_transaction",
+                                          "date_paiement"
+                                      ]
+                      },
+                      {
+                          "name":  "message",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+                                              "id_expediteur â†’ utilisateur(id)",
+                                              "id_reservation â†’ reservation(id)"
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "id_expediteur FK",
+                                          "id_reservation FK",
+                                          "contenu",
+                                          "lu",
+                                          "created_at"
+                                      ]
+                      },
+                      {
+                          "name":  "dm",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+                                              "id_personne_1 â†’ utilisateur(id)",
+                                              "id_personne_2 â†’ utilisateur(id)"
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "id_personne_1 FK",
+                                          "id_personne_2 FK",
+                                          "created_at"
+                                      ]
+                      },
+                      {
+                          "name":  "dm_message",
+                          "primaryKey":  "(id_dm, id_message)",
+                          "foreignKeys":  [
+                                              "id_dm â†’ dm(id)",
+                                              "id_message â†’ message(id)"
+                                          ],
+                          "columns":  [
+                                          "id_dm PK FK",
+                                          "id_message PK FK"
+                                      ]
+                      },
+                      {
+                          "name":  "admin",
+                          "primaryKey":  "id",
+                          "foreignKeys":  [
+
+                                          ],
+                          "columns":  [
+                                          "id PK",
+                                          "nom",
+                                          "email UK",
+                                          "mot_de_passe",
+                                          "role",
+                                          "created_at"
+                                      ]
+                      }
+                  ],
+    "dictionary":  [
+                       {
+                           "table":  "utilisateur",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "a1b2c3d4-0001-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "nom",
+                           "type":  "VARCHAR(80)",
+                           "nullable":  false,
+                           "description":  "Nom de famille",
+                           "example":  "Martin"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "prenom",
+                           "type":  "VARCHAR(80)",
+                           "nullable":  false,
+                           "description":  "PrÃ©nom",
+                           "example":  "Lucas"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "email",
+                           "type":  "VARCHAR(150)",
+                           "nullable":  false,
+                           "description":  "Adresse email de connexion (unique)",
+                           "example":  "lucas.martin@gmail.com"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "mot_de_passe",
+                           "type":  "VARCHAR(255)",
+                           "nullable":  false,
+                           "description":  "Hash bcrypt du mot de passe",
+                           "example":  "$2y$10$..."
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "telephone",
+                           "type":  "VARCHAR(20)",
+                           "nullable":  true,
+                           "description":  "NumÃ©ro de tÃ©lÃ©phone",
+                           "example":  "0612345678"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "date_naissance",
+                           "type":  "DATE",
+                           "nullable":  true,
+                           "description":  "Date de naissance",
+                           "example":  "1990-04-15"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "adresse",
+                           "type":  "TEXT",
+                           "nullable":  true,
+                           "description":  "Adresse postale",
+                           "example":  "12 rue des Lilas"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "ville",
+                           "type":  "VARCHAR(100)",
+                           "nullable":  true,
+                           "description":  "Ville de rÃ©sidence",
+                           "example":  "Paris"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "num_permis",
+                           "type":  "VARCHAR(50)",
+                           "nullable":  true,
+                           "description":  "NumÃ©ro de permis de conduire",
+                           "example":  "P-123456"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "permis_verifie",
+                           "type":  "TINYINT(1)",
+                           "nullable":  false,
+                           "default":  "0",
+                           "description":  "Permis vÃ©rifiÃ© administrativement",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "est_proprietaire",
+                           "type":  "TINYINT(1)",
+                           "nullable":  false,
+                           "default":  "0",
+                           "description":  "L\u0027utilisateur est-il propriÃ©taire d\u0027un vÃ©hicule ?",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "photo_profil",
+                           "type":  "VARCHAR(255)",
+                           "nullable":  true,
+                           "description":  "URL de la photo de profil",
+                           "example":  "uploads/profil.jpg"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "note_moyenne",
+                           "type":  "DECIMAL(3,2)",
+                           "nullable":  false,
+                           "default":  "0.00",
+                           "description":  "Note moyenne pondÃ©rÃ©e",
+                           "example":  "4.80"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "actif",
+                           "type":  "TINYINT(1)",
+                           "nullable":  false,
+                           "default":  "1",
+                           "description":  "Compte actif",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "utilisateur",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date de crÃ©ation",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "type_voiture",
+                           "field":  "id",
+                           "type":  "INT UNSIGNED",
+                           "nullable":  false,
+                           "description":  "Identifiant auto-incrÃ©mentÃ©",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "type_voiture",
+                           "field":  "libelle",
+                           "type":  "VARCHAR(60)",
+                           "nullable":  false,
+                           "description":  "LibellÃ© du type (unique)",
+                           "example":  "Citadine"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "c3d4e5f6-0003-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "id_proprietaire",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers utilisateur propriÃ©taire",
+                           "example":  "a1b2c3d4-0001-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "id_type",
+                           "type":  "INT UNSIGNED",
+                           "nullable":  false,
+                           "description":  "FK vers type_voiture",
+                           "example":  "2"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "marque",
+                           "type":  "VARCHAR(60)",
+                           "nullable":  false,
+                           "description":  "Marque du vÃ©hicule",
+                           "example":  "Renault"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "modele",
+                           "type":  "VARCHAR(80)",
+                           "nullable":  false,
+                           "description":  "ModÃ¨le du vÃ©hicule",
+                           "example":  "Clio 5"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "annee",
+                           "type":  "YEAR",
+                           "nullable":  false,
+                           "description":  "AnnÃ©e de mise en circulation",
+                           "example":  "2021"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "couleur",
+                           "type":  "VARCHAR(40)",
+                           "nullable":  true,
+                           "description":  "Couleur",
+                           "example":  "Gris"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "immatriculation",
+                           "type":  "VARCHAR(20)",
+                           "nullable":  false,
+                           "description":  "Plaque d\u0027immatriculation (unique)",
+                           "example":  "AB-123-CD"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "kilometrage",
+                           "type":  "INT UNSIGNED",
+                           "nullable":  false,
+                           "default":  "0",
+                           "description":  "KilomÃ©trage actuel",
+                           "example":  "32000"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "carburant",
+                           "type":  "ENUM(essence,diesel,electrique,hybride,gpl)",
+                           "nullable":  false,
+                           "description":  "Type de carburant",
+                           "example":  "essence"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "boite_vitesse",
+                           "type":  "ENUM(manuelle,automatique)",
+                           "nullable":  false,
+                           "description":  "Type de boÃ®te de vitesses",
+                           "example":  "manuelle"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "nb_places",
+                           "type":  "TINYINT UNSIGNED",
+                           "nullable":  false,
+                           "default":  "5",
+                           "description":  "Nombre de places",
+                           "example":  "5"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "prix_par_jour",
+                           "type":  "DECIMAL(8,2)",
+                           "nullable":  false,
+                           "description":  "Prix de location par jour",
+                           "example":  "45.00"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "caution",
+                           "type":  "DECIMAL(8,2)",
+                           "nullable":  false,
+                           "default":  "0.00",
+                           "description":  "Montant de la caution",
+                           "example":  "300.00"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "ville",
+                           "type":  "VARCHAR(100)",
+                           "nullable":  false,
+                           "description":  "Ville de stationnement",
+                           "example":  "Paris"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "adresse",
+                           "type":  "TEXT",
+                           "nullable":  true,
+                           "description":  "Adresse exacte de stationnement",
+                           "example":  "12 rue des Lilas"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "latitude",
+                           "type":  "DECIMAL(10,7)",
+                           "nullable":  true,
+                           "description":  "Latitude",
+                           "example":  "48.8566000"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "longitude",
+                           "type":  "DECIMAL(10,7)",
+                           "nullable":  true,
+                           "description":  "Longitude",
+                           "example":  "2.3522000"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "disponible",
+                           "type":  "TINYINT(1)",
+                           "nullable":  false,
+                           "default":  "1",
+                           "description":  "VÃ©hicule disponible Ã  la location",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "verifie",
+                           "type":  "TINYINT(1)",
+                           "nullable":  false,
+                           "default":  "0",
+                           "description":  "VÃ©hicule vÃ©rifiÃ© par l\u0027admin",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "note_moyenne",
+                           "type":  "DECIMAL(3,2)",
+                           "nullable":  false,
+                           "default":  "0.00",
+                           "description":  "Note moyenne du vÃ©hicule",
+                           "example":  "4.50"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "description",
+                           "type":  "TEXT",
+                           "nullable":  true,
+                           "description":  "Description textuelle",
+                           "example":  "Petite citadine idÃ©ale pour Paris."
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "e5f6a7b8-0005-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "id_voiture",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers voiture",
+                           "example":  "c3d4e5f6-0003-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "id_locataire",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers utilisateur locataire",
+                           "example":  "a1b2c3d4-0001-4000-8000-000000000003"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "date_debut",
+                           "type":  "DATE",
+                           "nullable":  false,
+                           "description":  "Date de dÃ©but",
+                           "example":  "2026-06-01"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "date_fin",
+                           "type":  "DATE",
+                           "nullable":  false,
+                           "description":  "Date de fin",
+                           "example":  "2026-06-05"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "nb_jours",
+                           "type":  "SMALLINT UNSIGNED",
+                           "nullable":  false,
+                           "description":  "Nombre de jours",
+                           "example":  "4"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "prix_total",
+                           "type":  "DECIMAL(10,2)",
+                           "nullable":  false,
+                           "description":  "Prix total de la rÃ©servation",
+                           "example":  "180.00"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "caution_payee",
+                           "type":  "DECIMAL(8,2)",
+                           "nullable":  false,
+                           "default":  "0.00",
+                           "description":  "Caution versÃ©e",
+                           "example":  "300.00"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "statut",
+                           "type":  "ENUM(en_attente,confirmee,en_cours,terminee,annulee,refusee)",
+                           "nullable":  false,
+                           "default":  "en_attente",
+                           "description":  "Statut de la rÃ©servation",
+                           "example":  "terminee"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "message",
+                           "type":  "TEXT",
+                           "nullable":  true,
+                           "description":  "Message du locataire",
+                           "example":  "Bonjour, je serai ponctuel."
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "motif_annulation",
+                           "type":  "TEXT",
+                           "nullable":  true,
+                           "description":  "Motif d\u0027annulation",
+                           "example":  "ImprÃ©vu professionnel"
+                       },
+                       {
+                           "table":  "paiement",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "f6a7b8c9-0006-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "paiement",
+                           "field":  "id_reservation",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers reservation",
+                           "example":  "e5f6a7b8-0005-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "paiement",
+                           "field":  "montant",
+                           "type":  "DECIMAL(10,2)",
+                           "nullable":  false,
+                           "description":  "Montant du paiement",
+                           "example":  "180.00"
+                       },
+                       {
+                           "table":  "paiement",
+                           "field":  "methode",
+                           "type":  "ENUM(carte,virement,paypal)",
+                           "nullable":  false,
+                           "description":  "MÃ©thode de paiement",
+                           "example":  "carte"
+                       },
+                       {
+                           "table":  "paiement",
+                           "field":  "statut",
+                           "type":  "ENUM(en_attente,valide,refuse,rembourse)",
+                           "nullable":  false,
+                           "default":  "en_attente",
+                           "description":  "Statut du paiement",
+                           "example":  "valide"
+                       },
+                       {
+                           "table":  "paiement",
+                           "field":  "id_transaction",
+                           "type":  "VARCHAR(100)",
+                           "nullable":  true,
+                           "description":  "RÃ©fÃ©rence de transaction externe",
+                           "example":  "txn_001_stripe_abc123"
+                       },
+                       {
+                           "table":  "paiement",
+                           "field":  "date_paiement",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "description":  "Date du paiement",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "a7b8c9d0-0007-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "id_reservation",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers reservation",
+                           "example":  "e5f6a7b8-0005-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "id_auteur",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers utilisateur auteur",
+                           "example":  "a1b2c3d4-0001-4000-8000-000000000003"
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "id_cible",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant de la cible (voiture ou utilisateur)",
+                           "example":  "c3d4e5f6-0003-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "type_cible",
+                           "type":  "ENUM(voiture,locataire,proprietaire)",
+                           "nullable":  false,
+                           "description":  "Type de cible Ã©valuÃ©e",
+                           "example":  "voiture"
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "note",
+                           "type":  "TINYINT UNSIGNED",
+                           "nullable":  false,
+                           "description":  "Note de 1 Ã  5",
+                           "example":  "5"
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "commentaire",
+                           "type":  "TEXT",
+                           "nullable":  true,
+                           "description":  "Commentaire textuel",
+                           "example":  "Voiture impeccable, propre et conforme."
+                       },
+                       {
+                           "table":  "avis",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date de crÃ©ation de l\u0027avis",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "voiture",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date d\u0027ajout du vÃ©hicule",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "reservation",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date de crÃ©ation de la rÃ©servation",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "photo_voiture",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "d4e5f6a7-0004-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "photo_voiture",
+                           "field":  "id_voiture",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers voiture",
+                           "example":  "c3d4e5f6-0003-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "photo_voiture",
+                           "field":  "chemin",
+                           "type":  "VARCHAR(255)",
+                           "nullable":  false,
+                           "description":  "Chemin du fichier image",
+                           "example":  "uploads/voitures/c.webp"
+                       },
+                       {
+                           "table":  "photo_voiture",
+                           "field":  "est_principale",
+                           "type":  "TINYINT(1)",
+                           "nullable":  false,
+                           "default":  "0",
+                           "description":  "Photo principale (vignette)",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "photo_voiture",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date d\u0027ajout",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "equipement",
+                           "field":  "id",
+                           "type":  "INT UNSIGNED",
+                           "nullable":  false,
+                           "description":  "Identifiant auto-incrÃ©mentÃ©",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "equipement",
+                           "field":  "nom",
+                           "type":  "VARCHAR(100)",
+                           "nullable":  false,
+                           "description":  "Nom de l\u0027Ã©quipement (unique)",
+                           "example":  "Climatisation manuelle"
+                       },
+                       {
+                           "table":  "equipement",
+                           "field":  "categorie",
+                           "type":  "ENUM(confort,securite,multimedia,enfant,pratique)",
+                           "nullable":  false,
+                           "description":  "CatÃ©gorie d\u0027Ã©quipement",
+                           "example":  "confort"
+                       },
+                       {
+                           "table":  "voiture_equipement",
+                           "field":  "id_voiture",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers voiture",
+                           "example":  "c3d4e5f6-0003-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "voiture_equipement",
+                           "field":  "id_equipement",
+                           "type":  "INT UNSIGNED",
+                           "nullable":  false,
+                           "description":  "FK vers equipement",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "message",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "b8c9d0e1-0008-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "message",
+                           "field":  "id_expediteur",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers utilisateur expÃ©diteur",
+                           "example":  "a1b2c3d4-0001-4000-8000-000000000003"
+                       },
+                       {
+                           "table":  "message",
+                           "field":  "id_reservation",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  true,
+                           "description":  "FK vers rÃ©servation (nullable)",
+                           "example":  "e5f6a7b8-0005-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "message",
+                           "field":  "contenu",
+                           "type":  "TEXT",
+                           "nullable":  false,
+                           "description":  "Contenu du message",
+                           "example":  "Bonjour, est-ce que je peux rÃ©cupÃ©rer la voiture Ã  8h ?"
+                       },
+                       {
+                           "table":  "message",
+                           "field":  "lu",
+                           "type":  "TINYINT(1)",
+                           "nullable":  false,
+                           "default":  "0",
+                           "description":  "Message lu",
+                           "example":  "1"
+                       },
+                       {
+                           "table":  "message",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date d\u0027envoi",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "dm",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "c9d0e1f2-0009-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "dm",
+                           "field":  "id_personne_1",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers premier participant",
+                           "example":  "a1b2c3d4-0001-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "dm",
+                           "field":  "id_personne_2",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers second participant",
+                           "example":  "a1b2c3d4-0001-4000-8000-000000000003"
+                       },
+                       {
+                           "table":  "dm",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date de crÃ©ation de la conversation",
+                           "example":  "2026-05-27 08:56:25"
+                       },
+                       {
+                           "table":  "dm_message",
+                           "field":  "id_dm",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers conversation DM",
+                           "example":  "c9d0e1f2-0009-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "dm_message",
+                           "field":  "id_message",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "FK vers message (unique)",
+                           "example":  "b8c9d0e1-0008-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "admin",
+                           "field":  "id",
+                           "type":  "VARCHAR(36)",
+                           "nullable":  false,
+                           "description":  "Identifiant unique UUID",
+                           "example":  "b2c3d4e5-0002-4000-8000-000000000001"
+                       },
+                       {
+                           "table":  "admin",
+                           "field":  "nom",
+                           "type":  "VARCHAR(80)",
+                           "nullable":  false,
+                           "description":  "Nom de l\u0027administrateur",
+                           "example":  "Admin Principal"
+                       },
+                       {
+                           "table":  "admin",
+                           "field":  "email",
+                           "type":  "VARCHAR(150)",
+                           "nullable":  false,
+                           "description":  "Email de connexion (unique)",
+                           "example":  "admin@locationvoiture.fr"
+                       },
+                       {
+                           "table":  "admin",
+                           "field":  "mot_de_passe",
+                           "type":  "VARCHAR(255)",
+                           "nullable":  false,
+                           "description":  "Hash bcrypt du mot de passe",
+                           "example":  "$2b$10$abcdefghijklmnopqrstuu..."
+                       },
+                       {
+                           "table":  "admin",
+                           "field":  "role",
+                           "type":  "ENUM(super_admin,moderateur,support)",
+                           "nullable":  false,
+                           "default":  "moderateur",
+                           "description":  "RÃ´le dans l\u0027administration",
+                           "example":  "super_admin"
+                       },
+                       {
+                           "table":  "admin",
+                           "field":  "created_at",
+                           "type":  "TIMESTAMP",
+                           "nullable":  false,
+                           "default":  "CURRENT_TIMESTAMP",
+                           "description":  "Date de crÃ©ation",
+                           "example":  "2026-05-27 08:56:25"
+                       }
+                   ],
+    "sqlSchema":  "-- phpMyAdmin SQL Dump\n-- version 5.2.1\n-- https://www.phpmyadmin.net/\n--\n-- Hôte : 127.0.0.1:3306\n-- Généré le : mer. 17 juin 2026 à 07:34\n-- Version du serveur : 9.1.0\n-- Version de PHP : 8.3.14\n\nSET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\nSTART TRANSACTION;\nSET time_zone = \"+00:00\";\n\n\n/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\n/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\n/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n/*!40101 SET NAMES utf8mb4 */;\n\n--\n-- Base de données : `dryvea`\n--\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `admin`\n--\n\nDROP TABLE IF EXISTS `admin`;\nCREATE TABLE IF NOT EXISTS `admin` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `nom` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `mot_de_passe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `role` enum(\u0027super_admin\u0027,\u0027moderateur\u0027,\u0027support\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT \u0027moderateur\u0027,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `email` (`email`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `admin`\n--\n\nINSERT INTO `admin` (`id`, `nom`, `email`, `mot_de_passe`, `role`, `created_at`) VALUES\n(\u0027b2c3d4e5-0002-4000-8000-000000000001\u0027, \u0027Admin Principal\u0027, \u0027admin@locationvoiture.fr\u0027, \u0027$2b$10$abcdefghijklmnopqrstuuVwXyZ0123456789abcdefghijk\u0027, \u0027super_admin\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027b2c3d4e5-0002-4000-8000-000000000002\u0027, \u0027Modérateur 1\u0027, \u0027modo@locationvoiture.fr\u0027, \u0027$2b$10$abcdefghijklmnopqrstuuVwXyZ0123456789abcdefghijk\u0027, \u0027moderateur\u0027, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `avis`\n--\n\nDROP TABLE IF EXISTS `avis`;\nCREATE TABLE IF NOT EXISTS `avis` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_reservation` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_auteur` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_cible` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `type_cible` enum(\u0027voiture\u0027,\u0027locataire\u0027,\u0027proprietaire\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `note` tinyint UNSIGNED NOT NULL,\n  `commentaire` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `id_reservation` (`id_reservation`),\n  KEY `id_auteur` (`id_auteur`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `avis`\n--\n\nINSERT INTO `avis` (`id`, `id_reservation`, `id_auteur`, `id_cible`, `type_cible`, `note`, `commentaire`, `created_at`) VALUES\n(\u0027a7b8c9d0-0007-4000-8000-000000000001\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, \u0027voiture\u0027, 5, \u0027Voiture impeccable, propre et conforme à l annonce. Je recommande !\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027a7b8c9d0-0007-4000-8000-000000000002\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u0027locataire\u0027, 5, \u0027Locataire sérieux, ponctuel, voiture rendue en parfait état.\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027a7b8c9d0-0007-4000-8000-000000000003\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000004\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000005\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000003\u0027, \u0027voiture\u0027, 4, \u0027Très bonne voiture, propre. Juste un peu de retard au rendez-vous.\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027a7b8c9d0-0007-4000-8000-000000000004\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000004\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000002\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000005\u0027, \u0027locataire\u0027, 4, \u0027Bon locataire, voiture bien restituée.\u0027, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `dm`\n--\n\nDROP TABLE IF EXISTS `dm`;\nCREATE TABLE IF NOT EXISTS `dm` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_personne_1` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_personne_2` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `paire_unique` (`id_personne_1`,`id_personne_2`),\n  KEY `id_personne_2` (`id_personne_2`),\n  CONSTRAINT `dm_chk_ordre` CHECK (`id_personne_1` \u003c `id_personne_2`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `dm`\n--\n\nINSERT INTO `dm` (`id`, `id_personne_1`, `id_personne_2`, `created_at`) VALUES\n(\u0027c9d0e1f2-0009-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027c9d0e1f2-0009-4000-8000-000000000002\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000002\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000004\u0027, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `dm_message`\n--\n\nDROP TABLE IF EXISTS `dm_message`;\nCREATE TABLE IF NOT EXISTS `dm_message` (\n  `id_dm` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_message` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  PRIMARY KEY (`id_dm`,`id_message`),\n  UNIQUE KEY `id_message` (`id_message`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `dm_message`\n--\n\nINSERT INTO `dm_message` (`id_dm`, `id_message`) VALUES\n(\u0027c9d0e1f2-0009-4000-8000-000000000001\u0027, \u0027b8c9d0e1-0008-4000-8000-000000000001\u0027),\n(\u0027c9d0e1f2-0009-4000-8000-000000000001\u0027, \u0027b8c9d0e1-0008-4000-8000-000000000002\u0027),\n(\u0027c9d0e1f2-0009-4000-8000-000000000002\u0027, \u0027b8c9d0e1-0008-4000-8000-000000000003\u0027),\n(\u0027c9d0e1f2-0009-4000-8000-000000000001\u0027, \u0027b8c9d0e1-0008-4000-8000-000000000004\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `equipement`\n--\n\nDROP TABLE IF EXISTS `equipement`;\nCREATE TABLE IF NOT EXISTS `equipement` (\n  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,\n  `nom` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `categorie` enum(\u0027confort\u0027,\u0027securite\u0027,\u0027multimedia\u0027,\u0027enfant\u0027,\u0027pratique\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `nom` (`nom`)\n) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `equipement`\n--\n\nINSERT INTO `equipement` (`id`, `nom`, `categorie`) VALUES\n(1, \u0027Climatisation manuelle\u0027, \u0027confort\u0027),\n(2, \u0027Climatisation automatique\u0027, \u0027confort\u0027),\n(3, \u0027Climatisation bi-zone\u0027, \u0027confort\u0027),\n(4, \u0027Toit ouvrant\u0027, \u0027confort\u0027),\n(5, \u0027Toit panoramique\u0027, \u0027confort\u0027),\n(6, \u0027Sièges chauffants\u0027, \u0027confort\u0027),\n(7, \u0027Vitres électriques\u0027, \u0027confort\u0027),\n(8, \u0027Caméra de recul\u0027, \u0027securite\u0027),\n(9, \u0027Radar de recul\u0027, \u0027securite\u0027),\n(10, \u0027Radar avant\u0027, \u0027securite\u0027),\n(11, \u0027Régulateur de vitesse\u0027, \u0027securite\u0027),\n(12, \u0027Limiteur de vitesse\u0027, \u0027securite\u0027),\n(13, \u0027Aide au maintien de voie\u0027, \u0027securite\u0027),\n(14, \u0027Détection angle mort\u0027, \u0027securite\u0027),\n(15, \u0027GPS intégré\u0027, \u0027multimedia\u0027),\n(16, \u0027Bluetooth\u0027, \u0027multimedia\u0027),\n(17, \u0027Prise USB\u0027, \u0027multimedia\u0027),\n(18, \u0027Apple CarPlay / Android Auto\u0027, \u0027multimedia\u0027),\n(19, \u0027Écran tactile\u0027, \u0027multimedia\u0027),\n(20, \u0027Siège bébé fourni\u0027, \u0027enfant\u0027),\n(21, \u0027Siège enfant fourni\u0027, \u0027enfant\u0027),\n(22, \u0027Fixations ISOFIX\u0027, \u0027enfant\u0027),\n(23, \u0027Galerie de toit\u0027, \u0027pratique\u0027),\n(24, \u0027Attelage remorque\u0027, \u0027pratique\u0027),\n(25, \u0027Chaînes neige fournies\u0027, \u0027pratique\u0027),\n(26, \u0027Animaux acceptés\u0027, \u0027pratique\u0027),\n(27, \u0027Livraison possible\u0027, \u0027pratique\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `message`\n--\n\nDROP TABLE IF EXISTS `message`;\nCREATE TABLE IF NOT EXISTS `message` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_expediteur` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_reservation` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `contenu` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `lu` tinyint(1) DEFAULT \u00270\u0027,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `id_expediteur` (`id_expediteur`),\n  KEY `id_reservation` (`id_reservation`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `message`\n--\n\nINSERT INTO `message` (`id`, `id_expediteur`, `id_reservation`, `contenu`, `lu`, `created_at`) VALUES\n(\u0027b8c9d0e1-0008-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000001\u0027, \u0027Bonjour, est-ce que je peux récupérer la voiture à 8h ?\u0027, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027b8c9d0e1-0008-4000-8000-000000000002\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000001\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000001\u0027, \u0027Oui bien sûr, je serai disponible à partir de 8h.\u0027, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027b8c9d0e1-0008-4000-8000-000000000003\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000004\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000002\u0027, \u0027Le SUV a-t-il un câble de recharge ou juste le CarPlay ?\u0027, 0, \u00272026-05-27 08:56:25\u0027),\n(\u0027b8c9d0e1-0008-4000-8000-000000000004\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000003\u0027, \u0027Avez-vous un adaptateur pour le chargeur Tesla en déplacement ?\u0027, 0, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `paiement`\n--\n\nDROP TABLE IF EXISTS `paiement`;\nCREATE TABLE IF NOT EXISTS `paiement` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_reservation` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `montant` decimal(10,2) NOT NULL,\n  `methode` enum(\u0027carte\u0027,\u0027virement\u0027,\u0027paypal\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `statut` enum(\u0027en_attente\u0027,\u0027valide\u0027,\u0027refuse\u0027,\u0027rembourse\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT \u0027en_attente\u0027,\n  `id_transaction` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `date_paiement` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `id_reservation` (`id_reservation`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `paiement`\n--\n\nINSERT INTO `paiement` (`id`, `id_reservation`, `montant`, `methode`, `statut`, `id_transaction`, `date_paiement`) VALUES\n(\u0027f6a7b8c9-0006-4000-8000-000000000001\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000001\u0027, 180.00, \u0027carte\u0027, \u0027valide\u0027, \u0027txn_001_stripe_abc123\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027f6a7b8c9-0006-4000-8000-000000000002\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000002\u0027, 425.00, \u0027carte\u0027, \u0027valide\u0027, \u0027txn_002_stripe_def456\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027f6a7b8c9-0006-4000-8000-000000000003\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000003\u0027, 770.00, \u0027paypal\u0027, \u0027en_attente\u0027, NULL, \u00272026-05-27 08:56:25\u0027),\n(\u0027f6a7b8c9-0006-4000-8000-000000000004\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000004\u0027, 165.00, \u0027carte\u0027, \u0027valide\u0027, \u0027txn_004_stripe_ghi789\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027f6a7b8c9-0006-4000-8000-000000000005\u0027, \u0027e5f6a7b8-0005-4000-8000-000000000005\u0027, 350.00, \u0027virement\u0027, \u0027valide\u0027, \u0027vir_005_bnp_jkl012\u0027, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `photo_voiture`\n--\n\nDROP TABLE IF EXISTS `photo_voiture`;\nCREATE TABLE IF NOT EXISTS `photo_voiture` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_voiture` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `chemin` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `est_principale` tinyint(1) DEFAULT \u00270\u0027,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `id_voiture` (`id_voiture`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `photo_voiture`\n--\n\nINSERT INTO `photo_voiture` (`id`, `id_voiture`, `chemin`, `est_principale`, `created_at`) VALUES\n(\u0027d4e5f6a7-0004-4000-8000-000000000001\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, \u0027uploads/voitures/c.webp\u0027, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027d4e5f6a7-0004-4000-8000-000000000002\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, \u0027uploads/voitures/c.webp\u0027, 0, \u00272026-05-27 08:56:25\u0027),\n(\u0027d4e5f6a7-0004-4000-8000-000000000003\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, \u0027uploads/voitures/p.png\u0027, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027d4e5f6a7-0004-4000-8000-000000000004\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000003\u0027, \u0027uploads/voitures/w.webp\u0027, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027d4e5f6a7-0004-4000-8000-000000000005\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, \u0027uploads/voitures/t.webp\u0027, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027d4e5f6a7-0004-4000-8000-000000000006\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, \u0027uploads/voitures/t.webp\u0027, 0, \u00272026-05-27 08:56:25\u0027),\n(\u0027d4e5f6a7-0004-4000-8000-000000000007\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, \u0027uploads/voitures/r.webp\u0027, 1, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `reservation`\n--\n\nDROP TABLE IF EXISTS `reservation`;\nCREATE TABLE IF NOT EXISTS `reservation` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_voiture` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_locataire` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `date_debut` date NOT NULL,\n  `date_fin` date NOT NULL,\n  `nb_jours` smallint UNSIGNED NOT NULL,\n  `prix_total` decimal(10,2) NOT NULL,\n  `caution_payee` decimal(8,2) DEFAULT \u00270.00\u0027,\n  `statut` enum(\u0027en_attente\u0027,\u0027confirmee\u0027,\u0027en_cours\u0027,\u0027terminee\u0027,\u0027annulee\u0027,\u0027refusee\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT \u0027en_attente\u0027,\n  `message` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,\n  `motif_annulation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  KEY `id_voiture` (`id_voiture`),\n  KEY `id_locataire` (`id_locataire`),\n  KEY `idx_resa_dates` (`date_debut`,`date_fin`),\n  KEY `idx_resa_statut` (`statut`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `reservation`\n--\n\nINSERT INTO `reservation` (`id`, `id_voiture`, `id_locataire`, `date_debut`, `date_fin`, `nb_jours`, `prix_total`, `caution_payee`, `statut`, `message`, `motif_annulation`, `created_at`) VALUES\n(\u0027e5f6a7b8-0005-4000-8000-000000000001\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u00272026-06-01\u0027, \u00272026-06-05\u0027, 4, 180.00, 300.00, \u0027terminee\u0027, \u0027Bonjour, je serai ponctuel pour la remise des clés.\u0027, NULL, \u00272026-05-27 08:56:25\u0027),\n(\u0027e5f6a7b8-0005-4000-8000-000000000002\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000004\u0027, \u00272026-06-10\u0027, \u00272026-06-15\u0027, 5, 425.00, 600.00, \u0027confirmee\u0027, \u0027Parfait, merci pour la disponibilité.\u0027, NULL, \u00272026-05-27 08:56:25\u0027),\n(\u0027e5f6a7b8-0005-4000-8000-000000000003\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u00272026-07-01\u0027, \u00272026-07-07\u0027, 7, 770.00, 800.00, \u0027en_attente\u0027, \u0027Avez-vous un chargeur Type 2 à disposition ?\u0027, NULL, \u00272026-05-27 08:56:25\u0027),\n(\u0027e5f6a7b8-0005-4000-8000-000000000004\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000003\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000005\u0027, \u00272026-05-20\u0027, \u00272026-05-23\u0027, 3, 165.00, 400.00, \u0027terminee\u0027, NULL, NULL, \u00272026-05-27 08:56:25\u0027),\n(\u0027e5f6a7b8-0005-4000-8000-000000000005\u0027, \u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000004\u0027, \u00272026-06-20\u0027, \u00272026-06-25\u0027, 5, 350.00, 500.00, \u0027confirmee\u0027, \u0027On part en vacances, parfait pour les bagages.\u0027, NULL, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `type_voiture`\n--\n\nDROP TABLE IF EXISTS `type_voiture`;\nCREATE TABLE IF NOT EXISTS `type_voiture` (\n  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,\n  `libelle` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `libelle` (`libelle`)\n) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `type_voiture`\n--\n\nINSERT INTO `type_voiture` (`id`, `libelle`) VALUES\n(2, \u0027Berline\u0027),\n(4, \u0027Break\u0027),\n(6, \u0027Cabriolet\u0027),\n(1, \u0027Citadine\u0027),\n(8, \u0027Électrique / Hybride\u0027),\n(5, \u0027Monospace\u0027),\n(3, \u0027SUV / 4x4\u0027),\n(7, \u0027Utilitaire\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `utilisateur`\n--\n\nDROP TABLE IF EXISTS `utilisateur`;\nCREATE TABLE IF NOT EXISTS `utilisateur` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `nom` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `prenom` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `email` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `mot_de_passe` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `telephone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `date_naissance` date DEFAULT NULL,\n  `adresse` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,\n  `ville` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `num_permis` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `permis_verifie` tinyint(1) DEFAULT \u00270\u0027,\n  `est_proprietaire` tinyint(1) DEFAULT \u00270\u0027,\n  `photo_profil` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `note_moyenne` decimal(3,2) DEFAULT \u00270.00\u0027,\n  `actif` tinyint(1) DEFAULT \u00271\u0027,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `email` (`email`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `utilisateur`\n--\n\nINSERT INTO `utilisateur` (`id`, `nom`, `prenom`, `email`, `mot_de_passe`, `telephone`, `date_naissance`, `adresse`, `ville`, `num_permis`, `permis_verifie`, `est_proprietaire`, `photo_profil`, `note_moyenne`, `actif`, `created_at`) VALUES\n(\u00276a310d607327c\u0027, \u0027NEUGNOT\u0027, \u0027Olivier\u0027, \u0027oneugnot@edenschool.fr\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-16 08:46:24\u0027),\n(\u00276a310dd4162b9\u0027, \u0027Boum\u0027, \u0027Daran\u0027, \u0027dara@gmail.com\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-16 08:48:20\u0027),\n(\u00276a311095eedf5\u0027, \u0027root\u0027, \u0027root\u0027, \u0027root@gmail.com\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-16 09:00:06\u0027),\n(\u00276a3146af07d8a\u0027, \u0027mat\u0027, \u0027Matteo\u0027, \u0027matteo@gmail.com\u0027, \u0027$2y$10$ZktwOjIVZFBmvguFwt5FWuCcAjFnvDIuTscTnxihhgnrBVjx4Q9re\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-16 12:50:55\u0027),\n(\u00276a3249552afd8\u0027, \u0027NEUGNOT\u0027, \u0027Olivier\u0027, \u0027oricasht@gmail.com\u0027, \u0027$2y$10$xVyguSIys9imHNR0u5IP0O9a3ly8QfCKuHsPBCpytbjNbHIqaDkk2\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-17 07:14:29\u0027),\n(\u00276a324a0a58e2e\u0027, \u0027dolivier\u0027, \u0027dolivier\u0027, \u0027olivier@gmail.com\u0027, \u0027$2y$10$.pOb42rIGlyJk0OH/d8dl.FpO8JknySdlwUgkqcbJ2DhIRWVIfOL.\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-17 07:17:30\u0027),\n(\u00276a324a38c75da\u0027, \u0027fojgrziogjz\u0027, \u0027zejfzeoijzeiofjze\u0027, \u0027azerty@gmail.com\u0027, \u0027$2y$10$jdKARzf.z4.Qij1pxG.u5epx/03bjlLsZii5J8LdrY.Atz1m3Z8S6\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-17 07:18:16\u0027),\n(\u00276a324d4ad9060\u0027, \u0027yoooooooooooooooooooooooooooooooooooooo\u0027, \u0027yooooooooooooo\u0027, \u0027yo@gmail.com\u0027, \u0027$2y$10$ctkojNgj7LDx/yUkp8sEhOjHtt73Qh/NySHjps8mdF8ReTUi8aqs2\u0027, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.00, 1, \u00272026-06-17 07:31:22\u0027),\n(\u0027a1b2c3d4-0001-4000-8000-000000000001\u0027, \u0027Martin\u0027, \u0027Lucas\u0027, \u0027lucas.martin@gmail.com\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, \u00270612345678\u0027, \u00271990-04-15\u0027, \u002712 rue des Lilas\u0027, \u0027Paris\u0027, \u0027P-123456\u0027, 1, 1, NULL, 4.80, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027a1b2c3d4-0001-4000-8000-000000000002\u0027, \u0027Bernard\u0027, \u0027Sophie\u0027, \u0027sophie.bernard@gmail.com\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, \u00270623456789\u0027, \u00271985-08-22\u0027, \u00275 avenue du Marché\u0027, \u0027Lyon\u0027, \u0027B-654321\u0027, 1, 1, NULL, 4.60, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027a1b2c3d4-0001-4000-8000-000000000003\u0027, \u0027Dubois\u0027, \u0027Théo\u0027, \u0027theo.dubois@gmail.com\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, \u00270634567890\u0027, \u00271995-01-10\u0027, \u00278 boulevard Victor Hugo\u0027, \u0027Marseille\u0027, \u0027D-789012\u0027, 1, 0, NULL, 4.20, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027a1b2c3d4-0001-4000-8000-000000000004\u0027, \u0027Leroy\u0027, \u0027Emma\u0027, \u0027emma.leroy@gmail.com\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, \u00270645678901\u0027, \u00271992-11-03\u0027, \u00273 rue Pasteur\u0027, \u0027Bordeaux\u0027, \u0027L-345678\u0027, 1, 0, NULL, 4.90, 1, \u00272026-05-27 08:56:25\u0027),\n(\u0027a1b2c3d4-0001-4000-8000-000000000005\u0027, \u0027Moreau\u0027, \u0027Antoine\u0027, \u0027antoine.moreau@gmail.com\u0027, \u0027$2y$10$/nOrpIJArIIeVWdE6Tw6JeDcoLfOz9XSwOWlfMXP0Aw3quXrw3hpy\u0027, \u00270656789012\u0027, \u00271988-06-30\u0027, \u002721 rue de la Paix\u0027, \u0027Toulouse\u0027, \u0027M-901234\u0027, 1, 1, NULL, 4.50, 1, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `voiture`\n--\n\nDROP TABLE IF EXISTS `voiture`;\nCREATE TABLE IF NOT EXISTS `voiture` (\n  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_proprietaire` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_type` int UNSIGNED NOT NULL,\n  `marque` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `modele` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `annee` year NOT NULL,\n  `couleur` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,\n  `immatriculation` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `kilometrage` int UNSIGNED DEFAULT \u00270\u0027,\n  `carburant` enum(\u0027essence\u0027,\u0027diesel\u0027,\u0027electrique\u0027,\u0027hybride\u0027,\u0027gpl\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `boite_vitesse` enum(\u0027manuelle\u0027,\u0027automatique\u0027) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `nb_places` tinyint UNSIGNED DEFAULT \u00275\u0027,\n  `prix_par_jour` decimal(8,2) NOT NULL,\n  `caution` decimal(8,2) DEFAULT \u00270.00\u0027,\n  `ville` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `adresse` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,\n  `latitude` decimal(10,7) DEFAULT NULL,\n  `longitude` decimal(10,7) DEFAULT NULL,\n  `disponible` tinyint(1) DEFAULT \u00271\u0027,\n  `verifie` tinyint(1) DEFAULT \u00270\u0027,\n  `note_moyenne` decimal(3,2) DEFAULT \u00270.00\u0027,\n  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\n  PRIMARY KEY (`id`),\n  UNIQUE KEY `immatriculation` (`immatriculation`),\n  KEY `id_proprietaire` (`id_proprietaire`),\n  KEY `id_type` (`id_type`),\n  KEY `idx_voiture_ville` (`ville`,`disponible`),\n  KEY `idx_voiture_prix` (`prix_par_jour`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `voiture`\n--\n\nINSERT INTO `voiture` (`id`, `id_proprietaire`, `id_type`, `marque`, `modele`, `annee`, `couleur`, `immatriculation`, `kilometrage`, `carburant`, `boite_vitesse`, `nb_places`, `prix_par_jour`, `caution`, `ville`, `adresse`, `latitude`, `longitude`, `disponible`, `verifie`, `note_moyenne`, `description`, `created_at`) VALUES\n(\u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000001\u0027, 2, \u0027Renault\u0027, \u0027Clio 5\u0027, \u00272021\u0027, \u0027Gris\u0027, \u0027AB-123-CD\u0027, 32000, \u0027essence\u0027, \u0027manuelle\u0027, 5, 45.00, 300.00, \u0027Paris\u0027, \u002712 rue des Lilas\u0027, 48.8566000, 2.3522000, 1, 1, 0.00, \u0027Petite citadine idéale pour Paris. Facile à garer, économique.\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000001\u0027, 3, \u0027Peugeot\u0027, \u00273008\u0027, \u00272022\u0027, \u0027Blanc\u0027, \u0027EF-456-GH\u0027, 18000, \u0027hybride\u0027, \u0027automatique\u0027, 5, 85.00, 600.00, \u0027Paris\u0027, \u002712 rue des Lilas\u0027, 48.8566000, 2.3522000, 1, 1, 0.00, \u0027SUV hybride spacieux, parfait pour les longs trajets.\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027c3d4e5f6-0003-4000-8000-000000000003\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000002\u0027, 1, \u0027Volkswagen\u0027, \u0027Golf\u0027, \u00272020\u0027, \u0027Bleu\u0027, \u0027IJ-789-KL\u0027, 45000, \u0027diesel\u0027, \u0027manuelle\u0027, 5, 55.00, 400.00, \u0027Lyon\u0027, \u00275 avenue du Marché\u0027, 45.7640000, 4.8357000, 1, 1, 0.00, \u0027Golf très bien entretenue, consommation faible.\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000002\u0027, 8, \u0027Tesla\u0027, \u0027Model 3\u0027, \u00272023\u0027, \u0027Noir\u0027, \u0027MN-012-OP\u0027, 9000, \u0027electrique\u0027, \u0027automatique\u0027, 5, 110.00, 800.00, \u0027Lyon\u0027, \u00275 avenue du Marché\u0027, 45.7640000, 4.8357000, 1, 1, 0.00, \u0027Tesla Model 3 autonomie 500km, chargeur Type 2 inclus.\u0027, \u00272026-05-27 08:56:25\u0027),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, \u0027a1b2c3d4-0001-4000-8000-000000000005\u0027, 4, \u0027Citroën\u0027, \u0027C5 Aircross\u0027, \u00272021\u0027, \u0027Rouge\u0027, \u0027QR-345-ST\u0027, 28000, \u0027diesel\u0027, \u0027automatique\u0027, 5, 70.00, 500.00, \u0027Toulouse\u0027, \u002721 rue de la Paix\u0027, 43.6047000, 1.4442000, 1, 1, 0.00, \u0027Break confortable, grand coffre, idéal déménagement ou vacances.\u0027, \u00272026-05-27 08:56:25\u0027);\n\n-- --------------------------------------------------------\n\n--\n-- Structure de la table `voiture_equipement`\n--\n\nDROP TABLE IF EXISTS `voiture_equipement`;\nCREATE TABLE IF NOT EXISTS `voiture_equipement` (\n  `id_voiture` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,\n  `id_equipement` int UNSIGNED NOT NULL,\n  PRIMARY KEY (`id_voiture`,`id_equipement`),\n  KEY `id_equipement` (`id_equipement`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;\n\n--\n-- Déchargement des données de la table `voiture_equipement`\n--\n\nINSERT INTO `voiture_equipement` (`id_voiture`, `id_equipement`) VALUES\n(\u0027c3d4e5f6-0003-4000-8000-000000000003\u0027, 1),\n(\u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, 2),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 2),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, 2),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, 3),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, 6),\n(\u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, 8),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, 8),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 8),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, 8),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, 9),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 9),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, 11),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 11),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, 11),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 14),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, 15),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 15),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, 15),\n(\u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, 16),\n(\u0027c3d4e5f6-0003-4000-8000-000000000003\u0027, 16),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, 16),\n(\u0027c3d4e5f6-0003-4000-8000-000000000001\u0027, 17),\n(\u0027c3d4e5f6-0003-4000-8000-000000000003\u0027, 17),\n(\u0027c3d4e5f6-0003-4000-8000-000000000002\u0027, 18),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 18),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, 18),\n(\u0027c3d4e5f6-0003-4000-8000-000000000004\u0027, 19),\n(\u0027c3d4e5f6-0003-4000-8000-000000000005\u0027, 23);\n\n--\n-- Contraintes pour les tables déchargées\n--\n--\n-- Contraintes pour la table `avis`\n--\nALTER TABLE `avis`\n  ADD CONSTRAINT `avis_ibfk_1` FOREIGN KEY (`id_reservation`) REFERENCES `reservation` (`id`) ON DELETE CASCADE,\n  ADD CONSTRAINT `avis_ibfk_2` FOREIGN KEY (`id_auteur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;\n\n--\n-- Contraintes pour la table `dm`\n--\nALTER TABLE `dm`\n  ADD CONSTRAINT `dm_ibfk_1` FOREIGN KEY (`id_personne_1`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE,\n  ADD CONSTRAINT `dm_ibfk_2` FOREIGN KEY (`id_personne_2`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE;\n\n--\n-- Contraintes pour la table `dm_message`\n--\nALTER TABLE `dm_message`\n  ADD CONSTRAINT `dm_message_ibfk_1` FOREIGN KEY (`id_dm`) REFERENCES `dm` (`id`) ON DELETE CASCADE,\n  ADD CONSTRAINT `dm_message_ibfk_2` FOREIGN KEY (`id_message`) REFERENCES `message` (`id`) ON DELETE CASCADE;\n\n--\n-- Contraintes pour la table `message`\n--\nALTER TABLE `message`\n  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`id_expediteur`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE,\n  ADD CONSTRAINT `message_ibfk_3` FOREIGN KEY (`id_reservation`) REFERENCES `reservation` (`id`) ON DELETE SET NULL;\n\n--\n-- Contraintes pour la table `paiement`\n--\nALTER TABLE `paiement`\n  ADD CONSTRAINT `paiement_ibfk_1` FOREIGN KEY (`id_reservation`) REFERENCES `reservation` (`id`) ON DELETE RESTRICT;\n\n--\n-- Contraintes pour la table `photo_voiture`\n--\nALTER TABLE `photo_voiture`\n  ADD CONSTRAINT `photo_voiture_ibfk_1` FOREIGN KEY (`id_voiture`) REFERENCES `voiture` (`id`) ON DELETE CASCADE;\n\n--\n-- Contraintes pour la table `reservation`\n--\nALTER TABLE `reservation`\n  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_voiture`) REFERENCES `voiture` (`id`) ON DELETE RESTRICT,\n  ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`id_locataire`) REFERENCES `utilisateur` (`id`) ON DELETE RESTRICT;\n\n--\n-- Contraintes pour la table `voiture`\n--\nALTER TABLE `voiture`\n  ADD CONSTRAINT `voiture_ibfk_1` FOREIGN KEY (`id_proprietaire`) REFERENCES `utilisateur` (`id`) ON DELETE CASCADE,\n  ADD CONSTRAINT `voiture_ibfk_2` FOREIGN KEY (`id_type`) REFERENCES `type_voiture` (`id`) ON DELETE RESTRICT;\n\n--\n-- Contraintes pour la table `voiture_equipement`\n--\nALTER TABLE `voiture_equipement`\n  ADD CONSTRAINT `voiture_equipement_ibfk_1` FOREIGN KEY (`id_voiture`) REFERENCES `voiture` (`id`) ON DELETE CASCADE,\n  ADD CONSTRAINT `voiture_equipement_ibfk_2` FOREIGN KEY (`id_equipement`) REFERENCES `equipement` (`id`) ON DELETE CASCADE;\nCOMMIT;\n\n/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;\n/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;\n/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;"
 }
