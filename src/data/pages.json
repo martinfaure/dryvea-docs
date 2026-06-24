@@ -138,21 +138,13 @@
     "lastUpdated": "2026-05-18",
     "body": "Profils utilisateurs types de la plateforme Dryvea — propriétaires, locataires et cas d'usage P2P VSP."
   },
-  "mcd": {
-    "id": "mcd",
-    "title": "MCD (Modèle Conceptuel)",
+  "mcd-mld": {
+    "id": "mcd-mld",
+    "title": "MCD / MLD",
     "icon": "database",
-    "breadcrumb": ["Base de données", "MCD"],
-    "lastUpdated": "2026-06-01",
-    "body": "Modèle conceptuel de données représentant les entités métier de la plateforme Dryvea et leurs relations.\n\n## Entités principales\n\nLe modèle comprend 14 tables : utilisateur, type_voiture, voiture, photo_voiture, equipement, voiture_equipement, reservation, avis, paiement, message, dm, dm_message, admin.\n\n## Relations clés\n\n- Un **utilisateur** possède plusieurs **voiture**\n- Une **voiture** appartient à un **type_voiture** et un **utilisateur** (propriétaire)\n- Une **voiture** peut avoir plusieurs **photo_voiture** et plusieurs **equipement**\n- Une **voiture** reçoit plusieurs **reservation**\n- Chaque **reservation** peut avoir un **paiement** et un ou plusieurs **avis**"
-  },
-  "mld": {
-    "id": "mld",
-    "title": "MLD (Modèle Logique)",
-    "icon": "database",
-    "breadcrumb": ["Base de données", "MLD"],
-    "lastUpdated": "2026-06-01",
-    "body": "Modèle logique de données traduisant le MCD en tables relationnelles avec clés primaires, étrangères et contraintes d'unicité."
+    "breadcrumb": ["Base de données", "MCD / MLD"],
+    "lastUpdated": "2026-06-24",
+    "body": "Vue d'ensemble du modèle conceptuel (MCD) et logique (MLD) de données de la plateforme Dryvea."
   },
   "schema-sql": {
     "id": "schema-sql",
