@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import PageLayout from '../../components/PageLayout'
 import DocumentCard from '../../components/DocumentCard'
-import PdfPreview from '../../components/PdfPreview'
+import DocxPreview from '../../components/DocxPreview'
 import documents from '../../data/documents.json'
 import pages from '../../data/pages.json'
 
@@ -32,8 +32,8 @@ export default function DocumentPage() {
 
         <div>
           <h2 className="text-base font-semibold mb-3">Aperçu</h2>
-          <PdfPreview
-            file={`/documents/${document.pdfFilename}`}
+          <DocxPreview
+            file={`/documents/${document.filename}`}
             fileName={document.filename}
           />
         </div>
