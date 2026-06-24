@@ -54,7 +54,7 @@
     "breadcrumb": ["Maquettes & Design", "Figma — Vue d'ensemble"],
     "lastUpdated": "2026-05-10",
     "body": "Fichier Figma principal contenant l'ensemble des écrans et composants du design system Dryvea.\n\n## Accès\n\nFichier : **Dryvea — Design System v2**\nLien : figma.com/file/dryvea-design-system-v2\n\n## Contenu\n\n- Design tokens (typographie, espacements, composants)\n- Flows utilisateur complets (onboarding → réservation → paiement)\n- Variantes mobile (375px) et desktop (1440px)",
-    "figmaUrl": "https://www.figma.com/file/dryvea-design-system",
+    "figmaUrl": "https://www.figma.com/design/pegT3sk6JKAd7ZtxhKwNBA/Dryvea?node-id=0-1&t=b8r9UIBP6jGgR6e1-1",
     "frames": [
       { "name": "Design System", "screen": "Tokens & Components" },
       { "name": "User Flows", "screen": "Parcours complets" },
@@ -69,7 +69,7 @@
     "breadcrumb": ["Maquettes & Design", "Maquette Homepage"],
     "lastUpdated": "2026-04-28",
     "body": "Page d'accueil de la plateforme Dryvea avec recherche géolocalisée et annonces mises en avant.",
-    "figmaUrl": "https://www.figma.com/file/dryvea-homepage",
+    "figmaUrl": "https://www.figma.com/design/pegT3sk6JKAd7ZtxhKwNBA/Dryvea?node-id=0-1&t=b8r9UIBP6jGgR6e1-1",
     "frames": [
       { "name": "Hero Section", "screen": "Recherche + CTA" },
       { "name": "Featured Listings", "screen": "Grille annonces" },
@@ -84,7 +84,7 @@
     "breadcrumb": ["Maquettes & Design", "Maquette Annonce"],
     "lastUpdated": "2026-04-28",
     "body": "Page détail d'une annonce de location VSP avec galerie photos, carte et calendrier de disponibilité.",
-    "figmaUrl": "https://www.figma.com/file/dryvea-listing",
+    "figmaUrl": "https://www.figma.com/design/pegT3sk6JKAd7ZtxhKwNBA/Dryvea?node-id=0-1&t=b8r9UIBP6jGgR6e1-1",
     "frames": [
       { "name": "Photo Gallery", "screen": "Carousel images" },
       { "name": "Listing Details", "screen": "Specs VSP + prix" },
@@ -99,7 +99,7 @@
     "breadcrumb": ["Maquettes & Design", "Maquette Réservation"],
     "lastUpdated": "2026-05-02",
     "body": "Flow de réservation en 4 étapes : dates, récapitulatif, paiement Stripe, confirmation.",
-    "figmaUrl": "https://www.figma.com/file/dryvea-booking",
+    "figmaUrl": "https://www.figma.com/design/pegT3sk6JKAd7ZtxhKwNBA/Dryvea?node-id=0-1&t=b8r9UIBP6jGgR6e1-1",
     "frames": [
       { "name": "Date Selection", "screen": "Calendrier + créneaux" },
       { "name": "Price Summary", "screen": "Détail tarif + frais" },
@@ -114,7 +114,7 @@
     "breadcrumb": ["Maquettes & Design", "Maquette Profil"],
     "lastUpdated": "2026-05-05",
     "body": "Espace utilisateur avec onglets : mes annonces, mes réservations, avis reçus, paramètres KYC.",
-    "figmaUrl": "https://www.figma.com/file/dryvea-profile",
+    "figmaUrl": "https://www.figma.com/design/pegT3sk6JKAd7ZtxhKwNBA/Dryvea?node-id=0-1&t=b8r9UIBP6jGgR6e1-1",
     "frames": [
       { "name": "Profile Header", "screen": "Avatar + stats" },
       { "name": "My Listings", "screen": "Annonces actives" },

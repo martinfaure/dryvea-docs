@@ -30,17 +30,13 @@ export default function FigmaPage() {
 
         <div>
           <h2 className="text-base font-semibold mb-3">Embed Figma</h2>
-          <div className="relative border border-gray-100 bg-gray-50 aspect-video flex items-center justify-center">
+          <div className="border border-gray-100 bg-gray-50">
             <iframe
               title={`Figma — ${page.title}`}
-              src="about:blank"
-              className="absolute inset-0 w-full h-full bg-gray-50"
-              sandbox=""
+              src={`https://www.figma.com/embed?embed_host=astra&url=${encodeURIComponent('https://www.figma.com/design/pegT3sk6JKAd7ZtxhKwNBA/Dryvea?node-id=0-1')}`}
+              className="w-full aspect-video"
+              allowFullScreen
             />
-            <div className="relative pointer-events-none text-center z-10">
-              <p className="text-sm text-gray-400">Figma Embed</p>
-              <p className="text-xs text-gray-400 mt-1 font-mono">{page.figmaUrl}</p>
-            </div>
           </div>
         </div>
 
