@@ -4,10 +4,6 @@ import pages from '../../data/pages.json'
 
 const pageIdMap = {
   'figma-overview': 'figma-overview',
-  'maquette-homepage': 'maquette-homepage',
-  'maquette-annonce': 'maquette-annonce',
-  'maquette-reservation': 'maquette-reservation',
-  'maquette-profil': 'maquette-profil',
 }
 
 export default function FigmaPage() {

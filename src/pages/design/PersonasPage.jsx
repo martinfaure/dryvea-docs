@@ -15,10 +15,9 @@ export default function PersonasPage() {
           <p className="text-[11px] uppercase tracking-wider text-gray-400 mb-3">Priorité MVP</p>
           <div className="flex flex-wrap gap-3">
             {[
-              { persona: 'Thomas Leroy', priority: 'P0 — Locataire', flow: 'Recherche → Réservation → Paiement' },
-              { persona: 'Marie Dupont', priority: 'P0 — Propriétaire', flow: 'Publication → Calendrier → État des lieux' },
-              { persona: 'Henri Moreau', priority: 'P1 — Accessibilité', flow: 'UX senior + assistance' },
-              { persona: 'Camille Rousseau', priority: 'P2 — Pro', flow: 'Multi-VSP dashboard (post-MVP)' },
+              { persona: 'Matilde', priority: 'P0 — Lycéenne', flow: 'Recherche VSP → Réservation → Trajet lycée' },
+              { persona: 'Didier', priority: 'P0 — Urgence mobilité', flow: 'Recherche rapide → Location courte durée → Rendez-vous' },
+              { persona: 'Timéo', priority: 'P1 — Social', flow: 'Découverte → Location minute → Partage réseau' },
             ].map((item) => (
               <div key={item.persona} className="border border-gray-100 px-3 py-2 flex-1 min-w-[200px]">
                 <p className="text-sm font-semibold">{item.persona}</p>

@@ -128,12 +128,10 @@ export default function Sidebar({ onSearchOpen, isMobileOpen, onMobileClose }) {
         }`}
       >
         <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 bg-black text-white flex items-center justify-center text-[20px] font-bold leading-none">
-              D
+            <div className="flex items-center gap-2.5">
+              <img src="/logo.svg" alt="Dryvea" className="w-7 h-7" />
+              <span className="text-[14px] font-semibold text-black">Dryvea Docs</span>
             </div>
-            <span className="text-[14px] font-semibold text-black">Dryvea Docs</span>
-          </div>
           <button
             onClick={onMobileClose}
             className="lg:hidden text-gray-400 hover:text-black"
@@ -170,9 +168,7 @@ export function MobileHeader({ onMenuOpen, onSearchOpen }) {
         <Menu size={20} />
       </button>
       <div className="flex items-center gap-2">
-        <div className="w-6 h-6 bg-black text-white flex items-center justify-center text-sm font-bold">
-          D
-        </div>
+        <img src="/logo.svg" alt="Dryvea" className="w-6 h-6" />
         <span className="text-sm font-semibold">Dryvea Docs</span>
       </div>
       <button onClick={onSearchOpen} className="text-gray-400">

@@ -44,16 +44,16 @@ export default function CharteGraphiquePage() {
           <h2 className="text-base font-semibold mb-4">Logo</h2>
           <div className="flex flex-wrap gap-6">
             <div className="bg-[#0b1120] p-8 flex flex-col items-center gap-3 rounded-xl">
-              <span className="text-white text-[28px] font-extrabold tracking-[2.5px]">DRYVEA</span>
+              <img src="/logo.svg" alt="Dryvea" className="w-24 h-24" />
               <p className="text-[13px] text-white/60">Logo — navbar sombre</p>
             </div>
             <div className="border border-gray-100 p-8 flex flex-col items-center gap-3 rounded-xl">
-              <span className="text-[#0b1120] text-[28px] font-extrabold tracking-[2.5px]">DRYVEA</span>
+              <img src="/logo.svg" alt="Dryvea" className="w-24 h-24" />
               <p className="text-[13px] text-gray-400">Logo — fond clair</p>
             </div>
           </div>
           <ul className="mt-4 space-y-1 text-[13px] text-gray-400">
-            <li>Typographie extrabold uppercase, letter-spacing 2.5px</li>
+            <li>Icône entrelacée (maillons) dans un carré noir arrondi</li>
             <li>Zone de protection : ½ hauteur du logo sur chaque côté</li>
             <li>Ne pas déformer ni ajouter d'effets</li>
           </ul>
@@ -242,7 +242,7 @@ export default function CharteGraphiquePage() {
             <div>
               <p className="text-[11px] uppercase tracking-wider text-gray-400 mb-3">Navbar</p>
               <div className="bg-[#0b1120] rounded-xl p-4 flex items-center gap-6">
-                <span className="text-white text-[16px] font-extrabold tracking-[2.5px]">DRYVEA</span>
+                <img src="/logo.svg" alt="Dryvea" className="w-7 h-7" />
                 <div className="flex items-center gap-2 text-[13px]">
                   <span className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-[50px] text-white font-medium">
                     <span className="text-sm">🏠</span> Home

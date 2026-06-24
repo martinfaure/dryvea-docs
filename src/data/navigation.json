@@ -18,11 +18,7 @@
     "children": [
       { "id": "figma-overview", "label": "Figma — Vue d'ensemble", "path": "/design/figma-overview", "icon": "figma" },
       { "id": "charte-graphique", "label": "Charte graphique", "path": "/design/charte-graphique", "icon": "palette" },
-      { "id": "personas", "label": "Personas", "path": "/design/personas", "icon": "users" },
-      { "id": "maquette-homepage", "label": "Maquette Homepage", "path": "/design/maquette-homepage", "icon": "layout" },
-      { "id": "maquette-annonce", "label": "Maquette Annonce", "path": "/design/maquette-annonce", "icon": "layout" },
-      { "id": "maquette-reservation", "label": "Maquette Réservation", "path": "/design/maquette-reservation", "icon": "layout" },
-      { "id": "maquette-profil", "label": "Maquette Profil", "path": "/design/maquette-profil", "icon": "layout" }
+      { "id": "personas", "label": "Personas", "path": "/design/personas", "icon": "users" }
     ]
   },
   {
