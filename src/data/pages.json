@@ -153,24 +153,7 @@
     "body": "Standards de code appliqués sur l'ensemble des repositories Dryvea.",
     "devType": "conventions"
   },
-  "git-flow": {
-    "id": "git-flow",
-    "title": "Git Flow",
-    "icon": "git-branch",
-    "breadcrumb": ["Repo & Dev", "Git Flow"],
-    "lastUpdated": "2026-06-10",
-    "body": "Workflow Git adopté par l'équipe Dryvea pour le versioning et les releases.",
-    "devType": "git-flow"
-  },
-  "cicd": {
-    "id": "cicd",
-    "title": "CI/CD Pipeline",
-    "icon": "workflow",
-    "breadcrumb": ["Repo & Dev", "CI/CD Pipeline"],
-    "lastUpdated": "2026-06-10",
-    "body": "Pipeline d'intégration et déploiement continu via GitHub Actions.",
-    "devType": "cicd"
-  },
+
   "projet": {
     "id": "projet",
     "title": "Board projet",

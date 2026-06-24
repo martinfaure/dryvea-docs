@@ -67,9 +67,7 @@
     "icon": "folder",
     "children": [
       { "id": "getting-started", "label": "Getting Started", "path": "/dev/getting-started", "icon": "rocket" },
-      { "id": "conventions", "label": "Conventions de code", "path": "/dev/conventions", "icon": "book-open" },
-      { "id": "git-flow", "label": "Git Flow", "path": "/dev/git-flow", "icon": "git-branch" },
-      { "id": "cicd", "label": "CI/CD Pipeline", "path": "/dev/cicd", "icon": "workflow" }
+      { "id": "conventions", "label": "Conventions de code", "path": "/dev/conventions", "icon": "book-open" }
     ]
   },
   {

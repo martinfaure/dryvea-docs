@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import {
   ChevronRight,
   ChevronDown,
@@ -128,10 +128,10 @@ export default function Sidebar({ onSearchOpen, isMobileOpen, onMobileClose }) {
         }`}
       >
         <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100">
-            <div className="flex items-center gap-2.5">
-              <img src="/logo.svg" alt="Dryvea" className="w-7 h-7" />
-              <span className="text-[14px] font-semibold text-black">Dryvea Docs</span>
-            </div>
+        <Link to="/" className="flex items-center gap-2.5">
+          <img src="/logo.svg" alt="Dryvea" className="w-7 h-7" />
+          <span className="text-[14px] font-semibold text-black">Dryvea Docs</span>
+        </Link>
           <button
             onClick={onMobileClose}
             className="lg:hidden text-gray-400 hover:text-black"
@@ -167,10 +167,10 @@ export function MobileHeader({ onMenuOpen, onSearchOpen }) {
       <button onClick={onMenuOpen} className="text-black">
         <Menu size={20} />
       </button>
-      <div className="flex items-center gap-2">
+      <Link to="/" className="flex items-center gap-2">
         <img src="/logo.svg" alt="Dryvea" className="w-6 h-6" />
         <span className="text-sm font-semibold">Dryvea Docs</span>
-      </div>
+      </Link>
       <button onClick={onSearchOpen} className="text-gray-400">
         <Search size={18} />
       </button>
