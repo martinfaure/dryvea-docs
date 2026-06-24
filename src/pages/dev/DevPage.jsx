@@ -37,31 +37,31 @@ function GettingStarted() {
   const steps = [
     {
       title: 'Cloner le repository',
-      code: 'git clone git@github.com:dryvea/dryvea-platform.git\ncd dryvea-platform',
+      code: 'git clone https://github.com/ONeugnot/Dryvea.git\ncd Dryvea',
     },
     {
-      title: 'Installer les dépendances',
-      code: 'npm install\ncp .env.example .env',
+      title: 'Installer les dépendances Composer',
+      code: 'composer install',
     },
     {
-      title: 'Lancer PostgreSQL et Redis (Docker)',
-      code: 'docker compose up -d postgres redis',
+      title: 'Configurer la base de données',
+      code: 'cp config/config.exemple.php config/config.php\n# Modifier config/config.php avec vos identifiants MySQL',
     },
     {
-      title: 'Appliquer le schéma de base de données',
-      code: 'npm run db:migrate\nnpm run db:seed',
+      title: 'Importer le schéma SQL',
+      code: 'mysql -u root -p dryvea < dryvea.sql',
     },
     {
-      title: 'Démarrer l\'API et le frontend',
-      code: 'npm run dev:api    # port 3000\nnpm run dev:web    # port 5173',
+      title: 'Démarrer le serveur PHP',
+      code: 'composer run serve\n# ou : php -S localhost:8080 -t public',
     },
   ]
 
   return (
     <div className="space-y-8">
       <p className="text-[15px] leading-relaxed text-black">
-        Guide d'installation et de lancement du projet Dryvea en local. Prérequis : Node.js 20+,
-        Docker, Git.
+        Guide d'installation et de lancement du projet Dryvea en local. Prérequis : PHP 8.1+,
+        MySQL 8+, Composer, Git.
       </p>
       {steps.map((step, index) => (
         <div key={index}>
@@ -80,22 +80,22 @@ function GettingStarted() {
 
 function Conventions() {
   const rules = [
-    { category: 'Nommage', rule: 'camelCase pour variables/fonctions JS', example: 'getUserById' },
-    { category: 'Nommage', rule: 'PascalCase pour composants React', example: 'ListingCard' },
-    { category: 'Nommage', rule: 'snake_case pour colonnes SQL', example: 'owner_id' },
-    { category: 'Nommage', rule: 'kebab-case pour fichiers et routes', example: 'booking-service.ts' },
-    { category: 'Git', rule: 'Commits en anglais, impératif', example: 'fix: resolve booking date overlap' },
-    { category: 'Git', rule: 'Branches feature/fix/chore prefix', example: 'feature/stripe-webhook' },
-    { category: 'API', rule: 'RESTful, versioning /api/v1', example: 'GET /api/v1/listings' },
-    { category: 'API', rule: 'Réponses JSON camelCase', example: '{ "totalPrice": 76.50 }' },
-    { category: 'Tests', rule: 'Coverage minimum 80% sur services', example: 'jest --coverage' },
-    { category: 'Sécurité', rule: 'Jamais de secrets en dur', example: 'process.env.STRIPE_KEY' },
+    { category: 'Nommage', rule: 'camelCase pour méthodes PHP', example: 'getCarById()' },
+    { category: 'Nommage', rule: 'PascalCase pour classes PHP', example: 'CarController' },
+    { category: 'Nommage', rule: 'snake_case pour colonnes SQL et variables PHP', example: 'id_proprietaire' },
+    { category: 'Nommage', rule: 'kebab-case pour noms de fichiers', example: 'detail.js' },
+    { category: 'PHP', rule: 'Namespace PSR-4 : dryvea\\', example: 'dryvea\\Controllers\\HomeController' },
+    { category: 'PHP', rule: 'Typage strict des paramètres et retours', example: 'public function index(): void' },
+    { category: 'BDD', rule: 'Clés primaires UUID VARCHAR(36)', example: 'a1b2c3d4-0001-4000-8000-000000000001' },
+    { category: 'BDD', rule: 'Tables avec préfixe relationnel clair', example: 'voiture_equipement' },
+    { category: 'API', rule: 'Retours JSON pour endpoints API', example: 'json(["message" => "OK"])' },
+    { category: 'Sécurité', rule: 'Mots de passe hashés avec bcrypt', example: 'password_hash($pwd, PASSWORD_DEFAULT)' },
   ]
 
   return (
     <div className="space-y-4">
       <p className="text-[15px] leading-relaxed text-black mb-6">
-        Standards de code appliqués sur l'ensemble des repositories Dryvea.
+        Standards de code appliqués sur le projet Dryvea.
       </p>
       <div className="border border-gray-100 overflow-x-auto">
         <table className="w-full text-[13px]">
@@ -131,34 +131,31 @@ function GitFlow() {
   return (
     <div className="space-y-8">
       <p className="text-[15px] leading-relaxed text-black">
-        Workflow Git adopté par l'équipe Dryvea. Basé sur Git Flow simplifié avec branches{' '}
-        <code className="bg-gray-50 px-1 py-0.5 text-[13px] font-mono">main</code> et{' '}
-        <code className="bg-gray-50 px-1 py-0.5 text-[13px] font-mono">develop</code>.
+        Workflow Git utilisé par l'équipe Dryvea. Dépôt sur{' '}
+        <code className="bg-gray-50 px-1 py-0.5 text-[13px] font-mono">github.com/ONeugnot/Dryvea</code>
+        , branche principale <code className="bg-gray-50 px-1 py-0.5 text-[13px] font-mono">main</code>.
       </p>
 
       <div className="border border-gray-100 p-6">
         <div className="flex flex-col gap-6">
-          <BranchRow name="main" desc="Production — tags semver v1.x.x" isMain />
-          <Connector label="merge via PR + review" />
-          <BranchRow name="develop" desc="Intégration — déploiement staging" />
-          <Connector label="merge feature branches" />
+          <BranchRow name="main" desc="Branche principale — code stable" isMain />
+          <Connector label="merge via PR" />
           <div className="flex gap-4 flex-wrap ml-8">
             <BranchRow name="feature/*" desc="Nouvelles fonctionnalités" small />
             <BranchRow name="fix/*" desc="Corrections de bugs" small />
-            <BranchRow name="chore/*" desc="Maintenance, deps, docs" small />
           </div>
-          <Connector label="hotfix direct from main" />
-          <BranchRow name="hotfix/*" desc="Corrections urgentes production" small />
+          <Connector label="branche secondaire" />
+          <BranchRow name="feature/login_register" desc="Existant : inscription/connexion" small />
         </div>
       </div>
 
       <div>
-        <h2 className="text-base font-semibold mb-3">Règles de merge</h2>
+        <h2 className="text-base font-semibold mb-3">Pratiques Git</h2>
         <ul className="list-disc pl-5 space-y-1.5 text-[15px]">
-          <li>Minimum 1 review approuvée avant merge vers develop</li>
-          <li>Minimum 2 reviews pour merge develop → main</li>
-          <li>CI doit passer (lint, tests, build)</li>
-          <li>Squash merge pour feature branches</li>
+          <li>Commits en français ou anglais, descriptifs</li>
+          <li>Branches feature/* pour le développement</li>
+          <li>Merge sur main via PR (pas de push direct)</li>
+          <li>Pas de CI/CD automatisé</li>
         </ul>
       </div>
     </div>
@@ -190,61 +187,31 @@ function Connector({ label }) {
 }
 
 function CicdPipeline() {
-  const stages = [
-    { name: 'Lint & Type Check', desc: 'ESLint + TypeScript strict mode' },
-    { name: 'Unit Tests', desc: 'Jest — coverage gate 80%' },
-    { name: 'Integration Tests', desc: 'Supertest against test DB' },
-    { name: 'Build Docker', desc: 'Multi-stage build → ECR push' },
-    { name: 'Deploy Staging', desc: 'Auto on develop merge' },
-    { name: 'Deploy Production', desc: 'Manual approval on main' },
-  ]
-
   return (
     <div className="space-y-8">
       <p className="text-[15px] leading-relaxed text-black">
-        Pipeline d'intégration et déploiement continu via GitHub Actions.
+        Le projet Dryvea ne dispose pas encore de pipeline CI/CD automatisé.
       </p>
 
-      <div className="flex flex-col gap-0">
-        {stages.map((stage, index) => (
-          <div key={stage.name} className="flex items-start gap-4">
-            <div className="flex flex-col items-center">
-              <div className="w-8 h-8 border border-black flex items-center justify-center text-xs font-bold">
-                {index + 1}
-              </div>
-              {index < stages.length - 1 && <div className="w-px h-8 bg-gray-100" />}
-            </div>
-            <div className="pb-6">
-              <p className="text-sm font-semibold">{stage.name}</p>
-              <p className="text-[13px] text-gray-400 mt-0.5">{stage.desc}</p>
-            </div>
-          </div>
-        ))}
+      <div className="border border-gray-100 p-6">
+        <h2 className="text-base font-semibold mb-4">Processus actuel</h2>
+        <ul className="list-disc pl-5 space-y-2 text-[15px]">
+          <li>Développement en local avec <code className="bg-gray-50 px-1 py-0.5 font-mono text-[13px]">php -S localhost:8080 -t public</code></li>
+          <li>Base de données MySQL en local</li>
+          <li>Tests manuels à chaque itération</li>
+          <li>Pas de déploiement staging ou production</li>
+          <li>Pas de pipeline GitHub Actions configuré</li>
+        </ul>
       </div>
 
-      <CodeBlock
-        code={`# .github/workflows/ci.yml (extrait)
-name: CI/CD Pipeline
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [develop]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run test:coverage
-      - run: npm run build`}
-        language="yaml"
-      />
+      <div>
+        <h2 className="text-base font-semibold mb-3">À venir</h2>
+        <ul className="list-disc pl-5 space-y-1.5 text-[15px] text-gray-400">
+          <li>Automatiser les tests PHPUnit avec GitHub Actions</li>
+          <li>Ajouter un environnement de staging</li>
+          <li>Mettre en place le déploiement continu</li>
+        </ul>
+      </div>
     </div>
   )
 }

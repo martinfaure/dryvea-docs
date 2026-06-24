@@ -144,7 +144,7 @@
     "icon": "database",
     "breadcrumb": ["Base de données", "MCD"],
     "lastUpdated": "2026-06-01",
-    "body": "Modèle conceptuel de données représentant les entités métier de la plateforme Dryvea et leurs relations.\n\n## Entités principales\n\nLe modèle comprend 8 entités : User, Vehicle, Listing, Booking, Payment, Review, Insurance et Incident.\n\n## Relations clés\n\n- Un **User** possède plusieurs **Vehicle**\n- Un **Vehicle** peut avoir plusieurs **Listing** (historique)\n- Un **Listing** reçoit plusieurs **Booking**\n- Chaque **Booking** génère des **Payment** et potentiellement des **Review** et **Incident**"
+    "body": "Modèle conceptuel de données représentant les entités métier de la plateforme Dryvea et leurs relations.\n\n## Entités principales\n\nLe modèle comprend 14 tables : utilisateur, type_voiture, voiture, photo_voiture, equipement, voiture_equipement, reservation, avis, paiement, message, dm, dm_message, admin.\n\n## Relations clés\n\n- Un **utilisateur** possède plusieurs **voiture**\n- Une **voiture** appartient à un **type_voiture** et un **utilisateur** (propriétaire)\n- Une **voiture** peut avoir plusieurs **photo_voiture** et plusieurs **equipement**\n- Une **voiture** reçoit plusieurs **reservation**\n- Chaque **reservation** peut avoir un **paiement** et un ou plusieurs **avis**"
   },
   "mld": {
     "id": "mld",
@@ -160,7 +160,7 @@
     "icon": "code",
     "breadcrumb": ["Base de données", "Schéma SQL"],
     "lastUpdated": "2026-06-01",
-    "body": "Script SQL complet pour initialiser la base de données PostgreSQL de Dryvea. Inclut les types ENUM, contraintes CHECK, index et trigger de mise à jour automatique."
+    "body": "Script SQL complet pour initialiser la base de données MySQL de Dryvea. Inclut les types ENUM, clés étrangères, index et contraintes d'intégrité référentielle."
   },
   "dictionnaire": {
     "id": "dictionnaire",
@@ -176,7 +176,7 @@
     "icon": "network",
     "breadcrumb": ["Architecture", "Architecture globale"],
     "lastUpdated": "2026-05-15",
-    "body": "Vue d'ensemble de l'architecture technique de Dryvea, de l'application client jusqu'à la persistance des données.\n\n## Stack technique\n\n- **Frontend** : React 19 + Vite, déployé sur Vercel\n- **API** : Node.js + Express, conteneurisé sur AWS ECS\n- **Base de données** : PostgreSQL 16 sur AWS RDS\n- **Cache** : Redis ElastiCache pour sessions et disponibilités\n- **Stockage** : AWS S3 pour photos véhicules et documents KYC\n- **Paiements** : Stripe Connect pour split payments propriétaire/plateforme"
+    "body": "Vue d'ensemble de l'architecture technique de Dryvea — application web PHP MVC.\n\n## Architecture\n\n- **Frontend** : HTML/CSS/JavaScript vanilla rendu côté serveur (PHP templates)\n- **Backend** : PHP 8.1+ avec architecture MVC custom (Routeur → Contrôleur → Modèle → Vue)\n- **Base de données** : MySQL 8+ avec PDO\n- **Serveur** : Apache avec mod_rewrite (fichiers .htaccess)\n- **Déploiement local** : PHP serveur intégré (`php -S localhost:8080 -t public`)\n\n## Structure MVC\n\n| Couche | Rôle | Dossier |\n|--------|------|--------|\n| **Router** | Dispatch des requêtes HTTP vers les contrôleurs | `app/Core/Router.php` |\n| **Controller** | Logique métier, rendu des vues | `app/Controllers/` |\n| **Model** | Accès aux données (CRUD) | `app/Models/` |\n| **View** | Templates PHP | `app/Views/` |\n| **Middleware** | Filtres (Auth, Guest, Log) | `app/Middlewares/` |\n\n## Dépendances\n\n- **PHP 8.1+** — seul prérequis serveur\n- **Composer** — autoloading PSR-4 (`dryvea\\` → `app/`)\n- **PHPUnit 11** — tests unitaires PHP\n- **Flatpickr** — sélecteur de dates (CDN)"
   },
   "schema-api": {
     "id": "schema-api",
@@ -184,7 +184,7 @@
     "icon": "server",
     "breadcrumb": ["Architecture", "Schéma API REST"],
     "lastUpdated": "2026-05-18",
-    "body": "## Endpoints principaux\n\n### Auth\n- `POST /api/v1/auth/register` — Inscription utilisateur\n- `POST /api/v1/auth/login` — Connexion JWT\n- `POST /api/v1/auth/refresh` — Renouvellement token\n\n### Listings\n- `GET /api/v1/listings` — Recherche avec filtres geo/prix\n- `GET /api/v1/listings/:id` — Détail annonce\n- `POST /api/v1/listings` — Créer annonce (auth owner)\n\n### Bookings\n- `POST /api/v1/bookings` — Créer réservation\n- `PATCH /api/v1/bookings/:id/status` — Changer statut\n- `GET /api/v1/bookings/me` — Mes réservations\n\n### Payments\n- `POST /api/v1/payments/intent` — Créer PaymentIntent Stripe\n- `POST /api/v1/payments/webhook` — Webhook Stripe\n\nAuthentification via Bearer JWT. Rate limiting : 100 req/min par IP."
+    "body": "## API REST — Routes implémentées\n\n### Pages (rendu HTML)\n| Méthode | Route | Contrôleur |\n|---------|-------|------------|\n| GET | `/` | Home → index |\n| GET | `/catalogue` | Home → catalogue |\n| GET | `/detail/{id}` | Home → detail |\n| GET | `/setting` | Home → setting (Auth) |\n| GET | `/message` | Home → message |\n| GET | `/reservation/{id}` | Home → reservation (Auth) |\n| GET | `/adminpanel` | Admin → panel |\n\n### API — Voitures\n| Méthode | Route | Fonction |\n|---------|-------|----------|\n| GET | `/api/v1/cars` | Liste toutes les voitures |\n| GET | `/api/v1/car/{id}` | Détail d'une voiture |\n| POST | `/api/v1/car/filter` | Filtre (marque, modèle) |\n| GET | `/api/v1/car/{id}/equipements` | Équipements |\n| GET | `/api/v1/car/{id}/avis` | Avis |\n| GET | `/api/v1/car/{id}/reservations` | Réservations |\n| GET | `/api/v1/car/{id}/date` | Dates disponibles |\n| GET | `/api/v1/cars/rate` | Mieux notées |\n| GET | `/api/v1/brands` | Marques |\n| GET | `/api/v1/models` | Modèles |\n| GET | `/api/v1/cars/locations` | Villes disponibles |\n\n### API — Authentification & Utilisateurs\n| Méthode | Route | Fonction |\n|---------|-------|----------|\n| POST | `/api/v1/user/login` | Connexion |\n| POST | `/api/v1/user/register` | Inscription |\n| POST | `/api/v1/user/deconnect` | Déconnexion |\n| GET | `/api/v1/user/info` | Infos utilisateur |\n| POST | `/api/v1/user/update` | Màj profil (Auth) |\n| GET | `/api/v1/user/reservations` | Réservations user (Auth) |\n\n### API — Réservations & Photos\n| Méthode | Route | Fonction |\n|---------|-------|----------|\n| POST | `/api/v1/reservation` | Créer réservation (Auth) |\n| GET | `/api/v1/reservation/user/{carId}` | Réservation user/voiture (Auth) |\n| GET | `/api/v1/photo/car/{id}` | Photos d'une voiture |\n\nAuthentification via session PHP. Pas de JWT. API retours JSON."
   },
   "flux-paiement": {
     "id": "flux-paiement",
@@ -192,7 +192,7 @@
     "icon": "credit-card",
     "breadcrumb": ["Architecture", "Flux de paiement"],
     "lastUpdated": "2026-05-20",
-    "body": "## Séquence de paiement\n\n1. Le locataire confirme sa réservation\n2. L'API crée un `PaymentIntent` Stripe avec montant total + dépôt\n3. Le frontend affiche Stripe Elements pour saisie CB\n4. Stripe confirme le paiement via webhook `payment_intent.succeeded`\n5. L'API met à jour le booking en `confirmed` et retient le dépôt\n6. À la fin de location : libération dépôt ou prélèvement franchise\n7. Split payment : 85% vers compte Connect propriétaire, 15% commission Dryvea\n\n## Gestion des remboursements\n\nAnnulation > 48h avant : remboursement intégral.\nAnnulation < 48h : 50% retenu au profit du propriétaire."
+    "body": "## Flux de paiement (structure de données)\n\nLe paiement est une entité enregistrée en base de données liée à chaque réservation.\n\n### Table `paiement`\n\n| Champ | Description |\n|-------|-------------|\n| `id` | Identifiant UUID |\n| `id_reservation` | FK vers la réservation concernée |\n| `montant` | Montant total en EUR |\n| `methode` | `carte`, `virement` ou `paypal` |\n| `statut` | `en_attente`, `valide`, `refuse`, `rembourse` |\n| `id_transaction` | Référence externe (Stripe, virement) |\n\n### Méthodes de paiement (seed data)\n- `carte` — Paiement par carte bancaire (Stripe simulé)\n- `virement` — Virement bancaire\n- `paypal` — PayPal\n\n> **Note :** Le système de paiement n'est pas encore connecté à une API externe. Les données de transaction sont des exemples (`txn_001_stripe_abc123`, `vir_005_bnp_jkl012`)."
   },
   "infrastructure": {
     "id": "infrastructure",
@@ -200,7 +200,7 @@
     "icon": "cloud",
     "breadcrumb": ["Architecture", "Infrastructure cloud"],
     "lastUpdated": "2026-05-22",
-    "body": "## Environnements\n\n| Env | URL | Branch |\n|-----|-----|--------|\n| Production | app.dryvea.fr | main |\n| Staging | staging.dryvea.fr | develop |\n| Dev | localhost:5173 | feature/* |\n\n## AWS Services\n\n- **ECS Fargate** : 2 tasks API (prod), auto-scaling CPU > 70%\n- **RDS PostgreSQL** : db.t4g.medium, Multi-AZ en production\n- **ElastiCache Redis** : cache.t4g.micro, cluster mode disabled\n- **S3** : bucket `dryvea-assets-prod`, CloudFront CDN\n- **Route 53** : DNS + health checks\n- **CloudWatch** : logs centralisés, alertes PagerDuty\n\n## CI/CD\n\nGitHub Actions → build Docker → push ECR → deploy ECS rolling update."
+    "body": "## Environnement local (développement)\n\n| Composant | Détail |\n|-----------|--------|\n| Serveur | PHP intégré (`php -S localhost:8080 -t public`) |\n| Base de données | MySQL 8+ sur localhost:3306 |\n| Configuration | Fichier `config/config.php` (gitignoré) |\n\n### Prérequis\n\n- PHP 8.1 ou supérieur\n- MySQL 8+ ou MariaDB\n- Composer (gestionnaire de dépendances PHP)\n- Apache avec mod_rewrite (optionnel, recommandé)\n\n### Déploiement\n\n1. Copier `config/config.exemple.php` vers `config/config.php`\n2. Renseigner les identifiants de base de données\n3. Importer `dryvea.sql` dans MySQL\n4. Exécuter `composer install`\n5. Lancer `composer run serve` (alias `php -S localhost:8080 -t public`)\n\nL'application ne dispose pas d'environnement de staging ou production dédié. Pas de CI/CD configuré."
   },
   "getting-started": {
     "id": "getting-started",
@@ -260,7 +260,7 @@
     "icon": "clipboard-check",
     "breadcrumb": ["Tests & Recette", "Plan de tests"],
     "lastUpdated": "2026-06-20",
-    "body": "Stratégie de tests MVP Dryvea — unitaires, intégration, E2E et recette staging.",
+    "body": "Stratégie de tests Dryvea — tests unitaires PHPUnit et validation manuelle.",
     "testType": "plan"
   },
   "recette": {
@@ -269,7 +269,7 @@
     "icon": "check-square",
     "breadcrumb": ["Tests & Recette", "Recette fonctionnelle"],
     "lastUpdated": "2026-06-22",
-    "body": "Scénarios de recette manuelle sur staging — parcours propriétaire et locataire.",
+    "body": "Scénarios de recette manuelle — parcours propriétaire, locataire et administration.",
     "testType": "recette"
   },
   "criteres-acceptation": {

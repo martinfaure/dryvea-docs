@@ -7,19 +7,6 @@ const statusLabels = {
 }
 
 export default function DocumentCard({ document }) {
-  const handleDownload = () => {
-    const blob = new Blob(
-      [`Dryvea — ${document.title}\nVersion ${document.version}\n\nContenu simulé pour démonstration.`],
-      { type: 'text/plain' }
-    )
-    const url = URL.createObjectURL(blob)
-    const a = window.document.createElement('a')
-    a.href = url
-    a.download = document.filename.replace(/\.(pdf|docx)$/i, '.txt')
-    a.click()
-    URL.revokeObjectURL(url)
-  }
-
   return (
     <div className="border border-gray-100 rounded-none p-4 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors">
       <div className="flex items-center gap-4 min-w-0">
@@ -35,12 +22,13 @@ export default function DocumentCard({ document }) {
       </div>
       <div className="flex items-center gap-3 shrink-0">
         <StatusBadge status={document.status} label={statusLabels[document.status]} />
-        <button
-          onClick={handleDownload}
-          className="px-3 py-1.5 text-xs font-medium border border-gray-100 hover:bg-gray-50 transition-colors"
+        <a
+          href={`/documents/${document.filename}`}
+          download={document.filename}
+          className="px-3 py-1.5 text-xs font-medium border border-gray-100 hover:bg-gray-50 transition-colors inline-block"
         >
           Télécharger
-        </button>
+        </a>
       </div>
     </div>
   )

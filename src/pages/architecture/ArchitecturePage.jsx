@@ -89,10 +89,10 @@ export default function ArchitecturePage() {
 
 function ArchitectureDiagram() {
   const layers = [
-    { label: 'Client', items: ['React Web App', 'React Native (future)'] },
-    { label: 'API Gateway', items: ['AWS ALB', 'Rate Limiting', 'JWT Auth'] },
-    { label: 'Services', items: ['Auth Service', 'Listing Service', 'Booking Service', 'Payment Service'] },
-    { label: 'Data', items: ['PostgreSQL RDS', 'Redis Cache', 'S3 Storage'] },
+    { label: 'Client (Browser)', items: ['HTML/CSS/JS', 'Flatpickr CDN'] },
+    { label: 'Apache / PHP Server', items: ['.htaccess rewrite', 'public/index.php', 'Session PHP'] },
+    { label: 'MVC Framework', items: ['Router', 'Controllers', 'Models', 'Views', 'Middlewares'] },
+    { label: 'Database', items: ['MySQL 8+', 'PDO'] },
   ]
 
   return (
@@ -124,9 +124,9 @@ function ArchitectureDiagram() {
         ))}
       </div>
       <div className="mt-6 flex flex-wrap gap-4 text-[13px] text-gray-400">
-        <span>Stripe Connect ← Payment Service</span>
-        <span>CloudFront CDN ← S3</span>
-        <span>CloudWatch ← All Services</span>
+        <span>Composer autoload PSR-4</span>
+        <span>config/config.php</span>
+        <span>dryvea.sql → MySQL</span>
       </div>
     </div>
   )

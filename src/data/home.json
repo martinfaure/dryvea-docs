@@ -1,15 +1,15 @@
 {
   "project": {
     "name": "Dryvea",
-    "tagline": "Plateforme P2P de location de véhicules sans permis électriques",
+    "tagline": "Plateforme P2P de location de véhicules entre particuliers",
     "description": "Dryvea Docs centralise toute la documentation interne du projet : juridique, design, base de données, architecture, suivi, tests et guides développeur."
   },
   "repositories": [
     {
-      "name": "dryvea-platform",
+      "name": "Dryvea",
       "label": "Application principale",
-      "url": "https://github.com/dryvea/dryvea-platform",
-      "description": "API Node.js, frontend React et services métier"
+      "url": "https://github.com/ONeugnot/Dryvea",
+      "description": "Application PHP MVC — backend, frontend vanilla et base MySQL"
     },
     {
       "name": "dryvea-docs",
@@ -22,7 +22,7 @@
     {
       "name": "Olivier Neugnot",
       "initials": "ON",
-      "role": "Design & UX",
+      "role": "Backend & API",
       "github": "https://github.com/ONeugnot",
       "githubUsername": "ONeugnot"
     },
@@ -56,9 +56,9 @@
     { "label": "Personas", "path": "/design/personas" },
     { "label": "Plan de tests", "path": "/tests/plan" }
   ],
-  "stack": ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
+  "stack": ["PHP 8.1+", "MySQL", "JavaScript vanilla", "Apache", "Composer"],
   "links": {
-    "staging": "staging.dryvea.fr",
-    "production": "app.dryvea.fr"
+    "local": "http://localhost:8888",
+    "devServer": "php -S localhost:8080 -t public"
   }
 }
