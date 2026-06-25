@@ -52,7 +52,7 @@ export default function SearchModal({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh]">
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative w-full max-w-lg mx-4 bg-white border border-gray-100">
+      <div className="relative w-full max-w-lg mx-4 py-2 rounded-[8px] px-2 bg-white border border-gray-100">
         <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-100">
           <Search size={16} className="text-gray-400 shrink-0" />
           <input
