@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Github, ExternalLink, ArrowRight } from 'lucide-react'
-import TeamFigurine from '../components/TeamFigurine'
+import { TeamFigurine } from '../components/TeamFigurine'
 import home from '../data/home.json'
 
 export default function Home() {

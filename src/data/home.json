@@ -19,35 +19,59 @@
     }
   ],
   "team": [
-    {
-      "name": "Olivier Neugnot",
-      "initials": "ON",
-      "role": "Backend & API",
-      "github": "https://github.com/ONeugnot",
-      "githubUsername": "ONeugnot"
-    },
-    {
-      "name": "Daris Boumertit",
-      "initials": "DB",
-      "role": "Base de données & Tests",
-      "github": "https://github.com/Boumertit",
-      "githubUsername": "Boumertit"
-    },
-    {
-      "name": "Matteo Banzet",
-      "initials": "MB",
-      "role": "Backend & Infrastructure",
-      "github": "https://github.com/Psyko38",
-      "githubUsername": "Psyko38"
-    },
-    {
-      "name": "Martin Faure",
-      "initials": "MF",
-      "role": "Documentation & Frontend",
-      "github": "https://github.com/martinfaure",
-      "githubUsername": "martinfaure"
-    }
-  ],
+  {
+    "name": "Olivier Neugnot",
+    "initials": "ON",
+    "role": "Backend & API",
+    "github": "https://github.com/ONeugnot",
+    "githubUsername": "ONeugnot",
+    "skin": "#ffffff",
+    "shirt": "#000",
+    "pants": "#000",
+    "hair": "#000",
+    "glow": "#000",
+    "accent": "#000"
+  },
+  {
+    "name": "Daris Boumertit",
+    "initials": "DB",
+    "role": "Base de données & Tests",
+    "github": "https://github.com/DarisB1",
+    "githubUsername": "soldier",
+    "skin": "#ffffff",
+    "shirt": "#000",
+    "pants": "#000",
+    "hair": "#000",
+    "glow": "#000",
+    "accent": "#000"
+  },
+  {
+    "name": "Matteo Banzet",
+    "initials": "MB",
+    "role": "Backend & Infrastructure",
+    "github": "https://github.com/Psyko38",
+    "githubUsername": "Psyko38",
+    "skin": "#ffffff",
+    "shirt": "#000",
+    "pants": "#000",
+    "hair": "#000",
+    "glow": "#000",
+    "accent": "#000"
+  },
+  {
+    "name": "Martin Faure",
+    "initials": "MF",
+    "role": "Documentation & Frontend",
+    "github": "https://github.com/martinfaure",
+    "githubUsername": "martinfaure",
+    "skin": "#ffffff",
+    "shirt": "#000",
+    "pants": "#000",
+    "hair": "#000",
+    "glow": "#000",
+    "accent": "#000"
+  }
+],
   "quickLinks": [
     { "label": "Présentation Canva", "path": "/projet/presentation-canva" },
     { "label": "Board projet", "path": "/projet" },
