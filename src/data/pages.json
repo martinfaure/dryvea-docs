@@ -47,6 +47,14 @@
     "lastUpdated": "2026-05-20",
     "body": "Cette charte clarifie la répartition des responsabilités entre propriétaire, locataire et assureur en cas d'incident durant une location P2P.\n\n## Couverture assurance\n\nChaque véhicule listé sur Dryvea doit disposer d'une assurance couvrant explicitement la location à des tiers (`covers_rental = true`).\n\n## Franchise\n\nEn cas de dommage responsable du locataire, une franchise de **500 €** s'applique, prélevée sur le dépôt de garantie.\n\n## Procédure sinistre\n\n1. Déclaration immédiate via l'application Dryvea\n2. Photos et description des dommages\n3. Notification automatique à l'assureur\n4. Expertise sous 72h ouvrées"
   },
+  "livrable-projet": {
+    "id": "livrable-projet",
+    "title": "Livrable projet (avec captures)",
+    "icon": "file-text",
+    "breadcrumb": ["Documents", "Livrable projet"],
+    "lastUpdated": "2026-06-25",
+    "body": "Livrable de projet Dryvea — document complet incluant les captures d'écran de l'interface utilisateur, les fonctionnalités implémentées et la présentation du rendu final."
+  },
   "figma-overview": {
     "id": "figma-overview",
     "title": "Figma — Vue d'ensemble",

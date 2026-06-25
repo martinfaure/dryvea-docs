@@ -8,7 +8,8 @@
       { "id": "cgu-cgv", "label": "CGU / CGV", "path": "/documents/cgu-cgv", "icon": "file-text" },
       { "id": "politique-confidentialite", "label": "Politique de confidentialité", "path": "/documents/politique-confidentialite", "icon": "file-text" },
       { "id": "mentions-legales", "label": "Mentions légales", "path": "/documents/mentions-legales", "icon": "file-text" },
-      { "id": "charte-responsabilite", "label": "Charte responsabilité & assurance", "path": "/documents/charte-responsabilite", "icon": "file-text" }
+      { "id": "charte-responsabilite", "label": "Charte responsabilité & assurance", "path": "/documents/charte-responsabilite", "icon": "file-text" },
+      { "id": "livrable-projet", "label": "Livrable projet", "path": "/documents/livrable-projet", "icon": "file-text" }
     ]
   },
   {
