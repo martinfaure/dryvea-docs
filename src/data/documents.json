@@ -80,5 +80,19 @@
       { "version": "1.1", "date": "2026-05-20", "author": "Marie Dupont", "changes": "Brouillon — ajout franchise et sinistres" },
       { "version": "1.0", "date": "2026-01-05", "author": "Marie Dupont", "changes": "Version initiale" }
     ]
+  },
+  {
+    "id": "livrable-projet",
+    "title": "Livrable projet (avec captures)",
+    "type": "DOCX",
+    "filename": "dryvea_livrable_projet_avec_captures.docx",
+    "size": "985 Ko",
+    "status": "validated",
+    "version": "1.0",
+    "lastModified": "2026-06-25",
+    "description": "Livrable de projet Dryvea incluant les captures d'écran de l'application — présentation complète du rendu final.",
+    "versions": [
+      { "version": "1.0", "date": "2026-06-25", "author": "Équipe Dryvea", "changes": "Version initiale" }
+    ]
   }
 ]
